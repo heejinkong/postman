@@ -1,8 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-import "../style/param.scss"
+import '../style/param.scss';
 export default function Params() {
-  return (
-    <div className='param'> Params</div>
-  )
+  return <div className="param"> Params</div>;
 }
