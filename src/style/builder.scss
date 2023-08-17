@@ -1,0 +1,68 @@
+.builder_container {
+    background-color: white;
+    height: 100%;
+
+    .builder_list {
+        background-color: white;
+        height: 8.2%;
+        border-bottom: 1px solid #d3cfcf;
+
+    }
+
+    .file_actions {
+        position: relative;
+        height: 8.5%;
+        display: flex; /* 혹은 inline-flex */
+        align-items: center;
+        border-bottom: 1px solid #d3cfcf;
+
+        .file_path {
+            position: inherit;
+            right: 5%;
+        }
+
+        .box_btn_save {
+            position: relative;
+            width: 4.5%;
+            height: 80%;
+            left: 87%;
+
+            border: none;
+            outline: none;
+            border-radius: 4px;
+    /* background-color: #ededed; */
+            font-size: 11px;
+            cursor: pointer;
+            // font-weight: 500;
+            // position: relative;
+            // display: flex;
+            // margin-right: 1rem;
+            // align-items: center;
+            // justify-content: space-between;
+
+            // // border: none;
+            // // outline: none;
+            // // border-radius: 4px;
+            // margin: 0;
+            .icon_text_container {
+                display: flex;
+                align-items: center;
+            
+                .icon_btn_save {
+                  margin-right: 5px;
+                }
+            
+                .text_btn_save {
+                  font-size: small;
+                }
+              }
+            }
+        }
+
+    .builder_body {
+        position: relative;
+        height: 82.6%;
+        border-bottom: 1px solid #d3cfcf;
+    }
+
+}

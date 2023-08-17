@@ -1,0 +1,52 @@
+.sidebar_container {
+    position: relative;
+    background-color: #f5f5f5;
+    width: 15%;
+    height: 95%;
+    top: 5%;
+
+    .sidebar_header {
+        position: relative;
+        height: 4.5%;
+        border-bottom: 1px solid #d3cfcf;
+              
+        .btn_area {
+          position: relative;
+          
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: space-between;
+          align-items: center;
+          margin-right: 1rem;
+
+          
+        .new_btn {
+            position: relative;
+            left: 38%;
+        }
+        .import_btn {
+            position: relative;
+            left: 40%;
+        }
+        .export_btn {
+            position: relative;
+            left: 42%;
+        }
+        @media (max-width: 768px) {
+          /* 화면 너비가 768px 이하일 때 적용되는 스타일 */
+          .new_btn {
+            left: 35%; /* 비율에 따라 조정 */
+          }
+          .import_btn {
+            left: 37%; /* 비율에 따라 조정 */
+          }
+          .export_btn {
+            left: 39%; /* 비율에 따라 조정 */
+          }
+        }
+      
+  
+      }
+
+      }
+    }
