@@ -20,30 +20,7 @@
           margin-right: 1rem;
 
           
-        .new_btn {
-            position: relative;
-            left: 38%;
-        }
-        .import_btn {
-            position: relative;
-            left: 40%;
-        }
-        .export_btn {
-            position: relative;
-            left: 42%;
-        }
-        @media (max-width: 768px) {
-          /* 화면 너비가 768px 이하일 때 적용되는 스타일 */
-          .new_btn {
-            left: 35%; /* 비율에 따라 조정 */
-          }
-          .import_btn {
-            left: 37%; /* 비율에 따라 조정 */
-          }
-          .export_btn {
-            left: 39%; /* 비율에 따라 조정 */
-          }
-        }
+        
       
   
       }

@@ -17,8 +17,7 @@
   
 
         .file_path {
-            position: inherit;
-            right: 5%;
+            position: relative;
         }
 
         .box_btn_save {
@@ -26,39 +25,9 @@
             width: 7%;
             height: 90%;
             margin-top: 10px;
-            margin-left: 90%;
+            margin-left: 87.5%;
 
-            border: none;
-            outline: none;
-            border-radius: 4px;
-    /* background-color: #ededed; */
-            font-size: 15px;
-            cursor: pointer;
-            // font-weight: 500;
-            // position: relative;
-            // display: flex;
-            // margin-right: 1rem;
-            // align-items: center;
-            // justify-content: space-between;
-
-            // // border: none;
-            // // outline: none;
-            // // border-radius: 4px;
-            // margin: 0;
-            .icon_text_container {
-                position: relative;
-                display: flex;
-                margin-left: 10%;
-                align-items: center;
             
-                .icon_btn_save {
-                  margin-right: 5px;
-                }
-            
-                .text_btn_save {
-                  font-size: 20px;
-                }
-              }
             }
         }
 
@@ -89,26 +58,24 @@
                     align-items: center;
                     justify-content: space-between;
                     margin-left: 1%;
-                    width: 80%;
+                    width: 60%;
                     height: 100%;
-                    margin-bottom: 20%;
-                    
-
-                    // border: 1px solid #d3cfcf;
-                    border-radius: 7px;
-                    // margin: 0 20px;
-
+   
                 }
                 .btn_send {
                     position: relative;
 
                     width: 7%;
                     height: 80%;
-                    margin-left: 9%;
+                    margin-left: 29%;
                     margin-top: 7px;
                     align-items: center;
                 }
-               
+            }
+
+            .box_request_tab{
+                position:absolute;
+                background-color: aqua;;
             }
 
         }

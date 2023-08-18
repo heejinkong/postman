@@ -2,6 +2,16 @@ import React from 'react';
 import '../style/sidebar.scss';
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import ButtonGroup from '@mui/material/ButtonGroup';
+
+
+const buttons = [
+  <Button key="new">New</Button>,
+  <Button key="import">Import</Button>,
+  <Button key="export">Export</Button>,
+];
 
 
 export default function Sidebar() {
@@ -12,11 +22,20 @@ export default function Sidebar() {
           <IconButton aria-label="plus">
             <AddIcon fontSize="small" />
           </IconButton>
-          <div className='btn_area'>
-            <button className="new_btn">New</button>
-            <button className="import_btn">Import</button>
-            <button className="export_btn">Export</button>
-          </div>
+          <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        '& > *': {
+          m: 5,
+        },
+      }}
+    >
+      <ButtonGroup  size="small" aria-label="small button group">
+        {buttons}
+      </ButtonGroup>
+    </Box>
         </div>
       </div>
     </div>

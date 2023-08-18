@@ -3,6 +3,7 @@ import '../style/builder.scss';
 import { Button, FormControl, MenuItem, OutlinedInput, Select, Stack } from '@mui/material';
 import Box from '@mui/material/Box';
 import SendIcon from '@mui/icons-material/Send';
+import SaveIcon from '@mui/icons-material/Save';
 
 export default function Builder() {
   const [method, setMethod] = React.useState('');
@@ -15,19 +16,11 @@ export default function Builder() {
     <div className='builder_container'>
       <div className='builder_list'>test</div>
       <div className='file_actions'>
-        <div className='file_path'>
-         
-        </div>
+        <div className='file_path'>path</div>
         <button className='box_btn_save'>
-          <div className='icon_text_container'>
-            <div className='icon_btn_save'>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 24 24" width="20" height="20">
-                <title>content-save</title>
-                <path d="M15,9H5V5H15M12,19A3,3 0 0,1 9,16A3,3 0 0,1 12,13A3,3 0 0,1 15,16A3,3 0 0,1 12,19M17,3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V7L17,3Z" fill='#afafaf' />
-              </svg>
-            </div>
-            <div className='text_btn_save'>Save</div>
-          </div>
+          <Button variant='outlined' startIcon={<SaveIcon />}>
+            Save
+          </Button> 
         </button>
       </div>
       <div className='builder_body'>
@@ -59,14 +52,15 @@ export default function Builder() {
              </Stack>
             </div>
             <div className='btn_send'>
-              
                 <Button variant='contained' startIcon={<SendIcon />}>
                   Send
                 </Button> 
-
             </div>
           </div>
         </div>
+        <div className='box_reuest_tab'>
+            request
+          </div>
       </div>
     </div>
   );
