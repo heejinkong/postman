@@ -14,7 +14,7 @@
         height: 8.5%;
         display: flex; /* 혹은 inline-flex */
         align-items: center;
-        border-bottom: 1px solid #d3cfcf;
+  
 
         .file_path {
             position: inherit;
@@ -23,15 +23,16 @@
 
         .box_btn_save {
             position: relative;
-            width: 4.5%;
-            height: 80%;
-            left: 87%;
+            width: 7%;
+            height: 90%;
+            margin-top: 10px;
+            margin-left: 90%;
 
             border: none;
             outline: none;
             border-radius: 4px;
     /* background-color: #ededed; */
-            font-size: 11px;
+            font-size: 15px;
             cursor: pointer;
             // font-weight: 500;
             // position: relative;
@@ -45,7 +46,9 @@
             // // border-radius: 4px;
             // margin: 0;
             .icon_text_container {
+                position: relative;
                 display: flex;
+                margin-left: 10%;
                 align-items: center;
             
                 .icon_btn_save {
@@ -53,7 +56,7 @@
                 }
             
                 .text_btn_save {
-                  font-size: small;
+                  font-size: 20px;
                 }
               }
             }
@@ -63,6 +66,52 @@
         position: relative;
         height: 82.6%;
         border-bottom: 1px solid #d3cfcf;
+
+        .body_box_top {
+          
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 15%;
+            margin-bottom: 0.5rem;
+
+            .method_options_container {
+                position: relative;
+                display: flex;
+                // box-sizing: border-box;
+                height: 90%;
+                top:20%;
+
+                // justify-content: space-between;
+                .box_method_url {
+                    position:relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-left: 1%;
+                    width: 80%;
+                    height: 100%;
+                    margin-bottom: 20%;
+                    
+
+                    // border: 1px solid #d3cfcf;
+                    border-radius: 7px;
+                    // margin: 0 20px;
+
+                }
+                .btn_send {
+                    position: relative;
+
+                    width: 7%;
+                    height: 80%;
+                    margin-left: 9%;
+                    margin-top: 7px;
+                    align-items: center;
+                }
+               
+            }
+
+        }
     }
 
 }
