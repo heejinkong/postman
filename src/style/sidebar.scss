@@ -9,21 +9,14 @@
         position: relative;
         height: 4.5%;
         border-bottom: 1px solid #d3cfcf;
-              
-        .btn_area {
-          position: relative;
-          
-          display: flex;
-          flex-flow: row nowrap;
-          justify-content: space-between;
-          align-items: center;
-          margin-right: 1rem;
-
-          
+        .btn-group{
+          .btn-1,
+          .btn-2,
+          .btn-3{
+            color: gray;
+            border-color: gray;
+          }
         
-      
-  
-      }
-
-      }
-    }
+        }    
+     }
+  }

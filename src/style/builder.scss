@@ -24,10 +24,9 @@
             position: relative;
             width: 7%;
             height: 90%;
-            margin-top: 10px;
+            margin-top: auto;
             margin-left: 87.5%;
 
-            
             }
         }
 
@@ -64,21 +63,19 @@
                 }
                 .btn_send {
                     position: relative;
-
                     width: 7%;
                     height: 80%;
                     margin-left: 29%;
-                    margin-top: 7px;
+                    margin-top: auto;
                     align-items: center;
                 }
             }
-
-            .box_request_tab{
-                position:absolute;
-                background-color: aqua;;
-            }
-
+        }
+        .box_request_tab{
+            position:absolute;
+            width: 100%;
+            height: 85%;
+            background-color: aqua;
         }
     }
-
 }

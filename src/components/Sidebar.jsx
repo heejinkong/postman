@@ -8,9 +8,9 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 
 
 const buttons = [
-  <Button key="new">New</Button>,
-  <Button key="import">Import</Button>,
-  <Button key="export">Export</Button>,
+  <Button key="new"className='btn-1'>New</Button>,
+  <Button key="import" className='btn-2'>Import</Button>,
+  <Button key="export" className='btn-3'>Export</Button>,
 ];
 
 
@@ -18,7 +18,7 @@ export default function Sidebar() {
   return (
     <div className="sidebar_container">
       <div className="sidebar_header">
-        <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+        <div className = "btn-group" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
           <IconButton aria-label="plus">
             <AddIcon fontSize="small" />
           </IconButton>
@@ -32,7 +32,7 @@ export default function Sidebar() {
         },
       }}
     >
-      <ButtonGroup  size="small" aria-label="small button group">
+      <ButtonGroup size="small" aria-label="small button group" className= "btn-len">
         {buttons}
       </ButtonGroup>
     </Box>

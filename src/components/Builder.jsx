@@ -17,11 +17,11 @@ export default function Builder() {
       <div className='builder_list'>test</div>
       <div className='file_actions'>
         <div className='file_path'>path</div>
-        <button className='box_btn_save'>
-          <Button variant='outlined' startIcon={<SaveIcon />}>
+        <div className='box_btn_save'>
+          <Button variant='outlined' startIcon={<SaveIcon />} size='big'>
             Save
           </Button> 
-        </button>
+        </div>
       </div>
       <div className='builder_body'>
         <div className='body_box_top'>
@@ -45,22 +45,22 @@ export default function Builder() {
               </FormControl>
 
               <Box component="form" noValidate autoComplete="off">
-                <FormControl sx={{ marginRight:'200px',  width: '150ch' }} size='small'>
-                  <OutlinedInput placeholder='Enter URL or paste text' />
+                <FormControl sx={{ marginRight:'200px',  width: '127ch' }} size='small'>
+                  <OutlinedInput placeholder='Enter URL or paste text' /> 
                 </FormControl>
               </Box>
              </Stack>
             </div>
             <div className='btn_send'>
-                <Button variant='contained' startIcon={<SendIcon />}>
+                <Button variant='contained' startIcon={<SendIcon />} size='big'>
                   Send
                 </Button> 
             </div>
           </div>
         </div>
-        <div className='box_reuest_tab'>
+        <div className='box_request_tab'>
             request
-          </div>
+        </div>
       </div>
     </div>
   );
