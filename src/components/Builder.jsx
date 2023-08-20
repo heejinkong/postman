@@ -4,6 +4,7 @@ import { Button, FormControl, MenuItem, OutlinedInput, Select, Stack } from '@mu
 import Box from '@mui/material/Box';
 import SendIcon from '@mui/icons-material/Send';
 import SaveIcon from '@mui/icons-material/Save';
+import ApiRequestTabs from './ApiRequestTabsContainer/ApiRequestTabs';
 
 export default function Builder() {
   const [method, setMethod] = React.useState('');
@@ -59,7 +60,7 @@ export default function Builder() {
           </div>
         </div>
         <div className='box_request_tab'>
-            request
+            <ApiRequestTabs/>
         </div>
       </div>
     </div>
