@@ -1,0 +1,24 @@
+.response_container {
+    flex: 1;
+    display: flex;
+    flex-direction: inherit;
+    min-height: 0;
+    min-width: 0;
+
+    .response_title {
+        position: relative;
+        margin-top: -10px;
+        margin-left: 25px;
+    }
+
+    .response_empty {
+        position: relative;
+        flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+    
+    }
+
+}

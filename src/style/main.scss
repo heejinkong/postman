@@ -1,14 +1,13 @@
 
 .container{
-    background-color: rgb(245, 244, 244);
+    background-color: white;
     height: 100vh;
     width: 100vw;
     display: flex;
     .header {
-        background-color: white;
         position: fixed;
         width: 100%;
-        height: 5%;
+        height: 4%;
         display: flex;
         border-bottom: 1px solid #d3cfcf;
     }
@@ -16,14 +15,13 @@
     }
     .main_container {
         position: relative;
-        background-color: dodgerblue;
-        height: 95%;
+        height: 96%;
         width: 85%;
         top: 5%;
         
         .builder{
             position: relative;
-            height: 55%;
+            height: 60%;
             background-color: rgb(248, 234, 234);
             // .topEle{
             //     display: flex;
@@ -51,8 +49,8 @@
         }
         .response {
             position: relative;
-            height: 45%;
-            background-color: rgb(223, 215, 223);
+            height: 36%;
+           
         }
 
         @media (max-width: 768px) {

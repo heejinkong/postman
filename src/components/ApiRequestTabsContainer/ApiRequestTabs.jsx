@@ -6,13 +6,18 @@ import AppBar from '@mui/material/AppBar';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
-import Zoom from '@mui/material/Zoom';
-import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
-import UpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { green } from '@mui/material/colors';
+// import Zoom from '@mui/material/Zoom';
+// import Fab from '@mui/material/Fab';
+// import AddIcon from '@mui/icons-material/Add';
+// import EditIcon from '@mui/icons-material/Edit';
+// import UpIcon from '@mui/icons-material/KeyboardArrowUp';
+// import { green } from '@mui/material/colors';
 import Box from '@mui/material/Box';
+import ParamsTab from './ParamsTab';
+import HeadersTab from './HeadersTab';
+import BodyTab from './BodyTab';
+import ResultTab from './ResultTab';
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -58,10 +63,10 @@ export default function FloatingActionButtonZoom() {
     setValue(index);
   };
 
-  const transitionDuration = {
-    enter: theme.transitions.duration.enteringScreen,
-    exit: theme.transitions.duration.leavingScreen,
-  };
+  // const transitionDuration = {
+  //   enter: theme.transitions.duration.enteringScreen,
+  //   exit: theme.transitions.duration.leavingScreen,
+  // };
 
  
 
@@ -76,9 +81,10 @@ export default function FloatingActionButtonZoom() {
     >
       <AppBar position="static" color= "transparent"
       sx={{
-        height: '40px', 
+        height: '35px', 
         background: 'rgba(0, 0, 0, 0)',
-        boxShadow: 'none'
+        boxShadow: 'none',
+        top: '50px'
        
       }} >
         <Tabs
@@ -90,8 +96,9 @@ export default function FloatingActionButtonZoom() {
           aria-label="action tabs example"
         >
           <Tab label="Params" {...a11yProps(0)} />
-          <Tab label="Header" {...a11yProps(1)} />
-          <Tab label="Results" {...a11yProps(2)} />
+          <Tab label="Headers" {...a11yProps(1)} />
+          <Tab label="Body" {...a11yProps(2)} />
+          <Tab label="Result" {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -100,13 +107,16 @@ export default function FloatingActionButtonZoom() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          Params
+          <ParamsTab/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          Item Two
+          <HeadersTab/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
+          <BodyTab/>
+        </TabPanel>
+        <TabPanel value={value} index={3} dir={theme.direction}>
+          <ResultTab/>
         </TabPanel>
       </SwipeableViews>
       

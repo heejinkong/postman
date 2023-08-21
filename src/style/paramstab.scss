@@ -1,0 +1,41 @@
+.params_container {
+    position: relative;
+    width: 100%;
+    height: 260px;
+
+    .params_editor_title {
+        position: relative;
+        height: 10%;
+    }
+
+    .params_editor_table {
+        position: relative;
+        height: 90%;
+        width: 100%;
+        .params_editor_header_row {
+            display: flex;
+            flex-direction: row;
+            position: relative;
+            flex: 1 1 auto;
+            height: 32px;
+            border-bottom: var(--border-width-default) var(--border-style-solid) var(--border-color-default);
+
+            .params_editor_top_header {
+                position: relative;
+                width: 100%;
+                
+                
+                .params_editor_key_header_row {
+                    position: relative;
+                    height: 30px;
+                    align-items: center;
+                    border: 2px solid #ededed; // #ddd 컬러의 border를 박스 전체에 씌운다.
+                    border-right: 2px solid #ededed; // 오른쪽 border를 없앤다.
+                    border-left: 2cap solid #ededed; // 왼쪽 border를 없앤다.
+                }
+            }
+
+        
+        }
+    }
+}

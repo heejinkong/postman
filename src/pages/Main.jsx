@@ -3,6 +3,7 @@ import '../style/main.scss';
 // import { Link, Routes, Route } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import Builder from '../components/Builder';
+import Response from '../components/Response';
 // import Params from '../components/Params';
 // import Header from '../components/Header';
 // import Body from '../components/Body';
@@ -39,7 +40,9 @@ export default function Main() {
         //     </Routes>
         //   </div>*/}
          </div> 
-        <div className="response">3</div> 
+        <div className="response">
+          <Response/>          
+        </div> 
       </div>
     </section>
   );
