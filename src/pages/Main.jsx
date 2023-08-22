@@ -17,28 +17,7 @@ export default function Main() {
       <div className="main_container">
          <div className="builder">
           <Builder/>
-        {/* //   <div className="topEle">
-        //     <Link to="/params" className="link">
-        //       Params
-        //     </Link>
-        //     <Link to="/header" className="link">
-        //       Header
-        //     </Link>
-        //     <Link to="/body" className="link">
-        //       Body
-        //     </Link>
-        //     <Link to="/link" className="link">
-        //       Settings
-        //     </Link>
-        //   </div>
-        //   <div className="bt-top">
-        //     <Routes>
-        //       <Route path="/params" element={<Params />} />
-        //       <Route path="/header" element={<Header />} />
-        //       <Route path="/body" element={<Body />} />
-        //       <Route path="/link" element={<Setting />} />
-        //     </Routes>
-        //   </div>*/}
+        
          </div> 
         <div className="response">
           <Response/>          

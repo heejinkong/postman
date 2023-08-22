@@ -1,6 +1,9 @@
 import React from 'react';
 import '../../style/bodytab.scss';
 import { Radio } from '@mui/material';
+import QueryParams from './QueryParams';
+import RawType from './RawType';
+import ContentType from './ContentType';
 
 export default function BodyTab() {
   const [selectedValue, setSelectedValue] = React.useState('a');
@@ -17,7 +20,7 @@ export default function BodyTab() {
     inputProps: { 'aria-label': item },
   });
 
-  
+
 
   return (
     <div className='body_container'>
@@ -29,10 +32,11 @@ export default function BodyTab() {
         <div className="body_request_raw">
           <Radio {...controlProps('b')} size="10px" />
           <span>raw</span>
+          {selectedValue === 'b' && <ContentType />} 
         </div>
      </div>
      <div className='body_editor_container'>
-
+     {selectedValue === 'a' ? <QueryParams /> : <RawType/>}
      </div>
     </div>
   );
