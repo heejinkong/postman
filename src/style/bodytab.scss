@@ -1,0 +1,33 @@
+.body_container {
+    position: relative;
+    width: 100%;
+    height: 260px;
+
+    .body_request_type {
+        position: relative;
+        display: flex;
+        height: 10%;
+        width: 23%;
+        margin-left: -10px;
+      
+      
+      .body_request_form,
+      .body_request_raw {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content:flex-start;
+        margin: 1px;
+      }
+      
+    }
+
+    .body_editor_container {
+        position: relative;
+        display: flex;
+        height: 90%;
+        width: 100%;
+        margin-left: -10px;
+        background-color: bisque;
+    }
+}
