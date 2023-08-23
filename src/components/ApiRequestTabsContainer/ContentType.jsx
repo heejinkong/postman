@@ -1,35 +1,65 @@
-import React from 'react';
+import { useEffect, useRef, useState } from 'react'
+
 import '../../style/contenttype.scss'
-import { FormControl, MenuItem, Select} from '@mui/material';
+import { colors } from '@mui/material';
+
 
 
 
 export default function ContentType() {
-    const [method, setMethod] = React.useState('');
+  const ref = useRef(null)
+  const [options, setoptions] = useState([
+    { key: 1, value: 'Text' },
+    { key: 2, value: 'JavaScript' },
+    { key: 3, value: 'JSON' },
+    { key: 4, value: 'HTML' },
+    { key: 5, value: 'XML' }
+  ])
+  const [open, setOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState('');
 
-    const handleChange = (event) => {
-      setMethod(event.target.value);
-    };
+  const toggleDropdown = () => {
+    setOpen(!open);
+  };
 
-    return (
-        <div className='content_type_container'>
-          <FormControl sx={{ minWidth: 40, height: '40%', borderColor: 'transparent', '&:hover': { borderColor: 'transparent' } }} size='small'>
-            <Select
-              value={method}
-              onChange={handleChange}
-              displayEmpty
-              sx={{ '&:before': { borderColor: 'transparent' }, '&:after': { borderColor: 'transparent' } }}
+  const handleOptionSelect = (option) => {
+    setSelectedOption(option);
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = event => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('click', handleClickOutside)
+    // No Cleanup function
+  }, [])
+
+  return (
+    <div className="dropdown"
+     onBlur={() => { setSelectedOption(false);
+    }}>
+      <div ref={ref}>
+      <button className="dropdown-toggle" onClick={toggleDropdown}>
+        {selectedOption || '선택'}
+      </button>
+      {open && (
+        <ul className="dropdown-options">
+          {options.map((option) => (
+            <li
+              key={option.key}
+              className={`option ${selectedOption === option.value ? 'selected' : ''}`}
+              onClick={() => handleOptionSelect(option.value)}
             >
-              <MenuItem value="">
-                <em>Text</em>
-              </MenuItem>
-              <MenuItem value={10}>JavaScript</MenuItem>
-              <MenuItem value={20}>JSON</MenuItem>
-              <MenuItem value={30}>HTML</MenuItem>
-              <MenuItem value={40}>XML</MenuItem>
-            </Select>
-          </FormControl>
-        </div>
-      );
+              {option.value}
+            </li>
+          ))}
+        </ul>
+      )}
+      </div>
+    </div>
+  );
       
 }
