@@ -14,8 +14,8 @@ export default function RawType() {
       <textarea
         value={code}
         onChange={handleCodeChange}
-        rows={10} // 원하는 행의 개수로 조정
-        cols={80} // 원하는 열의 개수로 조정
+        rows={15} // 원하는 행의 개수로 조정
+        cols={165} // 원하는 열의 개수로 조정
         placeholder="Enter your code here..."
       />
       <pre>

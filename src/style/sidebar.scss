@@ -19,4 +19,18 @@
         
         }    
      }
+    .sidebar_collection_container {
+      position: relative;
+      height: 95.5%;
+
+      .sidebar_empty_collection{
+        position: relative;
+        height: 20%;
+        margin-top: 240px;
+        background-color: aqua;
+        text-align: center;
+      }
+
+    }
+     
   }
