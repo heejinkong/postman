@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 import '../../style/contenttype.scss'
-import { colors } from '@mui/material';
+
 
 
 
@@ -43,14 +43,16 @@ export default function ContentType() {
     }}>
       <div ref={ref}>
       <button className="dropdown-toggle" onClick={toggleDropdown}>
-        {selectedOption || '선택'}
+        <span className={`selected-option ${selectedOption ? 'selected' : ''}`}>
+          {selectedOption || '선택'}
+        </span>
       </button>
       {open && (
         <ul className="dropdown-options">
           {options.map((option) => (
             <li
               key={option.key}
-              className={`option ${selectedOption === option.value ? 'selected' : ''}`}
+              className={"option"}
               onClick={() => handleOptionSelect(option.value)}
             >
               {option.value}
