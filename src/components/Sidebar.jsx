@@ -5,6 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
+import Collection from './Collection';
 
 const buttons = [
   <Button key="new" className='btn-1'>New</Button>,
@@ -35,9 +36,10 @@ export default function Sidebar() {
         </div>
       </div>
       <div className='sidebar_collection_container'>
-        <div className='sidebar_empty_collection'>
+        {/* <div className='sidebar_empty_collection'>
           <span>Create a collection for your requests</span>
-        </div>
+        </div> */}
+        <Collection/>
       </div>
     </div>
   );
