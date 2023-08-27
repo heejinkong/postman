@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
 import Collection from './Collection';
+import { Link, Route, Routes } from 'react-router-dom';
 
 const buttons = [
   <Button key="new" className='btn-1'>New</Button>,
@@ -14,13 +15,17 @@ const buttons = [
 ];
 
 export default function Sidebar() {
+
+  
   return (
     <div className="sidebar_container">
       <div className="sidebar_header">
         <div className="btn-group" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+          <Link to= "/add">
           <IconButton aria-label="plus">
             <AddIcon fontSize="small" />
           </IconButton>
+          </Link>
           <Box sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -36,10 +41,15 @@ export default function Sidebar() {
         </div>
       </div>
       <div className='sidebar_collection_container'>
-        {/* <div className='sidebar_empty_collection'>
+      
+
+      <Routes>
+        <Route path='/' element = {<div className='sidebar_empty_collection'>
           <span>Create a collection for your requests</span>
-        </div> */}
-        <Collection/>
+        </div>}>
+        </Route>
+          <Route path='/add' element = {<Collection/>}/>
+       </Routes>
       </div>
     </div>
   );
