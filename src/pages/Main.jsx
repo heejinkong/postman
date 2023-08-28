@@ -4,6 +4,7 @@ import '../style/main.scss';
 import Sidebar from '../components/Sidebar';
 import Builder from '../components/Builder';
 import Response from '../components/Response';
+import CollectionEdit from './CollectionEdit';
 // import Params from '../components/Params';
 // import Header from '../components/Header';
 // import Body from '../components/Body';
@@ -15,13 +16,14 @@ export default function Main() {
       <div className="header"> header </div>
       <Sidebar />
       <div className="main_container">
-         <div className="builder">
+         {/* <div className="builder">
           <Builder/>
         
          </div> 
-        <div className="response">
+         <div className="response">
           <Response/>          
-        </div> 
+         </div>  */}
+         <CollectionEdit/>
       </div>
     </section>
   );
