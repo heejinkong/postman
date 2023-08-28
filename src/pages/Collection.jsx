@@ -8,7 +8,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const options = [
   'Move',
-  'Ru collection',
+  'Run collection',
   'Add request',
   'Add folder',
   'Delete',
@@ -16,9 +16,8 @@ const options = [
 
 const ITEM_HEIGHT = 50;
 
-export default function Collection() {
+export default function Collection({ collections }) {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [containers, setContainers] = useState([]);
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -31,11 +30,11 @@ export default function Collection() {
 
   return (
     <div>
-
-      <div className='collection_container'>
-        <div className='collection_list'>
+     <div className='collection_container'>
+      {collections.map(collection => (
+        <div key={collection.id} className='collection_list'>
           <button className='collection_list_btn'><ChevronRightIcon /></button>
-          <button className='collection_list_name'>New Collection</button>
+          <button className='collection_list_name'>{collection.name}</button>
           <div className="collection_list_options" style={{ opacity: open ? 1 : 0 }}>
             <IconButton
               disableRipple
@@ -69,10 +68,10 @@ export default function Collection() {
                 </MenuItem>
               ))}
             </Menu>
+            </div>
           </div>
-        </div>
+      ))}
       </div>
-      
     </div>
   );
 }
