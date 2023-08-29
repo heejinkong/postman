@@ -4,15 +4,23 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
 
 export default function Workspace() {
-  const [isDescriptionVisible, setDescriptionVisible] = useState(false);
-  const [noteText, setNoteText] = useState(''); 
+  const [isEditingDescription, setEditingDescription] = useState(false);
+  const [descriptionText, setDescriptionText] = useState('');
 
-  const handleDescriptionButtonClick = () => {
-    setDescriptionVisible(!isDescriptionVisible);
+  const handleDescriptionClick = () => {
+    setEditingDescription(true);
   };
 
-  const handleNoteChange = (event) => {
-    setNoteText(event.target.value);
+  const handleDescriptionChange = (event) => {
+    setDescriptionText(event.target.value);
+  };
+
+  const handleDescriptionBlur = () => {
+    setEditingDescription(false);
+  };
+
+  const handleNotesClick = () => {
+    setEditingDescription(true);
   };
 
   return (
@@ -21,27 +29,26 @@ export default function Workspace() {
         <PersonOutlineOutlinedIcon /> My Workspace
       </div>
       <div className='workspace_description'>
-        <button
-          className={`workspace_description_btn ${isDescriptionVisible ? 'active' : ''}`}
-          onClick={handleDescriptionButtonClick}
-        >
-          <div className='workspace_description_title'>
+        <div className='workspace_description_btn'>
+          <div
+            className='workspace_description_title'
+            onClick={handleDescriptionClick}
+          >
             <EventNoteOutlinedIcon /> Workspace description
           </div>
-          <div className='workspace_description_notes'>
-            <span>Add information that you want quick access to. It can include links to important resources or notes of what you want to remember.</span>
-          </div>
-
-          {/* {isDescriptionVisible ? (
-            <div className='worspace_description_input'>
+          <div className='workspace_description_notes' onClick={handleNotesClick}>
+            {isEditingDescription ? (
               <textarea
-                placeholder='Add information that you want quick access to. It can include links to important resources or notes of what you want to remember.'
-                value={noteText}
-                onChange={handleNoteChange}
+                value={descriptionText}
+                onChange={handleDescriptionChange}
+                onBlur={handleDescriptionBlur}
+                autoFocus
               />
-            </div>
-          ) : null} */}
-        </button>
+            ) : (
+              <span>{descriptionText || 'Add information that you want quick access to. It can include links to important resources or notes of what you want to remember.'}</span>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
