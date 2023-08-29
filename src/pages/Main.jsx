@@ -2,13 +2,9 @@ import React from 'react';
 import '../style/main.scss';
 // import { Link, Routes, Route } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
-import Builder from '../components/Builder';
-import Response from '../components/Response';
-import CollectionEdit from './CollectionEdit';
+import Workspace from './Workspace';
 // import Params from '../components/Params';
-// import Header from '../components/Header';
-// import Body from '../components/Body';
-// import Setting from '../components/Setting';
+
 
 export default function Main() {
   return (
@@ -23,7 +19,7 @@ export default function Main() {
          <div className="response">
           <Response/>          
          </div>  */}
-         <CollectionEdit/>
+         <Workspace/>
       </div>
     </section>
   );
