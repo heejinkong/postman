@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import Collection from '../pages/Collection';
 import { Link, Route, Routes } from 'react-router-dom';
 
+
 export default function Sidebar() {
   const [collections, setCollections] = useState([]);
 

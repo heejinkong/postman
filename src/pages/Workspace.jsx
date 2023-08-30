@@ -9,10 +9,10 @@ export default function Workspace() {
 
   const handleDescriptionClick = () => {
     setEditingDescription(true);
-  };
+  }
 
-  const handleDescriptionChange = (event) => {
-    setDescriptionText(event.target.value);
+  const handleDescriptionChange = (e) => {
+    setDescriptionText(e.target.value);
   };
 
   const handleDescriptionBlur = () => {

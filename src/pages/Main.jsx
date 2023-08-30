@@ -1,9 +1,8 @@
 import React from 'react';
 import '../style/main.scss';
-// import { Link, Routes, Route } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import Workspace from './Workspace';
-// import Params from '../components/Params';
+import CollectionEditor from './CollectionEditor';
 
 
 export default function Main() {
@@ -19,7 +18,8 @@ export default function Main() {
          <div className="response">
           <Response/>          
          </div>  */}
-         <Workspace/>
+         {/* <Workspace/> */}
+         <CollectionEditor/>
       </div>
     </section>
   );
