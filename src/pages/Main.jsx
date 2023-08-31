@@ -1,8 +1,9 @@
 import React from 'react';
 import '../style/main.scss';
 import Sidebar from '../components/Sidebar';
-import Workspace from './Workspace';
-import CollectionEditor from './CollectionEditor';
+import Builder from '../components/Builder';
+import ResponseSuccess from '../components/ResponseSuccess';
+
 
 
 export default function Main() {
@@ -11,15 +12,15 @@ export default function Main() {
       <div className="header"> header </div>
       <Sidebar />
       <div className="main_container">
-         {/* <div className="builder">
+         <div className="builder">
           <Builder/>
         
          </div> 
          <div className="response">
-          <Response/>          
-         </div>  */}
+          <ResponseSuccess/>          
+         </div> 
          {/* <Workspace/> */}
-         <CollectionEditor/>
+         {/* <CollectionEditor/> */}
       </div>
     </section>
   );

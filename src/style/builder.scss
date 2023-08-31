@@ -2,9 +2,9 @@
     background-color: white;
     height: 100%;
 
-    .builder_list {
+    .builder_file_path {
         background-color: white;
-        height: 5.6%;
+        height: 7.8%;
         border-bottom: 1px solid #d3cfcf;
 
     }
@@ -12,13 +12,9 @@
     .file_actions {
         position: relative;
         height: 8.5%;
-        display: flex; /* 혹은 inline-flex */
+        display: flex; 
         align-items: center;
   
-
-        .file_path {
-            position: relative;
-        }
 
         .box_btn_save {
             position: relative;
@@ -35,6 +31,7 @@
         height: 82.6%;
         border-bottom: 1px solid #d3cfcf;
 
+
         .body_box_top {
           
             position: relative;
@@ -46,11 +43,10 @@
             .method_options_container {
                 position: relative;
                 display: flex;
-                // box-sizing: border-box;
                 height: 90%;
-                // top:5%;
 
-                // justify-content: space-between;
+
+                
                 .box_method_url {
                     position:relative;
                     display: flex;
@@ -65,7 +61,7 @@
                     position: relative;
                     width: 7%;
                     height: 80%;
-                    margin-left: 29%;
+                    margin-left: 24%;
                     margin-top: auto;
                     align-items: center;
                 }
@@ -76,6 +72,11 @@
             width: 100%;
             height: 85%;
 
+        }
+
+        .body_box_top,
+        .box_request_tab {
+            margin-left: 80px;
         }
     }
 }

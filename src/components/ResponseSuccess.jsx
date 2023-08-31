@@ -1,4 +1,6 @@
+
 import React, { useState } from 'react';
+import '../style/responsesuccess.scss'
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import { useTheme } from '@mui/material/styles';
@@ -7,46 +9,43 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import ParamsTab from './ParamsTab';
-import HeadersTab from './HeadersTab';
-import BodyTab from './BodyTab';
-import ResultTab from './ResultTab';
+import BodyTabResponse from './ResponseSuccessTabs/BodyTabResponse';
+
+
 
 
 function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <Typography
-      component="div"
-      role="tabpanel"
-      hidden={value !== index}
-      id={`action-tabpanel-${index}`}
-      aria-labelledby={`action-tab-${index}`}
-      {...other}
-    >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </Typography>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `action-tab-${index}`,
-    'aria-controls': `action-tabpanel-${index}`,
+    const { children, value, index, ...other } = props;
+  
+    return (
+      <Typography
+        component="div"
+        role="tabpanel"
+        hidden={value !== index}
+        id={`action-tabpanel-${index}`}
+        aria-labelledby={`action-tab-${index}`}
+        {...other}
+      >
+        {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      </Typography>
+    );
+  }
+  
+  TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
   };
-}
+  
+  function a11yProps(index) {
+    return {
+      id: `action-tab-${index}`,
+      'aria-controls': `action-tabpanel-${index}`,
+    };
+  }
 
-
-
-export default function FloatingActionButtonZoom() {
-  const theme = useTheme();
+export default function ResponseSuccess() {
+    const theme = useTheme();
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
@@ -57,14 +56,9 @@ export default function FloatingActionButtonZoom() {
     setValue(index);
   };
 
-  // const transitionDuration = {
-  //   enter: theme.transitions.duration.enteringScreen,
-  //   exit: theme.transitions.duration.leavingScreen,
-  // };
-
- 
 
   return (
+    <div className='responsesuccess_container'>
     <Box
       sx={{
         bgcolor: 'transparent',
@@ -89,10 +83,9 @@ export default function FloatingActionButtonZoom() {
           variant="standard"
           aria-label="action tabs example"
         >
-          <Tab label="Params" {...a11yProps(0)} />
+          <Tab label="Body" {...a11yProps(0)} />
           <Tab label="Headers" {...a11yProps(1)} />
-          <Tab label="Body" {...a11yProps(2)} />
-          <Tab label="Result" {...a11yProps(3)} />
+          <Tab label="Rsult diff" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -101,19 +94,17 @@ export default function FloatingActionButtonZoom() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <ParamsTab/>
+            <BodyTabResponse/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <HeadersTab/>
+
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <BodyTab/>
-        </TabPanel>
-        <TabPanel value={value} index={3} dir={theme.direction}>
-          <ResultTab/>
+
         </TabPanel>
       </SwipeableViews>
       
     </Box>
+    </div>
   );
 }

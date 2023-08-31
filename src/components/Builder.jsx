@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../style/builder.scss';
 import { Button, FormControl, MenuItem, OutlinedInput, Select, Stack } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -7,7 +7,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import ApiRequestTabs from './ApiRequestTabsContainer/ApiRequestTabs';
 
 export default function Builder() {
-  const [method, setMethod] = React.useState('');
+  const [method, setMethod] = useState('');
 
   const handleChange = (event) => {
     setMethod(event.target.value);
@@ -15,9 +15,8 @@ export default function Builder() {
 
   return (
     <div className='builder_container'>
-      <div className='builder_list'>test</div>
+      <div className='builder_file_path'>path</div>
       <div className='file_actions'>
-        <div className='file_path'>path</div>
         <div className='box_btn_save'>
           <Button variant='outlined' startIcon={<SaveIcon />} size='big'>
             Save
