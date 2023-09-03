@@ -1,18 +1,40 @@
-import React, { useState } from 'react';
+import React, { Children, useState } from 'react';
 import '../style/builder.scss';
 import { Button, FormControl, MenuItem, OutlinedInput, Select, Stack } from '@mui/material';
 import Box from '@mui/material/Box';
 import SendIcon from '@mui/icons-material/Send';
 import SaveIcon from '@mui/icons-material/Save';
 import ApiRequestTabs from './ApiRequestTabsContainer/ApiRequestTabs';
+import axios from 'axios';
+import ResponseSuccess from './ResponseSuccess';
+
+
 
 export default function Builder() {
   const [method, setMethod] = useState('');
+  const [responseData, setResponseData] = useState(null);
 
-  const handleChange = (event) => {
-    setMethod(event.target.value);
+  // 이건 get/ put / delete 등을 선택하면 setMethod 함수에 저장
+  const handleChange = async (event) => {
+    await setMethod(event.target.value);
   };
 
+  // 통신에 필요한 버튼 함수.
+  const sendUrl = async () => {
+    try {
+      const response = await axios({
+        method : method,
+        url : '/listing',
+      })
+      console.log(response.data);
+      setResponseData(response.data);
+    } catch (error) {
+      console.error(error);
+      console.log("Method 통신 잘못되었음.");
+    }
+  }
+
+ 
   return (
     <div className='builder_container'>
       <div className='builder_file_path'>path</div>
@@ -34,13 +56,15 @@ export default function Builder() {
                   onChange={handleChange}
                   displayEmpty
                 >
-                  <MenuItem value="">
-                    <em>GET</em>
+                  <MenuItem value=''> 
+                    <em>Method</em>
+
                   </MenuItem>
-                  <MenuItem value={10}>POST</MenuItem>
-                  <MenuItem value={20}>PUT</MenuItem>
-                  <MenuItem value={30}>PATCH</MenuItem>
-                  <MenuItem value={40}>DELETE</MenuItem>
+                  <MenuItem value={'get'}>GET</MenuItem>
+                  <MenuItem value={'post'}>POST</MenuItem>
+                  <MenuItem value={'put'}>PUT</MenuItem>
+                  <MenuItem value={'patch'}>PATCH</MenuItem>
+                  <MenuItem value={'delete'}>DELETE</MenuItem>
                 </Select>
               </FormControl>
 
@@ -52,7 +76,7 @@ export default function Builder() {
              </Stack>
             </div>
             <div className='btn_send'>
-                <Button variant='contained' startIcon={<SendIcon />} size='big'>
+                <Button variant='contained' startIcon={<SendIcon />} size='big' onClick={sendUrl}>
                   Send
                 </Button> 
             </div>
@@ -61,6 +85,7 @@ export default function Builder() {
         <div className='box_request_tab'>
             <ApiRequestTabs/>
         </div>
+
       </div>
     </div>
   );
