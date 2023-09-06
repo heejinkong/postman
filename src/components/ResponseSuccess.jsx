@@ -9,7 +9,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import BodyTabResponse from './ResponseSuccessTabs/BodyTabResponse';
+import ResponseBodyTabs from './ResponseSuccessTabs/ResponseBodyTab';
+import ResponseHeadersTab from './ResponseSuccessTabs/ResponseHeadersTab';
 
 
 
@@ -94,10 +95,10 @@ export default function ResponseSuccess() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-            <BodyTabResponse/>
+            <ResponseBodyTabs/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-
+          <ResponseHeadersTab/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
 

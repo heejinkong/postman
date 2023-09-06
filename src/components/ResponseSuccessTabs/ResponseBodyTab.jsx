@@ -1,23 +1,23 @@
-import React from 'react';
+import  { useState, useEffect } from 'react';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/mode/javascript/javascript';
-import { useState } from 'react';
 import axios from 'axios';
-import { useEffect } from 'react';
 import { Controlled as ControlledCodeMirror } from 'react-codemirror2';
+import '../../style/codemirror.scss';
 
-export default function ExampleKong() {
-  const [url, setUrl] = useState('');
-  const [response, setResponse] = useState('');
+
+
+export default function ResponseBodyTabs() {
+  const [result, setResult] = useState('');
 
   const fetchApi = async () => {
-    console.log('hi');
     try {
-      const result = await axios.get('/listing');
+      const response = await axios.get('https://httpbin.org/get');
+      console.log(response);
 
-      setResponse(JSON.stringify(result.data, null, 2));
+      setResult(JSON.stringify(response.data, null, 2));
     } catch (error) {
-      setResponse(`Error: ${error.message}`);
+      setResult(`Error: ${error.message}`);
     }
   };
 
@@ -27,7 +27,7 @@ export default function ExampleKong() {
 
   return (
     <div>
-      <div>
+      {/* <div>
         <input
           type="text"
           value={url}
@@ -35,10 +35,10 @@ export default function ExampleKong() {
           placeholder="Enter API URL"
         />
         <button onClick={fetchApi}>Send Request</button>
-      </div>
-      <div style={{ marginTop: '20px' }}>
+      </div> */}
+      <div style={{ marginTop: '0.1px' }}>
         <ControlledCodeMirror
-          value={response}
+          value={result}
           options={{
             mode: 'javascript',
             theme: 'default',
@@ -46,6 +46,7 @@ export default function ExampleKong() {
             readOnly: true,
           }}
           onBeforeChange={() => {}}
+          className="custom-codemirror"
         />
       </div>
     </div>
