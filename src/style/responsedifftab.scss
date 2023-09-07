@@ -1,0 +1,24 @@
+.result_diff_container {
+    display: flex;
+    border: 1px solid #ccc;
+    margin: 5px;
+    background-color: #dbd2d2;
+    overflow: auto; 
+  
+  
+  .result_body_content,
+  .result_predicted_content {
+    flex: 1;
+    padding: 170px; 
+    border: 1px solid #ccc;
+    box-sizing: border-box; 
+  }
+  .result_body_content {
+    background-color: aqua;
+  }
+  
+  .result_predicted_content {
+    background-color: bisque;
+  }
+  
+  }

@@ -1,14 +1,15 @@
-import  { useState, useEffect } from 'react';
+import  { useEffect } from 'react';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/mode/javascript/javascript';
 import axios from 'axios';
 import { Controlled as ControlledCodeMirror } from 'react-codemirror2';
 import '../../style/codemirror.scss';
+import { useData } from '../../contexts/DataContext';
 
 
 
 export default function ResponseBodyTabs() {
-  const [result, setResult] = useState('');
+  const { resultData,setResult } = useData();
 
   const fetchApi = async () => {
     try {
@@ -38,7 +39,7 @@ export default function ResponseBodyTabs() {
       </div> */}
       <div style={{ marginTop: '0.1px' }}>
         <ControlledCodeMirror
-          value={result}
+          value={resultData}
           options={{
             mode: 'javascript',
             theme: 'default',

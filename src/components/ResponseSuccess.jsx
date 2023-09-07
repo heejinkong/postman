@@ -9,8 +9,9 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import ResponseBodyTabs from './ResponseSuccessTabs/ResponseBodyTab';
+import ResponseBodyTab from './ResponseSuccessTabs/ResponseBodyTab';
 import ResponseHeadersTab from './ResponseSuccessTabs/ResponseHeadersTab';
+import ResultDiff from './ResponseSuccessTabs/ResponseDiffTab';
 
 
 
@@ -63,7 +64,7 @@ export default function ResponseSuccess() {
     <Box
       sx={{
         bgcolor: 'transparent',
-        width: 1224,
+        width: 1550,
         position: 'relative',
         minHeight: 283,
       }}
@@ -95,13 +96,13 @@ export default function ResponseSuccess() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-            <ResponseBodyTabs/>
+            <ResponseBodyTab/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <ResponseHeadersTab/>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-
+          <ResultDiff/>
         </TabPanel>
       </SwipeableViews>
       

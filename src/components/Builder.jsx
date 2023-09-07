@@ -1,38 +1,37 @@
-import React, { Children, useState } from 'react';
+import React, { useState } from 'react';
 import '../style/builder.scss';
 import { Button, FormControl, MenuItem, OutlinedInput, Select, Stack } from '@mui/material';
 import Box from '@mui/material/Box';
 import SendIcon from '@mui/icons-material/Send';
 import SaveIcon from '@mui/icons-material/Save';
 import ApiRequestTabs from './ApiRequestTabsContainer/ApiRequestTabs';
-import axios from 'axios';
-import ResponseSuccess from './ResponseSuccess';
+
+
 
 
 
 export default function Builder() {
   const [method, setMethod] = useState('');
-  const [responseData, setResponseData] = useState(null);
 
   // 이건 get/ put / delete 등을 선택하면 setMethod 함수에 저장
   const handleChange = async (event) => {
     await setMethod(event.target.value);
   };
 
-  // 통신에 필요한 버튼 함수.
-  const sendUrl = async () => {
-    try {
-      const response = await axios({
-        method : method,
-        url : '/listing',
-      })
-      console.log(response.data);
-      setResponseData(response.data);
-    } catch (error) {
-      console.error(error);
-      console.log("Method 통신 잘못되었음.");
-    }
-  }
+  // // 통신에 필요한 버튼 함수.
+  // const sendUrl = async () => {
+  //   try {
+  //     const response = await axios({
+  //       method : method,
+  //       url : '/listing',
+  //     })
+  //     console.log(response.data);
+  //     setResponseData(response.data);
+  //   } catch (error) {
+  //     console.error(error);
+  //     console.log("Method 통신 잘못되었음.");
+  //   }
+  // }
 
  
   return (
@@ -76,7 +75,7 @@ export default function Builder() {
              </Stack>
             </div>
             <div className='btn_send'>
-                <Button variant='contained' startIcon={<SendIcon />} size='big' onClick={sendUrl}>
+                <Button variant='contained' startIcon={<SendIcon />} size='big' >
                   Send
                 </Button> 
             </div>
