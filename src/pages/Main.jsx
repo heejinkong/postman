@@ -1,8 +1,11 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import '../style/main.scss';
 import Sidebar from '../components/Sidebar';
 import Builder from "../components/Builder";
 import ResponseSuccess from "../components/ResponseSuccess"
+import Workspace from './Workspace';
+import CollectionEditor from './CollectionEditor';
 import { DataProvider } from '../contexts/DataContext';
 
 export default function Main() {

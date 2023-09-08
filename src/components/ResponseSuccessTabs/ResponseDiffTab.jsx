@@ -1,27 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import 'react-diff-view/style/index.css'; 
-import { Diff } from 'react-diff-view'; 
-import { useData } from '../../contexts/DataContext';
+import React from "react";
+import * as Diff2Html from "diff2html";
+import '../../style/diff2html.css';
 
 export default function ResponseDiffTab() {
-  const { resultData, resultText } = useData();
-  const [codeDiff, setCodeDiff] = useState('');
+  // 직접 diff 데이터 생성
+  const diff = `diff --git a/sample.js b/sample.js
+index 0000001..0ddf2ba
+--- a/sample.js
++++ b/sample.js
+@@ -1 +1 @@
+-console.log("Hello World!")
++console.log("Hello from Diff2Html!")`;
 
-  useEffect(() => {
-    const responseCode = resultData;
-    const predictedCode = resultText;
-    setCodeDiff({ responseCode, predictedCode });
-  }, [resultText, resultData]);
+  let outputHtml = Diff2Html.html(diff, {
+    inputFormat: "diff",
+    showFiles: true,
+    matching: "lines",
+    outputFormat: "side-by-side"
+  });
 
   return (
     <div>
       <h2>Code Difference</h2>
-      <Diff
-        oldValue={codeDiff.responseCode}
-        newValue={codeDiff.predictedCode}
-        splitView={true} 
-        useDarkTheme={false} 
-      />
+      <div dangerouslySetInnerHTML={{ __html: outputHtml }}></div>
     </div>
   );
 }

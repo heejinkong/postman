@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../../style/resulttab.scss';
-
-
-
+import { useData } from '../../contexts/DataContext';
 
 export default function ResultTab() {
-  const [resultText, setResultText] = useState('');
+  const { resultText, setTextInput } = useData(); 
 
   const handleTextareaChange = (e) => {
-    setResultText(e.target.value);
+    setTextInput(e.target.value); 
   };
 
   return (
-    <div>
-      <textarea onChange={handleTextareaChange} value={resultText} />
+    <div className='result_container'>
+      <textarea
+        value={resultText}
+        onChange={handleTextareaChange}
+        // style={{ fontWeight: 'bold' }}
+      ></textarea>
     </div>
   );
 }
