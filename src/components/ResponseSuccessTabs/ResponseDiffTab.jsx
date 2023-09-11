@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import * as Diff2Html from "diff2html";
-import '../../style/diff2html.css';
-
 import { useData } from '../../contexts/DataContext';
+import '../../style/diff2html.css';
 
 export default function ResponseDiffTab() {
   const { resultText, resultData } = useData();
@@ -26,7 +25,6 @@ export default function ResponseDiffTab() {
   return (
     <div>
     <h2>Code Difference</h2>
-    {/* diff 결과를 화면에 표시 */}
     <div dangerouslySetInnerHTML={{ __html: outputHtml }}></div>
   </div>
 

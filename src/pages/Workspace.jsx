@@ -4,11 +4,12 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
 
 export default function Workspace() {
+  const [workspaceName, setWorkspaceName] = useState('My Workspace');
   const [isEditingDescription, setEditingDescription] = useState(false);
   const [descriptionText, setDescriptionText] = useState('');
 
-  const handleDescriptionClick = () => {
-    setEditingDescription(true);
+  const handleNameChange = (e) => {
+    setWorkspaceName(e.target.value);
   }
 
   const handleDescriptionChange = (e) => {
@@ -26,14 +27,16 @@ export default function Workspace() {
   return (
     <div className='workspace_container'>
       <div className='workspace_name_container'>
-        <PersonOutlineOutlinedIcon /> My Workspace
+        <PersonOutlineOutlinedIcon /> 
+        <input
+                type='text'
+                value={workspaceName}
+                onChange={handleNameChange}
+          />
       </div>
       <div className='workspace_description'>
         <div className='workspace_description_btn'>
-          <div
-            className='workspace_description_title'
-            onClick={handleDescriptionClick}
-          >
+          <div className='workspace_description_title'>
             <EventNoteOutlinedIcon /> Workspace description
           </div>
           <div className='workspace_description_notes' onClick={handleNotesClick}>

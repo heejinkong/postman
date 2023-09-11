@@ -14,6 +14,7 @@ export default function ResultTab() {
       <textarea
         value={resultText}
         onChange={handleTextareaChange}
+        placeholder="Please enter the expected result"
         // style={{ fontWeight: 'bold' }}
       ></textarea>
     </div>

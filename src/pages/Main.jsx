@@ -15,17 +15,17 @@ export default function Main() {
       <div className="header"> header </div>
       <Sidebar />
       <div className="main_container">
-         <div className="builder">
+         {/* <div className="builder">
           <Builder/>
         
          </div> 
          <div className="response">
           <ResponseSuccess/>          
-         </div> 
-         {/* <Routes>
+         </div>  */}
+         <Routes>
           <Route path='/' element = {<Workspace/>}/>
           <Route path='/collection' element = {<CollectionEditor/>}/>
-         </Routes> */}
+         </Routes>
       </div>
       </DataProvider>
     </section>
