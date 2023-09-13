@@ -23,7 +23,7 @@ export default function Main() {
           <ResponseSuccess/>          
          </div>  */}
          <Routes>
-          <Route path='/workspace/:workspaceId' element = {<Workspace/>}/>
+         <Route path="/workspace/:workspaceId" element={<Workspace />} />
           <Route path='/collection' element = {<CollectionEditor/>}/>
          </Routes>
       </div>

@@ -1,10 +1,11 @@
-import { takeLatest } from "redux-saga/effects";
+import {  takeEvery, takeLatest } from "redux-saga/effects";
 import { workspaceActions } from "../slice/workspaceSlice";
-import { registerWorkspaceAsync } from "./workspaceSaga";
+import { getWorkspaceAsync, registerWorkspaceAsync,  } from "./workspaceSaga";
 
 
-const { registerWorkspace } = workspaceActions;
+const { registerWorkspace, getWorkspace } = workspaceActions;
 
 export default function* rootWatcher() {
   yield takeLatest(registerWorkspace.type, registerWorkspaceAsync);
+  yield takeEvery(getWorkspace.type, getWorkspaceAsync);
 }

@@ -1,20 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../style/workspace.scss';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
 import { workspaceActions } from '../slice/workspaceSlice';
 import { useDispatch } from "react-redux";
+import { useParams } from 'react-router-dom';
 
 
 
 
 export default function Workspace() {
+  const { workspaceId } = useParams();
   const [workspaceName, setWorkspaceName] = useState('My Workspace');
   const [isEditingDescription, setEditingDescription] = useState(false);
   const [descriptionText, setDescriptionText] = useState('');
   const dispatch = useDispatch();
+  
+  console.log(useParams.workspaceId);
 
-
+ 
   const handleNameChange = (e) => {
     setWorkspaceName(e.target.value);
   };
@@ -40,11 +44,13 @@ export default function Workspace() {
     dispatch(workspaceActions.registerWorkspace(workspace));
   }
 
-
+   // useEffect(() => {
+  //   dispatch(workspaceActions.getWorkspace(workspaceId));
+  // }, [workspaceId]);
 
   return (
     <div className='workspace_container'>
-      
+      <div>Workspace {workspaceId}</div>
       <div className='workspace_name_container'>
         <PersonOutlineOutlinedIcon /> 
         <input
