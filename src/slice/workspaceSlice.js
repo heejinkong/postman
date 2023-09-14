@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const workspaceSlice = createSlice({
+export const workspaceSlice = createSlice({ // 액션 생성
     name: "workspace",
     initialState: { 
         id:0,
-        workspacetitle:"",
+        workspacetitle:"My Wokspace",
         description: "" 
     },
     reducers: {
         registerWorkspace: (state, { payload: workspace }) => {
-            console.log(workspace);
+            // console.log(workspace);
         },
         // registerWorkspaceAsync: (state, { payload }) => {
         //     console.lolg(payload);
@@ -21,7 +21,7 @@ export const workspaceSlice = createSlice({
         // },
 
         getWorkspace: (state, { payload: id }) => {
-            console.log(id);
+            // console.log(id);
         },
         getWorkspaceAsync: (state, { payload: workspace }) => {
             console.log(workspace);

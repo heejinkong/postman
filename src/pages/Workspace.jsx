@@ -3,21 +3,25 @@ import '../style/workspace.scss';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
 import { workspaceActions } from '../slice/workspaceSlice';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom';
 
 
 
 
 export default function Workspace() {
+  const dispatch = useDispatch();
   const { workspaceId } = useParams();
-  const [workspaceName, setWorkspaceName] = useState('My Workspace');
+  const [workspaceName, setWorkspaceName] = useState('');
   const [isEditingDescription, setEditingDescription] = useState(false);
   const [descriptionText, setDescriptionText] = useState('');
-  const dispatch = useDispatch();
-  
-  console.log(useParams.workspaceId);
 
+
+  const { id, name, description } = useSelector((state) => ({
+    id: state.workspaceReducers.id,
+    name: state.workspaceReducers.name,
+    description: state.workspaceReducers.description,
+  }));
  
   const handleNameChange = (e) => {
     setWorkspaceName(e.target.value);
@@ -43,14 +47,33 @@ export default function Workspace() {
     // console.log(workspace);
     dispatch(workspaceActions.registerWorkspace(workspace));
   }
+  useEffect(() => {
+    dispatch(workspaceActions.getWorkspace(workspaceId));
+  }, [dispatch, workspaceId]);
 
-   // useEffect(() => {
-  //   dispatch(workspaceActions.getWorkspace(workspaceId));
-  // }, [workspaceId]);
 
+  useEffect(() => {
+    if (name !== undefined && name !== null) {
+      setWorkspaceName(name);
+    }
+    if (description !== undefined && description !== null) {
+      setDescriptionText(description);
+    }
+  }, [name, description]);
+
+  
+  
+  
+  
+  
+  
+
+
+  
+  
   return (
     <div className='workspace_container'>
-      <div>Workspace {workspaceId}</div>
+      <div>Workspace {id}</div>
       <div className='workspace_name_container'>
         <PersonOutlineOutlinedIcon /> 
         <input
@@ -58,6 +81,7 @@ export default function Workspace() {
                 name='workspacetitle'
                 value={workspaceName}
                 onChange={handleNameChange}
+                placeholder='My Workspace'
           />
           <button onClick={handleSubmit}>save</button>
       </div>

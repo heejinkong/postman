@@ -7,6 +7,7 @@ import ResponseSuccess from "../components/ResponseSuccess"
 import Workspace from './Workspace';
 import CollectionEditor from './CollectionEditor';
 import { DataProvider } from '../contexts/DataContext';
+import WorkspaceEdit from './WorkspaceEdit';
 
 export default function Main() {
   return (
@@ -23,7 +24,8 @@ export default function Main() {
           <ResponseSuccess/>          
          </div>  */}
          <Routes>
-         <Route path="/workspace/:workspaceId" element={<Workspace />} />
+          <Route path="/workspace/:workspaceId" element={<Workspace />} />
+          {/* <Route path="/workspace/:workspaceId" element={<WorkspaceEdit />} /> */}
           <Route path='/collection' element = {<CollectionEditor/>}/>
          </Routes>
       </div>

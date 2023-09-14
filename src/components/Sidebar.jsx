@@ -20,7 +20,7 @@ export default function Sidebar() {
   };
 
   const buttons = [
-    <Link to = "/workspace/:workspaceId" >
+    <Link to = "/workspace/0" >
     <Button key="new" className='btn-1' onClick={addNewCollection}>New</Button>
     </Link>,
     <Button key="import" className='btn-2'>Import</Button>,

@@ -1,4 +1,4 @@
-import { getContext, put } from "redux-saga/effects";
+import { put } from "redux-saga/effects";
 import { workspaceActions } from "../slice/workspaceSlice";
 import axios from "axios";
 import history from "../utils/history";
@@ -24,7 +24,8 @@ export function* getWorkspaceAsync(action) {
 
   console.log(response.data);
 
-  yield put(workspaceActions.getArticleAsync(response.data));
+  yield put(workspaceActions.getWorkspaceAsync(response.data));
+
 }
 
 
