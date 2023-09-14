@@ -2,16 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const WorkspaceList = (props) => {
-  console.log(props.list);
-
-  if (!props.list || props.list.length === 0) {
-    alert("데이터없음");
-    return null;
-  }
-
   return (
     <div>
       <table>
+      <colgroup>
+            <col width="10%" />
+            <col width="40%" />
+            <col width="10%" />
+            <col width="40%" />
+          </colgroup>
         <thead>
           <tr>
             <th>번호</th>

@@ -26,7 +26,7 @@ export default function Main() {
           <ResponseSuccess/>          
          </div>  */}
          <Routes>
-         <Route path="/list" element={<ListPage />} />
+         <Route path="/" element={<ListPage />} />
           <Route path="/workspace/:workspaceId" element={<Workspace />} />
           {/* <Route path="/workspace/:workspaceId" element={<WorkspaceEdit />} /> */}
           <Route path='/collection' element = {<CollectionEditor/>}/>
