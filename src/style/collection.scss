@@ -50,13 +50,13 @@
             opacity: 0; /* 초기에는 투명한 상태 */
 
             &:hover {
-             opacity: 1 !important; /* 마우스 오버 시 투명도를 1로 변경하여 보이게 함 */
+             opacity: 1 !important; 
             }
 
         }
 
         &:hover {
-            background-color: lightgray; /* 마우스 오버 시 배경 색상 변경 */
+            background-color: lightgray;
             }
     
 

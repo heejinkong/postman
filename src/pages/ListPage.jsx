@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import '../style/listpage.scss';
 import { listActions } from '../slice/listSlice';
 import WorkspaceList from './WorkspaceList';
 
@@ -11,11 +12,35 @@ const ListPage = () => {
         dispatch(listActions.getList());
     }, [dispatch]);
 
-    const list = useSelector((state) => state.listReducers.list);
+    const { list, isLoding, isSuccess } = useSelector((state) => ({
+        list: state.listReducers.list,
+        isLoding: state.listReducers.isLoding,
+        isSuccess: state.listReducers.isSuccess,
+    }));
+
     return (
         <div>
-            <WorkspaceList list={list} />
+      <div className='home_editor_container'>
+        <div className='home_path_container'>
+            <div className='home_path_title'>
+               
+             </div>
+
+         </div>
+        <div className='home_description'>
+          <div className='home_title'>
+           
+          </div>
+          <div className='home_description_notes' >
+          {isSuccess && list.length > 0 ? (
+                    <WorkspaceList list={list}/>
+                ) : (
+                    <p>No workspace </p>
+                )}
+          </div>
         </div>
+      </div>
+    </div>
     );
 };
 

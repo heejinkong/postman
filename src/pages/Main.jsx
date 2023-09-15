@@ -10,14 +10,19 @@ import { DataProvider } from '../contexts/DataContext';
 import WorkspaceEdit from './WorkspaceEdit';
 import WorkspaceList from './WorkspaceList';
 import ListPage from './ListPage';
+import Header from '../components/Header';
+
 
 export default function Main() {
   return (
     <section className="container">
       <DataProvider>
-      <div className="header"> header </div>
+      <div className="header"> 
+      <Header/>
+      </div>
       <Sidebar />
       <div className="main_container">
+        <ListPage/>
          {/* <div className="builder">
           <Builder/>
         

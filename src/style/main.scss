@@ -7,17 +7,19 @@
   .header {
       position: fixed;
       width: 100%;
-      height: 4%;
+      height: 3.9%;
       display: flex;
       border-bottom: 1px solid #d3cfcf;
+
   }
 
   
   .main_container {
       position: relative;
-      height: 96%;
+      height: 96.1%;
       width: 95%;
       top: 4%;
+      border-bottom: 1px solid #d3cfcf;
       
       .builder{
           position: relative;
