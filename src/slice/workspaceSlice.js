@@ -24,7 +24,6 @@ export const workspaceSlice = createSlice({ // 액션 생성
             // console.log(id);
         },
         getWorkspaceAsync: (state, { payload: workspace }) => {
-            console.log(workspace);
             return {
                 ...state,
                 id: workspace.id,
@@ -33,8 +32,11 @@ export const workspaceSlice = createSlice({ // 액션 생성
             };
         },
 
+    
+
     },
 });
 
 export const workspaceReducers = workspaceSlice.reducer;
 export const workspaceActions = workspaceSlice.actions;
+

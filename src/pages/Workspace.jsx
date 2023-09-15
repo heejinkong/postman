@@ -17,8 +17,8 @@ export default function Workspace() {
   const [descriptionText, setDescriptionText] = useState('');
 
 
-  const { id, name, description } = useSelector((state) => ({
-    id: state.workspaceReducers.id,
+  const { name, description } = useSelector(
+    (state) => ({
     name: state.workspaceReducers.name,
     description: state.workspaceReducers.description,
   }));
@@ -62,18 +62,8 @@ export default function Workspace() {
   }, [name, description]);
 
   
-  
-  
-  
-  
-  
-
-
-  
-  
   return (
     <div className='workspace_container'>
-      <div>Workspace {id}</div>
       <div className='workspace_name_container'>
         <PersonOutlineOutlinedIcon /> 
         <input

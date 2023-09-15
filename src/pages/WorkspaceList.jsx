@@ -5,12 +5,6 @@ const WorkspaceList = (props) => {
   return (
     <div>
       <table>
-      <colgroup>
-            <col width="10%" />
-            <col width="40%" />
-            <col width="10%" />
-            <col width="40%" />
-          </colgroup>
         <thead>
           <tr>
             <th>번호</th>

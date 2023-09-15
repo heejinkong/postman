@@ -22,7 +22,6 @@ export default function Main() {
       </div>
       <Sidebar />
       <div className="main_container">
-        <ListPage/>
          {/* <div className="builder">
           <Builder/>
         

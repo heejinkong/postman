@@ -29,13 +29,17 @@ const ListPage = () => {
          </div>
         <div className='home_description'>
           <div className='home_title'>
-           
+          {isSuccess && list.length > 0 ? (
+                   <p>Click a Workspace</p>
+                ) : (
+                    <p>Workspace does not exist </p>
+                )}
           </div>
           <div className='home_description_notes' >
           {isSuccess && list.length > 0 ? (
                     <WorkspaceList list={list}/>
                 ) : (
-                    <p>No workspace </p>
+                    <p> Create a Workspace using the 'New' button on the left </p>
                 )}
           </div>
         </div>
