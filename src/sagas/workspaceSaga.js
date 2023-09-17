@@ -24,7 +24,7 @@ export function* getWorkspaceAsync(action) {
 
   try {
     const response = yield axios.get(`http://localhost:4000/workspace/${id}`);
-    console.log(response.data);
+
 
     yield put(workspaceActions.updateWorkspace(response.data));
   } catch (e) {
@@ -47,14 +47,15 @@ export function* fetchWorkspaceAsync(action) {
 
 export function* updateWorkspaceAsync(action) {
   const workspace = action.payload;
+  
 
+  
   try {
     const response = yield axios.put(`http://localhost:4000/workspace/${workspace.id}`, workspace);
-    alert("업데이트");
-    console.log(response.data.id);
-
+    console.log(response.data.name)
     history.push(`/workspace/${response.data.id}`, response.data.id);
-    console.log(response.data.name);
+
+    console.log(response.data.description)
   } catch (e) {
     console.error("에러 발생:", e);
   }

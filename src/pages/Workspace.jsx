@@ -22,22 +22,20 @@ export default function Workspace(props) {
 
   const { id ,name, description } = useSelector(
     (state) => ({
-      id: state.workspaceReducers.id,
+    id: state.workspaceReducers.id,
     name: state.workspaceReducers.name,
     description: state.workspaceReducers.description,
   }),
   shallowEqual
   );
- 
+
   const handleNameChange = (e) => {
     setWorkspaceName(e.target.value);
   };
-  console.log(workspaceName);
 
   const handleDescriptionChange = (e) => {
     setDescriptionText(e.target.value);
   };
-  console.log(descriptionText);
 
   const handleDescriptionBlur = () => {
     setEditingDescription(false);
@@ -58,19 +56,23 @@ export default function Workspace(props) {
     }
   }
 
-  useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    if (searchParams.get("isForEdit") === "true") {
-      setIsForUpdate(true);
-      dispatch(workspaceActions.fetchWorkspace(workspaceId));
-      
-    }
-    console.log(name, description);
-    // setWorkspaceName(name);
-    // setDescriptionText(description);
-  }, [id, location]);
+ useEffect(() => {
+  const searchParams = new URLSearchParams(location.search);
+  if (searchParams.get("isForEdit") === "true") {
+    setIsForUpdate(true);
+    dispatch(workspaceActions.fetchWorkspace(workspaceId));
+  }
+}, [location.search, workspaceId]);
 
-  
+useEffect(() => {
+  const updatedWorkspace = {
+    id: workspaceId,
+    name: workspaceName,
+    description: descriptionText,
+  };
+  dispatch(workspaceActions.updateWorkspace(updatedWorkspace));
+}, [workspaceId, workspaceName, descriptionText]);
+
 
   useEffect(() => {
     dispatch(workspaceActions.getWorkspace(workspaceId));
@@ -96,18 +98,17 @@ export default function Workspace(props) {
         <input
                 type='text'
                 name='workspacetitle'
-                value={workspaceName}
+                value={workspaceName} 
                 onChange={handleNameChange}
                 placeholder='My Workspace'
           />
-          <button onClick={handleSubmit}>save</button>
+          
           { id > 0 ? (
                      <Link to={`/workspace/${id}?isForEdit=true`}>
-                     <button type="primary">edit</button>
                      </Link>
         
                 ) : (
-                    <p>  </p>
+                  <button onClick={handleSubmit}>save</button>
                 )}
       </div>
       <div className='workspace_description'>
