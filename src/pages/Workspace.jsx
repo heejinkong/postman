@@ -56,13 +56,14 @@ export default function Workspace(props) {
     }
   }
 
- useEffect(() => {
-  const searchParams = new URLSearchParams(location.search);
-  if (searchParams.get("isForEdit") === "true") {
-    setIsForUpdate(true);
-    dispatch(workspaceActions.fetchWorkspace(workspaceId));
-  }
-}, [location.search, workspaceId]);
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    if (searchParams.get("isForEdit") === "true") {
+      setIsForUpdate(true);
+      dispatch(workspaceActions.fetchWorkspace(workspaceId));
+      console.log(workspaceId.name);
+    }
+  }, [location.search, workspaceId]);
 
 useEffect(() => {
   const updatedWorkspace = {
@@ -104,8 +105,7 @@ useEffect(() => {
           />
           
           { id > 0 ? (
-                     <Link to={`/workspace/${id}?isForEdit=true`}>
-                     </Link>
+                     <Link to={`/workspace/${workspaceId}?isForEdit=true`}></Link>
         
                 ) : (
                   <button onClick={handleSubmit}>save</button>

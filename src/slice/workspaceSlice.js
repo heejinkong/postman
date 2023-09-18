@@ -4,7 +4,7 @@ export const workspaceSlice = createSlice({ // 액션 생성
     name: "workspace",
     initialState: { 
         id:0,
-        workspacetitle:"My Wokspace",
+        name:"",
         description: "" 
     },
     reducers: {
@@ -55,4 +55,3 @@ export const workspaceSlice = createSlice({ // 액션 생성
 
 export const workspaceReducers = workspaceSlice.reducer;
 export const workspaceActions = workspaceSlice.actions;
-

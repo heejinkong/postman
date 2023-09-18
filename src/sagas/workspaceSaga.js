@@ -60,6 +60,3 @@ export function* updateWorkspaceAsync(action) {
     console.error("에러 발생:", e);
   }
 }
-
-
-
