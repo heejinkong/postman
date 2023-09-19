@@ -2,7 +2,7 @@
   "workspace": [
     {
       "id": 2,
-      "name": "abc",
+      "name": "abc55",
       "description": "fadsfasdf"
     },
     {
@@ -24,6 +24,38 @@
       "name": "@@@@@",
       "description": "123456",
       "id": 7
+    }
+  ],
+  "collection": [
+    {
+      "id": 1,
+      "collectionname": "ㅗㅎㅇㅎㄹ",
+      "collectiontext": "ㅗㅇㅎ롱ㄹ",
+      "workspaceId": "2"
+    },
+    {
+      "id": 2,
+      "collectionname": "ㅀㄴㄹ",
+      "collectiontext": "ㄹ",
+      "workspaceId": "2"
+    },
+    {
+      "id": 3,
+      "collectionname": "ㅀㄴㅀ",
+      "collectiontext": "ㅀㄹㅇㅎ",
+      "workspaceId": "2"
+    },
+    {
+      "id": 4,
+      "collectionname": "New Colleㄹㅇㅁㅇㄴㄹction",
+      "collectiontext": "ㄻㅇㄴㄹㄴㅇㄹ",
+      "workspaceId": "2"
+    },
+    {
+      "id": 5,
+      "collectionname": "New Collection",
+      "collectiontext": "ㅇㄹㄴㅁㅇ",
+      "workspaceId": "2"
     }
   ]
 }

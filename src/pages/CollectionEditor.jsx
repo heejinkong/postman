@@ -2,19 +2,34 @@ import React, { useState } from 'react';
 import '../style/collectioneditor.scss';
 import { Button } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { collectionActions } from '../slice/collectionSlice';
+import { useParams } from 'react-router-dom';
 
 
-export default function CollectionEditor() {
+export default function CollectionEditor(props) {
+  const dispatch =  useDispatch();
+  const { workspaceId } = useParams();
   const [collectionName, setCollectionName] = useState('New Collection');
   const [isEditingDescription, setEditingDescription] = useState(false);
-  const [descriptionText, setDescriptionText] = useState('');
+  const [collectionText, setCollectionText] = useState('');
+
+
+  const { id ,collectionname, collectiontext } = useSelector(
+    (state) => ({
+    id: state.workspaceReducers.id,
+    collectionname: state.collectionReducers.collectionname,
+    collectiontext: state.collectionReducers.collectiontext,
+  }),
+  shallowEqual
+  );
 
   const handleNameChange = (e) => {
     setCollectionName(e.target.value);
   };
 
   const handleDescriptionChange = (e) => {
-    setDescriptionText(e.target.value);
+    setCollectionText(e.target.value);
   };
 
   const handleDescriptionBlur = () => {
@@ -24,6 +39,20 @@ export default function CollectionEditor() {
     setEditingDescription(true);
   };
 
+  const handleSave = (e) => {
+    e.preventDefault();
+    const collection = {
+      id: 0,
+      collectionname: collectionName,
+      collectiontext: collectionText,
+      workspaceId: id,
+    };
+    console.log(workspaceId);
+    dispatch(collectionActions.registerCollection(collection));
+  };
+
+  console.log(collectionName);
+  console.log(collectionText);
   return (
     <div>
       <div className='collection_editor_container'>
@@ -37,7 +66,7 @@ export default function CollectionEditor() {
              </div>
              <div className='collection_save_container'>
                 <div className='collection_save_btn'>
-                <Button variant='outlined' startIcon={<SaveIcon />} size='big'>
+                <Button variant='outlined' onClick={handleSave} startIcon={<SaveIcon />} size='big'>
             Save
           </Button> 
                 </div>
@@ -55,13 +84,13 @@ export default function CollectionEditor() {
           <div className='collection_description_notes' onClick={handleNotesClick}>
             {isEditingDescription ? (
               <textarea
-                value={descriptionText}
+                value={collectionText}
                 onChange={handleDescriptionChange}
                 onBlur={handleDescriptionBlur}
                 autoFocus
               />
             ) : (
-              <span>{descriptionText || 'Make things easier for you teammates with a complete collection description.'}</span>
+              <span>{collectionText || 'Make things easier for you teammates with a complete collection description.'}</span>
             )}
           </div>
         </div>
