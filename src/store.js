@@ -5,28 +5,52 @@ import rootReducer from "./slice/rootSlice";
 import rootSaga from "./sagas/rootSaga";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage"; 
-import { workspaceReducers } from "./slice/workspaceSlice";
 
 const sagaMiddleware = createSagaMiddleware();
-const initialState = {};
 
 const persistConfig = {
-  key: "root", // 저장 키
-  storage, 
-  whitelist: ["workspaceReducers"], // 저장할 리듀서 이름
+  key: "root",
+  storage,
+  whitelist: ["workspaceReducers"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+// 로컬 스토리지에서 저장된 상태
+const loadState = () => {
+  try {
+    const serializedState = localStorage.getItem('reduxState');
+    if (serializedState === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedState);
+  } catch (e) {
+    console.error('로컬 스토리지에서 상태 복원 중 오류 발생', e);
+    return undefined;
+  }
+};
+
+const initialState = loadState(); // 초기 상태 복원
 
 const store = configureStore({
   reducer: persistedReducer,
   middleware: [sagaMiddleware, logger],
   devTools: true,
-  preloadedState: initialState,
+  preloadedState: initialState, // 초기 상태가져온 상태로 설정
 });
 
 sagaMiddleware.run(rootSaga);
 
 const persistor = persistStore(store);
+
+// 상태가 변경될 때마다 저장합니다.
+store.subscribe(() => {
+  try {
+    const serializedState = JSON.stringify(store.getState());
+    localStorage.setItem('reduxState', serializedState);
+  } catch (e) {
+    console.error('Failed to save state to local storage:', e);
+  }
+});
 
 export { store, persistor };

@@ -55,6 +55,9 @@ export default function Workspace(props) {
       dispatch(workspaceActions.registerWorkspace(workspace));
     }
   }
+  useEffect(() => {
+    dispatch(workspaceActions.getWorkspace(workspaceId));
+  }, [dispatch, workspaceId]);
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
@@ -75,9 +78,7 @@ useEffect(() => {
 }, [workspaceId, workspaceName, descriptionText]);
 
 
-  useEffect(() => {
-    dispatch(workspaceActions.getWorkspace(workspaceId));
-  }, [dispatch, workspaceId]);
+  
 
   
 

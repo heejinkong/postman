@@ -50,6 +50,10 @@ export const workspaceSlice = createSlice({ // 액션 생성
             };
           },
 
+          deleteWorkspace: (state, { payload: id }) => {
+            console.log("게시글 삭제");
+          }
+
     },
 });
 

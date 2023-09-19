@@ -48,15 +48,22 @@ export function* fetchWorkspaceAsync(action) {
 export function* updateWorkspaceAsync(action) {
   const workspace = action.payload;
   
-
-  
   try {
     const response = yield axios.put(`http://localhost:4000/workspace/${workspace.id}`, workspace);
-    console.log(response.data.name)
+    
     history.push(`/workspace/${response.data.id}`, response.data.id);
-
+    console.log(response.data.name)
     console.log(response.data.description)
   } catch (e) {
     console.error("에러 발생:", e);
   }
+}
+
+export function* deleteWorkspaceAsync(action) {
+  const id = action.payload;
+
+  yield axios.delete(`http://localhost:4000/workspace/${id}`);
+  alert("삭제");
+  history.push(`/`);
+  history.go(0);
 }
