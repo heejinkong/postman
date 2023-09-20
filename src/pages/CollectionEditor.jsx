@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../style/collectioneditor.scss';
 import { Button } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
@@ -45,11 +45,22 @@ export default function CollectionEditor(props) {
       id: 0,
       collectionname: collectionName,
       collectiontext: collectionText,
+      date: Date.now(),
       workspaceId: id,
     };
     console.log(workspaceId);
     dispatch(collectionActions.registerCollection(collection));
   };
+
+  
+  const collections = useSelector((state) => state.collectionReducers.collections);
+console.log(collections);
+
+
+
+  useEffect(() => {
+    dispatch(collectionActions.getCollection(workspaceId));
+  }, [dispatch, workspaceId])
 
   console.log(collectionName);
   console.log(collectionText);

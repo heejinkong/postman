@@ -11,11 +11,15 @@ import WorkspaceEdit from './WorkspaceEdit';
 import WorkspaceList from './WorkspaceList';
 import ListPage from './ListPage';
 import Header from '../components/Header';
+import { Provider } from 'react-redux';
+import { store } from "../../src/store";
 
 
 export default function Main() {
   return (
     <section className="container">
+
+     <Provider store={store}>
       <DataProvider>
       <div className="header"> 
       <Header/>
@@ -37,6 +41,7 @@ export default function Main() {
          </Routes>
       </div>
       </DataProvider>
+     </Provider>
     </section>
   );
 }
