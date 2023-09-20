@@ -13,7 +13,7 @@ export function* registerCollectionAsync(action) {
 
 export function* getCollectionsAsync(action) {
     const workspaceId = action.payload;
-  
+    console.log(action.payload);
     const response = yield axios.get(`http://localhost:4000/collection?workspaceId=${workspaceId}`);
     yield put(collectionActions.getCollectionsAsync(response.data)); 
   }

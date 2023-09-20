@@ -7,7 +7,6 @@ import ResponseSuccess from "../components/ResponseSuccess"
 import Workspace from './Workspace';
 import CollectionEditor from './CollectionEditor';
 import { DataProvider } from '../contexts/DataContext';
-import WorkspaceEdit from './WorkspaceEdit';
 import WorkspaceList from './WorkspaceList';
 import ListPage from './ListPage';
 import Header from '../components/Header';
@@ -37,7 +36,7 @@ export default function Main() {
          <Route path="/" element={<ListPage />} />
           <Route path="/workspace/:workspaceId" element={<Workspace />} />
           {/* <Route path="/workspace/:workspaceId" element={<WorkspaceEdit />} /> */}
-          <Route path='/collection' element = {<CollectionEditor/>}/>
+          <Route path='/workspace/:workspaceId/collection' element = {<CollectionEditor/>}/>
          </Routes>
       </div>
       </DataProvider>

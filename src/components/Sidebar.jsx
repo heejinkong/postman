@@ -31,7 +31,7 @@ export default function Sidebar() {
     <div className="sidebar_container">
       <div className="sidebar_header">
         <div className="btn-group" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-        <Link to= "/collection">
+        <Link to= "/workspace/:workspaceId/collection">
           <IconButton aria-label="plus" onClick={addNewCollection}>
             <AddIcon fontSize="small" />
           </IconButton>
@@ -57,7 +57,7 @@ export default function Sidebar() {
       <span>Create a collection for your requests</span>
     </div>
   } />
-  <Route path='/collection' element={<Collection collections={collections} />} />
+  <Route path='/workspace/:workspaceId/collection' element={<Collection collections={collections} />} />
 </Routes>
 
       </div>
