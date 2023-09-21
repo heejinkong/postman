@@ -36,7 +36,7 @@ export default function Main() {
          <Route path="/" element={<ListPage />} />
           <Route path="/workspace/:workspaceId" element={<Workspace />} />
           {/* <Route path="/workspace/:workspaceId" element={<WorkspaceEdit />} /> */}
-          <Route path='/workspace/:workspaceId/collection' element = {<CollectionEditor/>}/>
+          <Route path='/workspace/:workspaceId/collection/:collectionId' element = {<CollectionEditor/>}/>
          </Routes>
       </div>
       </DataProvider>

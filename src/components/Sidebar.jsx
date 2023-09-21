@@ -7,9 +7,12 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
 import Collection from '../pages/Collection';
 import { Link, Route, Routes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 
 
 export default function Sidebar() {
+  const workspaceId = useSelector((state) => state.workspaceReducers.id);
   const [collections, setCollections] = useState([]);
 
   const addNewCollection = () => {
@@ -20,8 +23,8 @@ export default function Sidebar() {
   };
 
   const buttons = [
-    <Link to = "/workspace/:workspaceId" >
-    <Button key="new" className='btn-1' onClick={addNewCollection}>New</Button>
+    <Link to={`/workspace/:workspaceId`}>
+      <Button key="new" className='btn-1'>New</Button>
     </Link>,
     <Button key="import" className='btn-2'>Import</Button>,
     <Button key="export" className='btn-3'>Export</Button>,
@@ -31,11 +34,11 @@ export default function Sidebar() {
     <div className="sidebar_container">
       <div className="sidebar_header">
         <div className="btn-group" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-        <Link to= "/workspace/:workspaceId/collection">
+        <Link to={`/workspace/${workspaceId}/collection/:collectionId`}>
           <IconButton aria-label="plus" onClick={addNewCollection}>
             <AddIcon fontSize="small" />
-          </IconButton>
-         </Link>
+            </IconButton>
+        </Link>
           <Box sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -52,12 +55,12 @@ export default function Sidebar() {
       </div>
       <div className='sidebar_collection_container'>
       <Routes>
-  <Route path='/' element={
+  <Route path='/workspace/:workspaceId' element={
     <div className='sidebar_empty_collection'>
       <span>Create a collection for your requests</span>
     </div>
   } />
-  <Route path='/workspace/:workspaceId/collection' element={<Collection collections={collections} />} />
+  <Route path='/workspace/:workspaceId/collection/:collectionId' element={<Collection collections={collections} />} />
 </Routes>
 
       </div>

@@ -5,9 +5,6 @@ import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
 import { workspaceActions } from '../slice/workspaceSlice';
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useParams } from 'react-router-dom';
-import { Button } from '@mui/material';
-
-
 
 
 export default function Workspace(props) {
@@ -17,16 +14,15 @@ export default function Workspace(props) {
   const [isEditingDescription, setEditingDescription] = useState(false);
   const [descriptionText, setDescriptionText] = useState('');
   const [isForUpdate, setIsForUpdate] = useState(false);
-  const stateForProps = useSelector((state) => state.workspaceReducers);
   const location = useLocation();
 
-  const { id ,name, description } = useSelector(
+  const { id, name, description } = useSelector(
     (state) => ({
-    id: state.workspaceReducers.id,
-    name: state.workspaceReducers.name,
-    description: state.workspaceReducers.description,
-  }),
-  shallowEqual
+      id: state.workspaceReducers.id,
+      name: state.workspaceReducers.name,
+      description: state.workspaceReducers.description,
+    }),
+    shallowEqual
   );
 
   const handleNameChange = (e) => {
@@ -44,17 +40,17 @@ export default function Workspace(props) {
   const handleNotesClick = () => {
     setEditingDescription(true);
   };
- 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const workspace = { name: workspaceName, description: descriptionText };
-    // console.log(workspace);
-    if(isForUpdate) {
+    if (isForUpdate) {
       dispatch(workspaceActions.updateWorkspace(workspace));
     } else {
       dispatch(workspaceActions.registerWorkspace(workspace));
     }
-  }
+  };
+
   useEffect(() => {
     dispatch(workspaceActions.getWorkspace(workspaceId));
   }, [dispatch, workspaceId]);
@@ -64,23 +60,17 @@ export default function Workspace(props) {
     if (searchParams.get("isForEdit") === "true") {
       setIsForUpdate(true);
       dispatch(workspaceActions.fetchWorkspace(workspaceId));
-      console.log(workspaceId.name);
     }
   }, [location.search, workspaceId]);
 
-useEffect(() => {
-  const updatedWorkspace = {
-    id: workspaceId,
-    name: workspaceName,
-    description: descriptionText,
-  };
-  dispatch(workspaceActions.updateWorkspace(updatedWorkspace));
-}, [workspaceId, workspaceName, descriptionText]);
-
-
-  
-
-  
+  useEffect(() => {
+    const updatedWorkspace = {
+      id: workspaceId,
+      name: workspaceName,
+      description: descriptionText,
+    };
+    dispatch(workspaceActions.updateWorkspace(updatedWorkspace));
+  }, [workspaceId, workspaceName, descriptionText]);
 
   useEffect(() => {
     if (name !== undefined && name !== null) {
@@ -91,26 +81,24 @@ useEffect(() => {
     }
   }, [name, description]);
 
-  
-
   return (
     <div className='workspace_container'>
+      {/* {workspaceId && <Sidebar workspaceId={workspaceId} />} */}
       <div className='workspace_name_container'>
-        <PersonOutlineOutlinedIcon /> 
+        <PersonOutlineOutlinedIcon />
         <input
-                type='text'
-                name='workspacetitle'
-                value={workspaceName} 
-                onChange={handleNameChange}
-                placeholder='My Workspace'
-          />
-          
-          { id > 0 ? (
-                     <Link to={`/workspace/${workspaceId}?isForEdit=true`}></Link>
-        
-                ) : (
-                  <button onClick={handleSubmit}>save</button>
-                )}
+          type='text'
+          name='workspacetitle'
+          value={workspaceName}
+          onChange={handleNameChange}
+          placeholder='My Workspace'
+        />
+
+        {id > 0 ? (
+          <Link to={`/workspace/${workspaceId}?isForEdit=true`}></Link>
+        ) : (
+          <button onClick={handleSubmit}>save</button>
+        )}
       </div>
       <div className='workspace_description'>
         <div className='workspace_description_btn'>
@@ -127,12 +115,14 @@ useEffect(() => {
                 autoFocus
               />
             ) : (
-              <span>{descriptionText || 'Add information that you want quick access to. It can include links to important resources or notes of what you want to remember.'}</span>
+              <span>
+                {descriptionText ||
+                  'Add information that you want quick access to. It can include links to important resources or notes of what you want to remember.'}
+              </span>
             )}
           </div>
         </div>
       </div>
-      
     </div>
   );
 }

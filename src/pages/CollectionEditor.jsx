@@ -14,7 +14,6 @@ export default function CollectionEditor(props) {
   const [isEditingDescription, setEditingDescription] = useState(false);
   const [collectionText, setCollectionText] = useState('');
 
-
   const { id ,collectionname, collectiontext } = useSelector(
     (state) => ({
     id: state.workspaceReducers.id,
@@ -54,7 +53,7 @@ export default function CollectionEditor(props) {
 
   
   const collections = useSelector((state) => state.collectionReducers.collections);
-console.log(collections);
+console.table(collections);
 
 
 
@@ -62,8 +61,7 @@ console.log(collections);
     dispatch(collectionActions.getCollection(workspaceId));
   }, [dispatch, workspaceId])
 
-  console.log(collectionName);
-  console.log(collectionText);
+
   return (
     <div>
       <div className='collection_editor_container'>

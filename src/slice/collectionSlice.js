@@ -15,7 +15,7 @@ export const collectionSlice = createSlice({
       console.log("collection 등록 액션"); 
     },
 
-    getCollection: (state, { payload:workspaceId }) => {
+    getCollection: (state, { payload: { workspaceId, collectionId } }) => {
       console.log("collection 불러오기 액션");
     },
 
