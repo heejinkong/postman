@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { collectionActions } from '../slice/collectionSlice';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 
 
 export default function CollectionEditor(props) {
@@ -13,6 +13,8 @@ export default function CollectionEditor(props) {
   const [collectionName, setCollectionName] = useState('New Collection');
   const [isEditingDescription, setEditingDescription] = useState(false);
   const [collectionText, setCollectionText] = useState('');
+  const [isForUpdate, setIsForUpdate] = useState(false);
+  const location = useLocation();
 
   const { id ,collectionname, collectiontext } = useSelector(
     (state) => ({
@@ -47,8 +49,10 @@ console.log(collectionId);
       date: Date.now(),
       workspaceId: id,
     };
-    console.log(workspaceId);
-    dispatch(collectionActions.registerCollection(collection));
+
+   
+      dispatch(collectionActions.registerCollection(collection));
+
   };
 
   
@@ -57,8 +61,18 @@ console.table(collections);
 
 
 useEffect(() => {
-  dispatch(collectionActions.getCollection(collectionId));
-}, [dispatch, collectionId])
+  dispatch(collectionActions.getCollection({ workspaceId, collectionId }));
+}, [dispatch,(workspaceId, collectionId)])
+
+useEffect(() => {
+  const searchParams = new URLSearchParams(location.search);
+  if (searchParams.get("isForEdit") === "true") {
+    setIsForUpdate(true);
+    dispatch(collectionActions.fetchCollection(collectionId));
+  }
+}, [location.search, workspaceId]);
+
+
 
 useEffect(() => {
   if (collectionname !== undefined && collectionname !== null) {
@@ -69,7 +83,7 @@ useEffect(() => {
   }
 }, [collectionname, collectiontext]);
 
-
+console.log(workspaceId)
   return (
     <div>
       <div className='collection_editor_container'>

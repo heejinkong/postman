@@ -18,16 +18,32 @@ export function* registerCollectionAsync(action) {
       }
     }
 
-export function* getCollectionAsync(action) {
-    const id = action.payload;
-    console.log(action.payload);
-
-    try {
-        const response = yield axios.get(`http://localhost:4000/collection/${id}`);
-
+    export function* getCollectionAsync(action) {
+      const { workspaceId, collectionId } = action.payload;
+      console.log(action.payload);
+    
+      try {
+        const response = yield axios.get(`http://localhost:4000/collection/${collectionId}`);
+    
         yield put(collectionActions.getCollectionAsync(response.data)); 
       } catch (e) {
         console.error("에러 발생:", e);
       }
     }
+    
   
+
+    export function* fetchCollectionAsync(action) {
+      const { workspaceId, collectionId } = action.payload;
+      console.log(action.payload);
+    
+      try {
+        const response = yield axios.get(`http://localhost:4000/collection/${collectionId}`);
+    
+        yield put(collectionActions.getCollectionAsync(response.data)); 
+      } catch (e) {
+        console.error("에러 발생:", e);
+      }
+    }
+    
+   

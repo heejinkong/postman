@@ -29,6 +29,11 @@ export const collectionSlice = createSlice({
       };
     },
 
+    fetchCollection: (state, {payload:id})=> {
+            
+      console.log("fetchCollection");
+  },
+
   },
 });
 
