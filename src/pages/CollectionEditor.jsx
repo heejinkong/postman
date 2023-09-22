@@ -9,20 +9,20 @@ import { useParams } from 'react-router-dom';
 
 export default function CollectionEditor(props) {
   const dispatch =  useDispatch();
-  const { workspaceId } = useParams();
+  const { workspaceId, collectionId } = useParams();
   const [collectionName, setCollectionName] = useState('New Collection');
   const [isEditingDescription, setEditingDescription] = useState(false);
   const [collectionText, setCollectionText] = useState('');
 
   const { id ,collectionname, collectiontext } = useSelector(
     (state) => ({
-    id: state.workspaceReducers.id,
+    id: state.collectionReducers.id,
     collectionname: state.collectionReducers.collectionname,
     collectiontext: state.collectionReducers.collectiontext,
   }),
   shallowEqual
   );
-
+console.log(collectionId);
   const handleNameChange = (e) => {
     setCollectionName(e.target.value);
   };
@@ -57,11 +57,17 @@ console.table(collections);
 
 
 useEffect(() => {
-  dispatch(collectionActions.getCollection(id));
-}, [dispatch, id])
-  useEffect(() => {
-    dispatch(collectionActions.getCollection(workspaceId));
-  }, [dispatch, workspaceId])
+  dispatch(collectionActions.getCollection(collectionId));
+}, [dispatch, collectionId])
+
+useEffect(() => {
+  if (collectionname !== undefined && collectionname !== null) {
+    setCollectionName(collectionname);
+  }
+  if (collectiontext !== undefined && collectiontext !== null) {
+    setCollectionText(collectiontext);
+  }
+}, [collectionname, collectiontext]);
 
 
   return (

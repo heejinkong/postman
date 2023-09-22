@@ -8,7 +8,6 @@ export const collectionSlice = createSlice({
     collectiontext:"",
     date: Date.now(),
     workspaceId: 0,
-    collections: [],
   },
   reducers: {
     registerCollection: (state, { payload: collection }) => {
@@ -19,10 +18,14 @@ export const collectionSlice = createSlice({
       console.log("collection 불러오기 액션");
     },
 
-    getCollectionsAsync: (state, { payload: list }) => {
+    getCollectionAsync: (state, { payload: collection }) => {
       return {
         ...state,
-        collections: list,
+        id: collection.id,
+        collectionname: collection.collectionname,
+        collectiontext: collection.collectiontext,
+        date: collection.date,
+        workspaceId: collection.workspaceId,
       };
     },
 

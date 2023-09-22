@@ -18,14 +18,14 @@ export function* registerCollectionAsync(action) {
       }
     }
 
-export function* getCollectionsAsync(action) {
-    const workspaceId = action.payload;
+export function* getCollectionAsync(action) {
+    const id = action.payload;
     console.log(action.payload);
 
     try {
-        const response = yield axios.get(`http://localhost:4000/collection?workspaceId=${workspaceId}`);
+        const response = yield axios.get(`http://localhost:4000/collection/${id}`);
 
-        yield put(collectionActions.getCollectionsAsync(response.data)); 
+        yield put(collectionActions.getCollectionAsync(response.data)); 
       } catch (e) {
         console.error("에러 발생:", e);
       }

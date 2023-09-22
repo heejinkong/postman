@@ -83,7 +83,6 @@ export default function Workspace(props) {
 
   return (
     <div className='workspace_container'>
-      {/* {workspaceId && <Sidebar workspaceId={workspaceId} />} */}
       <div className='workspace_name_container'>
         <PersonOutlineOutlinedIcon />
         <input
