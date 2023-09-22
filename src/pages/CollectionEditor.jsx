@@ -4,13 +4,13 @@ import { Button } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { collectionActions } from '../slice/collectionSlice';
-import { useParams, useLocation } from 'react-router-dom';
+import { Link ,useParams, useLocation } from 'react-router-dom';
 
 
 export default function CollectionEditor(props) {
   const dispatch =  useDispatch();
   const { workspaceId, collectionId } = useParams();
-  const [collectionName, setCollectionName] = useState('New Collection');
+  const [collectionName, setCollectionName] = useState('');
   const [isEditingDescription, setEditingDescription] = useState(false);
   const [collectionText, setCollectionText] = useState('');
   const [isForUpdate, setIsForUpdate] = useState(false);
@@ -75,10 +75,8 @@ useEffect(() => {
 
 
 useEffect(() => {
-  if (collectionname !== undefined && collectionname !== null) {
+  if (collectionId > 0) {
     setCollectionName(collectionname);
-  }
-  if (collectiontext !== undefined && collectiontext !== null) {
     setCollectionText(collectiontext);
   }
 }, [collectionname, collectiontext]);
@@ -93,13 +91,18 @@ console.log(workspaceId)
                 type='text'
                 value={collectionName}
                 onChange={handleNameChange}
+                placeholder='New Collectoin'
           />
              </div>
              <div className='collection_save_container'>
                 <div className='collection_save_btn'>
-                <Button variant='outlined' onClick={handleSave} startIcon={<SaveIcon />} size='big'>
-            Save
-          </Button> 
+                {collectionId > 0 ? (
+          <Link to={`/workspace/${workspaceId}/collection/${collectionId}?isForEdit=true`}></Link>
+        ) : (
+          <Button variant='outlined' onClick={handleSave} startIcon={<SaveIcon />} size='big'>
+          Save
+        </Button> 
+        )}
                 </div>
 
              </div>
@@ -110,6 +113,7 @@ console.log(workspaceId)
               value={collectionName}
               onChange={handleNameChange}
               style={{ fontWeight: 'bold' }}
+              placeholder='New Collectoin'
             ></textarea>
           </div>
           <div className='collection_description_notes' onClick={handleNotesClick}>
