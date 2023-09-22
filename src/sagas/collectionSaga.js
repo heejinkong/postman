@@ -10,7 +10,7 @@ export function* registerCollectionAsync(action) {
         const response = yield axios.post(`http://localhost:4000/collection/`,data);
         yield alert("저장");
         console.log(response.data.id);
-        history.push(`/workspace/:workspaceId/collection/${response.data.id}`, response.data.id);
+        history.push(`/workspace/${response.data.workspaceId}/collection/${response.data.id}`,response.data.workspaceId, response.data.id);
 
         // history.go(0);
       } catch (e) {

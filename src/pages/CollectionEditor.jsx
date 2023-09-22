@@ -56,7 +56,9 @@ export default function CollectionEditor(props) {
 console.table(collections);
 
 
-
+useEffect(() => {
+  dispatch(collectionActions.getCollection(id));
+}, [dispatch, id])
   useEffect(() => {
     dispatch(collectionActions.getCollection(workspaceId));
   }, [dispatch, workspaceId])
