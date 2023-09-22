@@ -47,6 +47,7 @@ console.log(collectionId);
       collectionname: collectionName,
       collectiontext: collectionText,
       date: Date.now(),
+      collections:[],
       workspaceId: id,
     };
 
