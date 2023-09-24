@@ -58,7 +58,13 @@ console.log(collectionId);
 
   
   const collections = useSelector((state) => state.collectionReducers.collections);
-console.table(collections);
+console.log(collections);
+
+
+
+  useEffect(() => {
+    dispatch(collectionActions.getCollection(workspaceId));
+  }, [dispatch, workspaceId])
 
 
 useEffect(() => {

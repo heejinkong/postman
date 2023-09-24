@@ -7,6 +7,7 @@ export const collectionSlice = createSlice({
     collectionname: "",
     collectiontext:"",
     date: Date.now(),
+    collections: [],
     workspaceId: 0,
   },
   reducers: {
@@ -33,7 +34,12 @@ export const collectionSlice = createSlice({
             
       console.log("fetchCollection");
   },
-
+  getCollectionsAsync: (state, { payload: list }) => {
+    return {
+      ...state,
+      collections: list,
+    };
+  },
   },
 });
 

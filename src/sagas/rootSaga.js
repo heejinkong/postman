@@ -3,7 +3,7 @@ import { workspaceActions } from "../slice/workspaceSlice";
 import { fetchWorkspaceAsync, getWorkspaceAsync, registerWorkspaceAsync, updateWorkspaceAsync, deleteWorkspaceAsync  } from "./workspaceSaga";
 import { listActions } from "../slice/listSlice";
 import { getListAsync } from "./listSaga";
-import { registerCollectionAsync, getCollectionAsync, fetchCollectionAsync } from "./collectionSaga";
+import { registerCollectionAsync, getCollectionAsync, fetchCollectionAsync, getCollectionsAsync  } from "./collectionSaga";
 import { collectionActions } from "../slice/collectionSlice";
 
 
@@ -23,4 +23,5 @@ export default function* rootWatcher() {
   yield takeLatest(registerCollection.type, registerCollectionAsync);
   yield takeEvery(getCollection.type, getCollectionAsync);
   yield takeEvery(fetchCollection.type, fetchCollectionAsync);
+  yield takeEvery(getCollection.type, getCollectionsAsync);
 }
