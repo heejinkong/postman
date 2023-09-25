@@ -3,14 +3,14 @@ import { workspaceActions } from "../slice/workspaceSlice";
 import { fetchWorkspaceAsync, getWorkspaceAsync, registerWorkspaceAsync, updateWorkspaceAsync, deleteWorkspaceAsync  } from "./workspaceSaga";
 import { listActions } from "../slice/listSlice";
 import { getListAsync } from "./listSaga";
-import { registerCollectionAsync, getCollectionAsync, fetchCollectionAsync, getCollectionsAsync  } from "./collectionSaga";
+import { registerCollectionAsync, getCollectionAsync, fetchCollectionAsync, getCollectionsAsync, deleteCollectionAsync  } from "./collectionSaga";
 import { collectionActions } from "../slice/collectionSlice";
 
 
 
 const { registerWorkspace, getWorkspace, fetchWorkspace, updateWorkspace, deleteWorkspace } = workspaceActions;
 const { getList } = listActions;
-const { registerCollection, getCollection, fetchCollection} = collectionActions;
+const { registerCollection, getCollection, fetchCollection, deleteCollection} = collectionActions;
 
 
 export default function* rootWatcher() {
@@ -24,4 +24,5 @@ export default function* rootWatcher() {
   yield takeEvery(getCollection.type, getCollectionAsync);
   yield takeEvery(fetchCollection.type, fetchCollectionAsync);
   yield takeEvery(getCollection.type, getCollectionsAsync);
+  yield takeEvery(deleteCollection.type, deleteCollectionAsync);
 }

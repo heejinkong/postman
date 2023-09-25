@@ -52,3 +52,12 @@ export function* registerCollectionAsync(action) {
       const response = yield axios.get(`http://localhost:4000/collection?workspaceId=${workspaceId}`);
       yield put(collectionActions.getCollectionsAsync(response.data)); 
     }
+
+    export function* deleteCollectionAsync(action) {
+      const { workspaceId, collectionId } = action.payload;
+    
+      yield axios.delete(`http://localhost:4000/collection/${collectionId}`);
+      alert("삭제");
+      history.push(`/`);
+      history.go(0);
+    }

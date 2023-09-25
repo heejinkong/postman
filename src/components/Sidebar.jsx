@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../style/sidebar.scss';
 import AddIcon from '@mui/icons-material/Add';
 import IconButton from '@mui/material/IconButton';
@@ -6,21 +6,44 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
 import Collection from '../pages/Collection';
-import { Link, Route, Routes } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link, Route, Routes, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { collectionActions } from '../slice/collectionSlice';
 
 
 
 export default function Sidebar() {
-  const workspaceId = useSelector((state) => state.workspaceReducers.id);
-  const [collections, setCollections] = useState([]);
 
-  const addNewCollection = () => {
-    setCollections(prevCollections => [
-      ...prevCollections,
-      { id: Date.now(), name: `New Collection` }
-    ]);
-  };
+const { workspaceId } = useSelector((state) => ({
+  workspaceId: state.workspaceReducers.id,
+}));
+
+
+console.log("workspaceId:", workspaceId);
+
+
+  // const workspaceId = useSelector((state) => state.workspaceReducers.id);
+  // const [collections, setCollections] = useState([]);
+
+  // const addNewCollection = () => {
+  //   setCollections(prevCollections => [
+  //     ...prevCollections,
+  //     { id: Date.now(), name: `New Collection` }
+  //   ]);
+  // };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (workspaceId) {
+      // workspaceId가 존재할 때만 데이터를 가져오도록 수정
+      dispatch(collectionActions.getCollection(workspaceId));
+    }
+  }, [dispatch, workspaceId]);
+
+  const { collections } = useSelector((state) => ({
+    collections: state.collectionReducers.collections,
+  }));
 
   const buttons = [
     <Link to={`/workspace/:workspaceId`}>
@@ -34,8 +57,9 @@ export default function Sidebar() {
     <div className="sidebar_container">
       <div className="sidebar_header">
         <div className="btn-group" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-        <Link to={`/workspace/${workspaceId}/collection/:collectionId`}>
-          <IconButton aria-label="plus" onClick={addNewCollection}>
+        <Link to={`/workspace/${workspaceId}/collection/:collectoinId`}>
+
+          <IconButton aria-label="plus" >
             <AddIcon fontSize="small" />
             </IconButton>
         </Link>
@@ -57,7 +81,11 @@ export default function Sidebar() {
       <Routes>
   <Route path='/workspace/:workspaceId' element={
     <div className='sidebar_empty_collection'>
-      <span>Create a collection for your requests</span>
+      { collections.length > 0 ? (
+                    <Collection collections={collections}/>
+                ) : (
+                    <span>Create a collection for your requests</span>
+                )}
     </div>
   } />
   <Route path='/workspace/:workspaceId/collection/:collectionId' element={<Collection collections={collections} />} />

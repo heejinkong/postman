@@ -40,6 +40,10 @@ export const collectionSlice = createSlice({
       collections: list,
     };
   },
+
+  deleteCollection: (state, {payload: id}) => {
+    console.log("삭제");
+  }
   },
 });
 
