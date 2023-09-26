@@ -18,18 +18,23 @@ export const workspaceSlice = createSlice({
     fetchWorkspace: (state, { payload: id }) => {
     },
 
-    updateWorkspace: (state, { payload: workspace }) => {
-        localStorage.setItem(`workspace-${workspace.id}`, JSON.stringify(workspace));
-  
-        return {
-          ...state,
-          id: workspace.id,
-          name: workspace.name,
-          description: workspace.description,
-        };
-      },
-  
-      
+     updateWorkspace: (state, { payload: workspace }) => {
+      localStorage.setItem(`workspace-${workspace.id}`, JSON.stringify(workspace));
+
+      return {
+        ...state,
+        name: workspace.name,
+        description: workspace.description,
+      };
+    },
+
+    updateWorkspaceId: (state, { payload: newId }) => {
+      return {
+        ...state,
+        id: newId,
+      };
+    },
+
     deleteWorkspace: (state, { payload: id }) => {
       localStorage.removeItem(`workspace-${id}`);
     },
