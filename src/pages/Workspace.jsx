@@ -3,9 +3,8 @@ import '../style/workspace.scss';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
 import { workspaceActions } from '../slice/workspaceSlice';
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useParams } from 'react-router-dom';
-
 
 export default function Workspace(props) {
   const dispatch = useDispatch();
@@ -43,54 +42,42 @@ export default function Workspace(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const workspace = { name: workspaceName, description: descriptionText };
-    if (isForUpdate) {
+    const workspace = { id: workspaceId, name: workspaceName, description: descriptionText };
+  
+    if (id > 0) {
+      // If id is already set, dispatch an update
       dispatch(workspaceActions.updateWorkspace(workspace));
     } else {
+
       dispatch(workspaceActions.registerWorkspace(workspace));
     }
+    localStorage.setItem(`workspace-${workspaceId}`, JSON.stringify(workspace));
   };
-
+  
   useEffect(() => {
     dispatch(workspaceActions.getWorkspace(workspaceId));
   }, [dispatch, workspaceId]);
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    if (searchParams.get("isForEdit") === "true") {
-      setIsForUpdate(true);
-      dispatch(workspaceActions.fetchWorkspace(workspaceId));
-    }
-  }, [location.search, workspaceId]);
+    const workspaceData = localStorage.getItem(`workspace-${workspaceId}`);
+    const workspace = workspaceData ? JSON.parse(workspaceData) : null;
 
-  useEffect(() => {
-    const updatedWorkspace = {
-      id: workspaceId,
-      name: workspaceName,
-      description: descriptionText,
-    };
-    dispatch(workspaceActions.updateWorkspace(updatedWorkspace));
-  }, [workspaceId, workspaceName, descriptionText]);
-
-  useEffect(() => {
-    if (name !== undefined && name !== null) {
-      setWorkspaceName(name);
+    if (workspace) {
+      setWorkspaceName(workspace.name);
+      setDescriptionText(workspace.description);
     }
-    if (description !== undefined && description !== null) {
-      setDescriptionText(description);
-    }
-  }, [name, description]);
+  }, [dispatch, workspaceId]);
 
   return (
-    <div className='workspace_container'>
-      <div className='workspace_name_container'>
+    <div className="workspace_container">
+      <div className="workspace_name_container">
         <PersonOutlineOutlinedIcon />
         <input
-          type='text'
-          name='workspacetitle'
+          type="text"
+          name="workspacetitle"
           value={workspaceName}
           onChange={handleNameChange}
-          placeholder='My Workspace'
+          placeholder="My Workspace"
         />
 
         {id > 0 ? (
@@ -99,15 +86,15 @@ export default function Workspace(props) {
           <button onClick={handleSubmit}>save</button>
         )}
       </div>
-      <div className='workspace_description'>
-        <div className='workspace_description_btn'>
-          <div className='workspace_description_title'>
+      <div className="workspace_description">
+        <div className="workspace_description_btn">
+          <div className="workspace_description_title">
             <EventNoteOutlinedIcon /> Workspace description
           </div>
-          <div className='workspace_description_notes' onClick={handleNotesClick}>
+          <div className="workspace_description_notes" onClick={handleNotesClick}>
             {isEditingDescription ? (
               <textarea
-                name='description'
+                name="description"
                 value={descriptionText}
                 onChange={handleDescriptionChange}
                 onBlur={handleDescriptionBlur}

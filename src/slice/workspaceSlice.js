@@ -1,60 +1,39 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const workspaceSlice = createSlice({ // 액션 생성
-    name: "workspace",
-    initialState: { 
-        id:0,
-        name:"",
-        description: "" 
+export const workspaceSlice = createSlice({
+  name: 'workspace',
+  initialState: {
+    id: 0,
+    name: '',
+    description: '',
+  },
+  reducers: {
+    registerWorkspace: (state, { payload: workspace }) => {
     },
-    reducers: {
-        registerWorkspace: (state, { payload: workspace }) => {
-            // console.log(workspace);
-        },
-        // registerWorkspaceAsync: (state, { payload }) => {
-        //     console.lolg(payload);
-        //     debugger;
-        //     return {
-        //         ...state,
-        //         id: payload.id,
-        //     };
-        // },
 
-        getWorkspace: (state, { payload: id }) => {
-            // console.log(id);
-        },
+    getWorkspace: (state, { payload: id }) => {
 
+    },
 
-        getWorkspaceAsync: (state, { payload: workspace }) => {
-            
-            return {
-                ...state,
-                id: workspace.id,
-                name: workspace.name,
-                description: workspace.description,
-            };
-        },
+    fetchWorkspace: (state, { payload: id }) => {
+    },
 
-        fetchWorkspace: (state, {payload:id})=> {
-            
-            console.log("fetchWorkspace");
-        },
-
-        updateWorkspace: (state, { payload: workspace }) => {
+    updateWorkspace: (state, { payload: workspace }) => {
+        localStorage.setItem(`workspace-${workspace.id}`, JSON.stringify(workspace));
+  
+        return {
+          ...state,
+          id: workspace.id,
+          name: workspace.name,
+          description: workspace.description,
+        };
+      },
+  
       
-            return {
-              ...state,
-              id: workspace.id,
-              name: workspace.name,
-              description: workspace.description,
-            };
-          },
-
-          deleteWorkspace: (state, { payload: id }) => {
-            console.log("게시글 삭제");
-          }
-
+    deleteWorkspace: (state, { payload: id }) => {
+      localStorage.removeItem(`workspace-${id}`);
     },
+  },
 });
 
 export const workspaceReducers = workspaceSlice.reducer;
