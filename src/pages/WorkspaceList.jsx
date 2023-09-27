@@ -8,9 +8,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 const WorkspaceList = (props) => {
   const dispatch = useDispatch(); 
 
-  const handleDeleteClick = (id) => {
+  const handleDeleteClick = (workspaceId) => {
     if (!window.confirm("해당 Workspace를 삭제하시겠습니까 ?")) return false;
-    dispatch(workspaceActions.deleteWorkspace(id)); 
+    dispatch(workspaceActions.deleteWorkspace(workspaceId)); 
   };
 
   return (

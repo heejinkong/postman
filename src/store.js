@@ -16,7 +16,6 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// 로컬 스토리지에서 저장된 상태
 const loadState = () => {
   try {
     const serializedState = localStorage.getItem('reduxState');
@@ -30,20 +29,19 @@ const loadState = () => {
   }
 };
 
-const initialState = loadState(); // 초기 상태 복원
+const initialState = loadState(); 
 
 const store = configureStore({
   reducer: persistedReducer,
   middleware: [sagaMiddleware, logger],
   devTools: true,
-  preloadedState: initialState, // 초기 상태가져온 상태로 설정
+  preloadedState: initialState, 
 });
 
 sagaMiddleware.run(rootSaga);
 
 const persistor = persistStore(store);
 
-// 상태가 변경될 때마다 저장합니다.
 store.subscribe(() => {
   try {
     const serializedState = JSON.stringify(store.getState());

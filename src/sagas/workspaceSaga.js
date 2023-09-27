@@ -52,7 +52,6 @@ export function* deleteWorkspaceAsync(action) {
   localStorage.removeItem(`workspace-${workspaceId}`);
 
   yield call(() => {
-    history.push(`/`);
-    history.go(0);
+    history.go('/');
   });
 }

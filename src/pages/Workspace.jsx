@@ -42,7 +42,7 @@ export default function Workspace(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newWorkspaceId = id + 1; // 다음 순차적인 ID를 생성 (현재 ID + 1)
+    const newWorkspaceId = id + 1; 
     const workspace = { id: newWorkspaceId, name: workspaceName, description: descriptionText };
 
     localStorage.setItem(`workspace-${newWorkspaceId}`, JSON.stringify(workspace));
@@ -53,14 +53,15 @@ export default function Workspace(props) {
       dispatch(workspaceActions.registerWorkspace(workspace));
     }
 
-    // 업데이트된 ID를 Redux 상태에 반영
     dispatch(workspaceActions.updateWorkspaceId(newWorkspaceId));
+
+    window.location.href = `/workspace/${newWorkspaceId}`;
   };
 
   useEffect(() => {
     const workspaceData = localStorage.getItem(`workspace-${workspaceId}`);
     const workspace = workspaceData ? JSON.parse(workspaceData) : null;
-
+  
     if (workspace) {
       setWorkspaceName(workspace.name);
       setDescriptionText(workspace.description);

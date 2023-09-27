@@ -1,13 +1,14 @@
 import { put } from "redux-saga/effects";
 import { listActions } from "../slice/listSlice";
-import axios from "axios";
 
 export function* getListAsync() {
   try {
-    const response = yield axios.get(`http://localhost:4000/workspace/`);
-    yield put(listActions.getListAsync(response.data));
+    const workspaceData = Object.keys(localStorage)
+      .filter((key) => key.startsWith("workspace-"))
+      .map((key) => JSON.parse(localStorage.getItem(key)));
+
+    yield put(listActions.getListAsync(workspaceData));
   } catch (error) {
     console.error("Error fetching list:", error);
-
   }
 }
