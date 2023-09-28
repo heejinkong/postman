@@ -25,11 +25,33 @@ export default function Workspace(props) {
   );
 
   const handleNameChange = (e) => {
-    setWorkspaceName(e.target.value);
+    const newWorkspaceName = e.target.value;
+    setWorkspaceName(newWorkspaceName);
+
+    // LocalStorage에서 해당 workspaceId의 데이터를 가져옵니다.
+    const workspaceData = localStorage.getItem(`workspace-${workspaceId}`);
+    if (workspaceData) {
+      const workspace = JSON.parse(workspaceData);
+      workspace.name = newWorkspaceName;
+
+      // 수정된 workspace 데이터를 다시 LocalStorage에 저장합니다.
+      localStorage.setItem(`workspace-${workspaceId}`, JSON.stringify(workspace));
+    }
   };
 
   const handleDescriptionChange = (e) => {
-    setDescriptionText(e.target.value);
+    const newDescriptionText = e.target.value;
+    setDescriptionText(newDescriptionText);
+
+    // LocalStorage에서 해당 workspaceId의 데이터를 가져옵니다.
+    const workspaceData = localStorage.getItem(`workspace-${workspaceId}`);
+    if (workspaceData) {
+      const workspace = JSON.parse(workspaceData);
+      workspace.description = newDescriptionText;
+
+      // 수정된 workspace 데이터를 다시 LocalStorage에 저장합니다.
+      localStorage.setItem(`workspace-${workspaceId}`, JSON.stringify(workspace));
+    }
   };
 
   const handleDescriptionBlur = () => {
@@ -42,10 +64,10 @@ export default function Workspace(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newWorkspaceId = id + 1; 
-    const workspace = { id: newWorkspaceId, name: workspaceName, description: descriptionText };
 
-    localStorage.setItem(`workspace-${newWorkspaceId}`, JSON.stringify(workspace));
+    const workspace = { id: workspaceId, name: workspaceName, description: descriptionText };
+
+    localStorage.setItem(`workspace-${workspaceId}`, JSON.stringify(workspace));
 
     if (isForUpdate) {
       dispatch(workspaceActions.updateWorkspace(workspace));
@@ -53,20 +75,21 @@ export default function Workspace(props) {
       dispatch(workspaceActions.registerWorkspace(workspace));
     }
 
-    dispatch(workspaceActions.updateWorkspaceId(newWorkspaceId));
-
-    window.location.href = `/workspace/${newWorkspaceId}`;
+    // 워크스페이스 정보를 업데이트한 후 현재 워크스페이스 페이지로 리다이렉트
+    window.location.href = `/workspace/${workspaceId}`;
   };
 
   useEffect(() => {
     const workspaceData = localStorage.getItem(`workspace-${workspaceId}`);
     const workspace = workspaceData ? JSON.parse(workspaceData) : null;
-  
+
     if (workspace) {
       setWorkspaceName(workspace.name);
       setDescriptionText(workspace.description);
     }
   }, [dispatch, workspaceId]);
+
+  const isWorkspaceRoute = location.pathname === `/workspace/:workspaceId`;
 
   return (
     <div className="workspace_container">
@@ -80,10 +103,10 @@ export default function Workspace(props) {
           placeholder="My Workspace"
         />
 
-        {id > 0 ? (
-          <Link to={`/workspace/${workspaceId}?isForEdit=true`}></Link>
-        ) : (
+        {isWorkspaceRoute ? (
           <button onClick={handleSubmit}>save</button>
+        ) : (
+          <Link to={`/workspace/${workspaceId}?isForEdit=true`}></Link>
         )}
       </div>
       <div className="workspace_description">
