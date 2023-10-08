@@ -4,7 +4,7 @@ import history from "../utils/history";
 
 export function* registerWorkspaceAsync(action) {
   const { workspace } = action.payload;
-
+  console.log(workspace);
   localStorage.setItem(`workspace-${workspace.id}`, JSON.stringify(workspace));
 
   yield put(workspaceActions.registerWorkspace(workspace)); 
@@ -16,7 +16,7 @@ export function* registerWorkspaceAsync(action) {
 
 export function* getWorkspaceAsync(action) {
   const { workspaceId } = action.payload;
-
+  
   const workspaceData = localStorage.getItem(`workspace-${workspaceId}`);
   const workspace = workspaceData ? JSON.parse(workspaceData) : null;
 
@@ -45,6 +45,8 @@ export function* updateWorkspaceAsync(action) {
 
   yield call(() => history.push(`/workspace/${workspace.id}`));
 }
+
+
 
 export function* deleteWorkspaceAsync(action) {
   const { workspaceId } = action.payload;

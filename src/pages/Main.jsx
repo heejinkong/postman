@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useParams } from 'react-router-dom';
 import '../style/main.scss';
 import Sidebar from '../components/Sidebar';
 import Builder from "../components/Builder";
@@ -15,6 +15,7 @@ import { store } from "../../src/store";
 
 
 export default function Main() {
+
   return (
     <section className="container">
 
@@ -33,6 +34,7 @@ export default function Main() {
           <ResponseSuccess/>          
          </div>  */}
          <Routes>
+          
          <Route path="/" element={<ListPage />} />
           <Route path="/workspace/:workspaceId" element={<Workspace />} />
           {/* <Route path="/workspace/:workspaceId" element={<WorkspaceEdit />} /> */}

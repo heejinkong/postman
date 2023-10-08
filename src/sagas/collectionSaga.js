@@ -19,6 +19,7 @@ export function* registerCollectionAsync(action) {
     }
 
     export function* getCollectionAsync(action) {
+      console.log(action.payload);
       const { workspaceId, collectionId } = action.payload;
       console.log(action.payload);
     

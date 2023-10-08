@@ -34,6 +34,7 @@ export const workspaceSlice = createSlice({
         id: newId,
       };
     },
+    
 
     deleteWorkspace: (state, { payload: id }) => {
       localStorage.removeItem(`workspace-${id}`);

@@ -8,6 +8,7 @@ import { Link ,useParams, useLocation } from 'react-router-dom';
 
 
 export default function CollectionEditor(props) {
+
   const dispatch =  useDispatch();
   const { workspaceId, collectionId } = useParams();
   const [collectionName, setCollectionName] = useState('');
@@ -88,7 +89,6 @@ useEffect(() => {
   }
 }, [collectionname, collectiontext]);
 
-console.log(workspaceId)
   return (
     <div>
       <div className='collection_editor_container'>
