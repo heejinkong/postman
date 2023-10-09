@@ -22,7 +22,7 @@ export default function CollectionEditor(props) {
 
   useEffect(() => {
     if (collectionId !== ':collectionId') {
-      const collectionData = localStorage.getItem(`collection-${collectionId}`);
+      const collectionData = localStorage.getItem(`collection-${workspaceId}-${collectionId}`);
       const collection = collectionData ? JSON.parse(collectionData) : null;
   
       if (collection) {
@@ -33,8 +33,8 @@ export default function CollectionEditor(props) {
       let maxId = 0;
       for (let i = 1; i <= localStorage.length; i++) {
         const key = localStorage.key(i);
-        if (key && key.startsWith('collection-')) {
-          const id = parseInt(key.replace('collection-', ''), 10);
+        if (key && key.startsWith(`collection-${workspaceId}-`)) {
+          const id = parseInt(key.replace(`collection-${workspaceId}-`, ''), 10);
           if (!isNaN(id) && id > maxId) {
             maxId = id;
           }
@@ -81,7 +81,7 @@ export default function CollectionEditor(props) {
   };
 
   const saveCollectionDataToLocalStorage = (data) => {
-    localStorage.setItem(`collection-${data.id}`, JSON.stringify(data));
+    localStorage.setItem(`collection-${workspaceId}-${data.id}`, JSON.stringify(data));
   };
 
   const handleSave = (e) => {
@@ -91,8 +91,8 @@ export default function CollectionEditor(props) {
     let maxId = 0;
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      if (key && key.startsWith('collection-')) {
-        const id = parseInt(key.replace('collection-', ''), 10);
+      if (key && key.startsWith(`collection-${workspaceId}-`)) {
+        const id = parseInt(key.replace(`collection-${workspaceId}-`, ''), 10);
         if (!isNaN(id) && id > maxId) {
           maxId = id;
         }
@@ -110,7 +110,7 @@ export default function CollectionEditor(props) {
       workspaceId: workspaceId,
     };
   
-    localStorage.setItem(`collection-${collection.id}`, JSON.stringify(collection));
+    localStorage.setItem(`collection-${workspaceId}-${collection.id}`, JSON.stringify(collection));
 
     const newUrl = `/workspace/${workspaceId}/collection/${collection.id}`;
   window.location.href = newUrl;
