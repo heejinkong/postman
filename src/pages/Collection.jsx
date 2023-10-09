@@ -48,6 +48,8 @@ export default function Collection(props) {
       // 이동 로직 추가
     } else if (option === 'Run collection') {
       // 컬렉션 실행 로직 추가
+    } else if (option === 'Add request') {
+      
     }
   };
 

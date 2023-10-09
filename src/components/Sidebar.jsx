@@ -7,48 +7,34 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
 import Collection from '../pages/Collection';
 import { Link, Route, Routes, useLocation, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { collectionActions } from '../slice/collectionSlice';
 
-
-
 export default function Sidebar() {
-
-// const { workspaceId } = useSelector((state) => ({
-//   workspaceId: state.workspaceReducers.id,
-// }));
-
-// const { workspaceId } = useParams();
-
-const location = useLocation();
-const pathSegments = location.pathname.split('/'); // 경로를 슬래시로 분할
-const workspaceId = pathSegments[pathSegments.length - 1];  
-
-// const workspaceId = useSelector((state) => state.workspaceReducers.id);
-  // const [collections, setCollections] = useState([]);
-
-  // const addNewCollection = () => {
-  //   setCollections(prevCollections => [
-  //     ...prevCollections,
-  //     { id: Date.now(), name: `New Collection` }
-  //   ]);
-  // };
+  const location = useLocation();
+  const pathSegments = location.pathname.split('/');
+  const workspaceId = pathSegments[pathSegments.length - 1];
 
   const dispatch = useDispatch();
 
+  // 로컬 스토리지에서 collections 데이터를 가져옴
+  const getCollectionsFromLocalStorage = () => {
+    const collections = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith(`collection-${workspaceId}-`)) {
+        const collectionData = localStorage.getItem(key);
+        const collection = collectionData ? JSON.parse(collectionData) : null;
+        if (collection) {
+          collections.push(collection);
+        }
+      }
+    }
+    return collections;
+  };
 
-  // useEffect(() => {
-  //   if (workspaceId) {
-  //     // workspaceId가 존재할 때만 데이터를 가져오도록 수정
-  //     console.log(workspaceId);
-  //     dispatch(collectionActions.getCollection(workspaceId));
-  //   }
-  // }, [dispatch, workspaceId]);
-
-  const { collections } = useSelector((state) => ({
-    collections: state.collectionReducers.collections,
-  }));
-
+  const collections = getCollectionsFromLocalStorage();
+  
   const buttons = [
     <Link to={`/workspace/:workspaceId`}>
       <Button key="new" className='btn-1'>New</Button>
