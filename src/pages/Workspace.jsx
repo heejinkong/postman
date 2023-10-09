@@ -15,22 +15,32 @@ export default function Workspace(props) {
   const location = useLocation();
 
   useEffect(() => {
-    if (workspaceId !== 'new') {
+    if (workspaceId !== ':workspaceId') {
       const workspaceData = localStorage.getItem(`workspace-${workspaceId}`);
       const workspace = workspaceData ? JSON.parse(workspaceData) : null;
-
+  
       if (workspace) {
         setWorkspaceData(workspace);
       }
     } else {
-      let nextId = 1;
-      while (localStorage.getItem(`workspace-${nextId}`)) {
-        nextId++;
+      // 기존에 사용된 ID 중 가장 큰 ID를 찾아서 그 다음 ID를 설정
+      let maxId = 0;
+      for (let i = 1; i <= localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('workspace-')) {
+          const id = parseInt(key.replace('workspace-', ''), 10);
+          if (!isNaN(id) && id > maxId) {
+            maxId = id;
+          }
+        }
       }
+  
+      const nextId = maxId + 1;
+  
       setWorkspaceData({ id: nextId, name: '', description: '' });
     }
   }, [workspaceId]);
-
+  
   const handleNameChange = (e) => {
     const newWorkspaceName = e.target.value;
     setWorkspaceData((prevData) => ({
@@ -68,28 +78,6 @@ export default function Workspace(props) {
     localStorage.setItem(`workspace-${data.id}`, JSON.stringify(data));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    let maxId = 0;
-    for (let i = 1; i <= localStorage.length; i++) {
-      const key = localStorage.key(i);
-      if (key && key.startsWith('workspace-')) {
-        const id = parseInt(key.replace('workspace-', ''), 10);
-        if (!isNaN(id) && id > maxId) {
-          maxId = id;
-        }
-      }
-    }
-
-    const newId = maxId + 1;
-    const workspaceDataToSave = { ...workspaceData, id: newId };
-    saveWorkspaceDataToLocalStorage(workspaceDataToSave);
-
-    setWorkspaceData(workspaceDataToSave);
-    window.location.href = `/workspace/${newId}`;
-  };
-
   const isWorkspaceRoute = location.pathname === `/workspace/${workspaceData.id}`;
 
   return (
@@ -104,11 +92,11 @@ export default function Workspace(props) {
           placeholder="My Workspace"
         />
 
-        {workspaceData.id < 1 ? (
+        {/* {workspaceData.id < 1 ? (
           <button onClick={handleSubmit}>Save</button>
         ) : (
           <Link to={`/workspace/${workspaceData.id}?isForEdit=true`}></Link>
-        )}
+        )} */}
       </div>
       <div className="workspace_description">
         <div className="workspace_description_btn">
