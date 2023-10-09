@@ -21,35 +21,7 @@
       top: 4%;
       border-bottom: 1px solid #d3cfcf;
       
-      .builder{
-          position: relative;
-          height: 58%;
-          background-color: rgb(248, 234, 234);
-          
-      }
-      .response {
-          position: relative;
-          height: 38%;
-         
-      }
 
-      @media (max-width: 768px) {
-          /* 화면 너비가 768px 이하일 때 적용되는 스타일 */
-          
-          .main_container {
-            width: 100%; /* 전체 너비 사용 */
-            height: 100%; /* 전체 높이 사용 */
-          }
-        
-          .builder {
-            height: 40%; /* 화면 높이의 40%로 조정 */
-          }
-        
-          .response {
-            height: 60%; /* 화면 높이의 60%로 조정 */
-
-          }
-        }
         
   }
 }

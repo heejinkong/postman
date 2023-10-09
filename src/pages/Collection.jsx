@@ -6,9 +6,15 @@ import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
-const options = ['Move', 'Run collection', 'Add request', 'Add folder', 'Delete'];
+const options = [
+  'Move',
+  'Run collection',
+  'Add request',
+  'Add folder',
+  'Delete',
+];
 const ITEM_HEIGHT = 50;
 
 export default function Collection(props) {
@@ -16,6 +22,7 @@ export default function Collection(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [collections, setCollections] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // 로컬 스토리지에서 컬렉션 데이터를 불러옵니다.
@@ -49,7 +56,7 @@ export default function Collection(props) {
     } else if (option === 'Run collection') {
       // 컬렉션 실행 로직 추가
     } else if (option === 'Add request') {
-      
+      navigate(`/workspace/${workspaceId}/collection/${collectionId}/request`);
     }
   };
 
@@ -83,7 +90,10 @@ export default function Collection(props) {
               </Link>
             </button>
 
-            <div className="collection_list_options" style={{ opacity: open ? 1 : 0 }}>
+            <div
+              className="collection_list_options"
+              style={{ opacity: open ? 1 : 0 }}
+            >
               <IconButton
                 disableRipple
                 aria-label="more"

@@ -30,9 +30,13 @@ export default function Sidebar() {
         }
       }
     }
+    console.log(collections);
     return collections;
   };
 
+  const kong = () => {
+    location.reload();
+  }
   const collections = getCollectionsFromLocalStorage();
   
   const buttons = [
@@ -46,7 +50,7 @@ export default function Sidebar() {
     <div className="sidebar_container">
       <div className="sidebar_header">
         <div className="btn-group" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-        <Link to={`/workspace/${workspaceId}/collection/:collectoinId`}>
+        <Link to={`/workspace/${workspaceId}/collection/:collectoinId`} onClick={kong}>
           <IconButton aria-label="plus">
             <AddIcon fontSize="small" />
             </IconButton>
