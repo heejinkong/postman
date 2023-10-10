@@ -6,16 +6,13 @@ import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
 import Collection from '../pages/Collection';
-import { Link, Route, Routes, useLocation, useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-
+import { Link, Route, Routes, useLocation } from 'react-router-dom';
 
 export default function Sidebar() {
   const location = useLocation();
   const pathSegments = location.pathname.split('/');
   const workspaceId = pathSegments[pathSegments.length - 1];
 
-  // 로컬 스토리지에서 collections 데이터를 가져옴
   const getCollectionsFromLocalStorage = () => {
     const collections = [];
     for (let i = 0; i < localStorage.length; i++) {
@@ -34,9 +31,9 @@ export default function Sidebar() {
 
   const collectionLocation = () => {
     location.reload();
-  }
+  };
   const collections = getCollectionsFromLocalStorage();
-  
+
   const buttons = [
     <Link to={`/workspace/:workspaceId`}>
       <Button key="new" className='btn-1'>New</Button>
@@ -44,15 +41,20 @@ export default function Sidebar() {
     <Button key="import" className='btn-2'>Import</Button>,
     <Button key="export" className='btn-3'>Export</Button>,
   ];
+
+  const showPlusButton = location.pathname === '/';
+
   return (
     <div className="sidebar_container">
       <div className="sidebar_header">
         <div className="btn-group" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-        <Link to={`/workspace/${workspaceId}/collection/:collectoinId`} onClick={collectionLocation}>
-          <IconButton aria-label="plus">
-            <AddIcon fontSize="small" />
-            </IconButton>
-        </Link>
+          {!showPlusButton ? (
+            <Link to={`/workspace/${workspaceId}/collection/:collectoinId`} onClick={collectionLocation}>
+              <IconButton aria-label="plus">
+                <AddIcon fontSize="small" />
+              </IconButton>
+            </Link>) : ('')
+          }
           <Box sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -68,20 +70,19 @@ export default function Sidebar() {
         </div>
       </div>
       <div className='sidebar_collection_container'>
-      <Routes>
-  <Route path='/workspace/:workspaceId' element={
-    <div>
-      { collections.length > 0 ? (
-                    <Collection collections={collections}/>
-                ) : (
-                    <div className='sidebar_empty_collection'>Create a collection for your requests</div>
-                )}
-    </div>
-  } />
-  <Route path='/workspace/:workspaceId/collection/:collectionId' element={<Collection collections={collections} />} />
-  <Route path='/workspace/:workspaceId/collection/:collectionId/request' element={<Collection collections={collections} />} />
-</Routes>
-
+        <Routes>
+          <Route path='/workspace/:workspaceId' element={
+            <div>
+              { collections.length > 0 ? (
+                <Collection collections={collections}/>
+              ) : (
+                <div className='sidebar_empty_collection'>Create a collection for your requests</div>
+              )}
+            </div>
+          } />
+          <Route path='/workspace/:workspaceId/collection/:collectionId' element={<Collection collections={collections} />} />
+          <Route path='/workspace/:workspaceId/collection/:collectionId/request' element={<Collection collections={collections} />} />
+        </Routes>
       </div>
     </div>
   );

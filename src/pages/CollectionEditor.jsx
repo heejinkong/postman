@@ -140,10 +140,9 @@ return (
         <div className="collection_save_container">
           <div className="collection_save_btn">
             {collectionData.id === 0 ? (
-              <button onClick={handleSave}>
+              <Button variant='outlined' onClick={handleSave} startIcon={<SaveIcon />} size='big'>
               Save
-              <SaveIcon />
-            </button>
+            </Button> 
             ) : (
               <Link
               to={`/workspace/${workspaceId}/collection/${collectionData.id}?isForEdit=true`}

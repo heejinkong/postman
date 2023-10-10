@@ -5,38 +5,53 @@ import Box from '@mui/material/Box';
 import SendIcon from '@mui/icons-material/Send';
 import SaveIcon from '@mui/icons-material/Save';
 import ApiRequestTabs from './ApiRequestTabsContainer/ApiRequestTabs';
-
-
-
-
+import axios from 'axios';
+import { useData } from '../contexts/DataContext';
 
 export default function Builder() {
-  const [method, setMethod] = useState('');
+  const [method, setMethod] = useState(''); 
+  const [url, setUrl] = useState(''); 
+  const { resultData,setResult } = useData();
+  const [name, setName] = useState('New Request');
 
-  // 이건 get/ put / delete 등을 선택하면 setMethod 함수에 저장
-  const handleChange = async (event) => {
-    await setMethod(event.target.value);
+
+  // 메서드 변경 
+  const handleChangeMethod = (event) => {
+    setMethod(event.target.value);
   };
 
-  // // 통신에 필요한 버튼 함수.
-  // const sendUrl = async () => {
-  //   try {
-  //     const response = await axios({
-  //       method : method,
-  //       url : '/listing',
-  //     })
-  //     console.log(response.data);
-  //     setResponseData(response.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //     console.log("Method 통신 잘못되었음.");
-  //   }
-  // }
+  // URL 입력
+  const handleChangeUrl = (event) => {
+    setUrl(event.target.value);
+  };
 
- 
+  // Send 버튼 클릭 
+  const handleSendClick = async () => {
+    try {
+      const response = await axios({
+        method: method, // 선택한 메서드
+        url: url, // 입력한 URL
+      });
+      console.log(response.data); 
+      setResult(JSON.stringify(response.data, null, 2));
+    } catch (error) {
+      setResult(`Error: ${error.message}`);
+    }
+  };
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+
   return (
     <div className='builder_container'>
-      <div className='builder_file_path'>path</div>
+      <div className='builder_file_path'>
+      <input
+            type="text"
+            value={name}
+            onChange={handleNameChange}
+          />
+      </div>
       <div className='file_actions'>
         <div className='box_btn_save'>
           <Button variant='outlined' startIcon={<SaveIcon />} size='big'>
@@ -48,43 +63,51 @@ export default function Builder() {
         <div className='body_box_top'>
           <div className='method_options_container'>
             <div className='box_method_url'>
-            <Stack direction="row" spacing={2}>
-              <FormControl sx={{ minWidth: 125, height: '80%' }} size='small'>
-                <Select
-                  value={method}
-                  onChange={handleChange}
-                  displayEmpty
-                >
-                  <MenuItem value=''> 
-                    <em>Method</em>
-
-                  </MenuItem>
-                  <MenuItem value={'get'}>GET</MenuItem>
-                  <MenuItem value={'post'}>POST</MenuItem>
-                  <MenuItem value={'put'}>PUT</MenuItem>
-                  <MenuItem value={'patch'}>PATCH</MenuItem>
-                  <MenuItem value={'delete'}>DELETE</MenuItem>
-                </Select>
-              </FormControl>
-
-              <Box component="form" noValidate autoComplete="off">
-                <FormControl sx={{ marginRight:'200px',  width: '127ch' }} size='small'>
-                  <OutlinedInput placeholder='Enter URL or paste text' /> 
+              <Stack direction="row" spacing={2}>
+                <FormControl sx={{ minWidth: 125, height: '80%' }} size='small'>
+                  <Select
+                    value={method}
+                    onChange={handleChangeMethod}
+                    displayEmpty
+                  >
+                    <MenuItem value=''> 
+                      <em>Method</em>
+                    </MenuItem>
+                    <MenuItem value={'get'}>GET</MenuItem>
+                    <MenuItem value={'post'}>POST</MenuItem>
+                    <MenuItem value={'put'}>PUT</MenuItem>
+                    <MenuItem value={'patch'}>PATCH</MenuItem>
+                    <MenuItem value={'delete'}>DELETE</MenuItem>
+                  </Select>
                 </FormControl>
-              </Box>
-             </Stack>
+                <Box component="form" noValidate autoComplete="off">
+                  <FormControl sx={{ marginRight: '200px', width: '127ch' }} size='small'>
+                    <OutlinedInput
+                      type="text"
+                      value={url}
+                      onChange={handleChangeUrl}
+                      placeholder='Enter URL or paste text'
+                    />
+                  </FormControl>
+                </Box>
+              </Stack>
             </div>
             <div className='btn_send'>
-                <Button variant='contained' startIcon={<SendIcon />} size='big' >
-                  Send
-                </Button> 
+              <Button
+                variant='contained'
+                startIcon={<SendIcon />}
+                size='big'
+                onClick={handleSendClick}
+              >
+                Send
+              </Button> 
             </div>
           </div>
         </div>
         <div className='box_request_tab'>
-            <ApiRequestTabs/>
+          <ApiRequestTabs/>
+          
         </div>
-
       </div>
     </div>
   );
