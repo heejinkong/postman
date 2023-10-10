@@ -12,6 +12,7 @@ import Box from '@mui/material/Box';
 import ResponseBodyTab from './ResponseSuccessTabs/ResponseBodyTab';
 import ResponseHeadersTab from './ResponseSuccessTabs/ResponseHeadersTab';
 import ResultDiff from './ResponseSuccessTabs/ResponseDiffTab';
+import { useData } from '../contexts/DataContext';
 
 
 
@@ -57,7 +58,7 @@ export default function ResponseSuccess() {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
-
+  const {resultText} = useData();
 
   return (
     <div className='responsesuccess_container'>
@@ -87,7 +88,10 @@ export default function ResponseSuccess() {
         >
           <Tab label="Body" {...a11yProps(0)} />
           <Tab label="Headers" {...a11yProps(1)} />
-          <Tab label="Rsult diff" {...a11yProps(2)} />
+          {/* <Tab label="Rsult diff" {...a11yProps(2)} /> */}
+          {resultText !== '' ? (
+          <Tab label="Rsult diff" {...a11yProps(2)} />) :('')
+        }
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -101,7 +105,7 @@ export default function ResponseSuccess() {
         <TabPanel value={value} index={1} dir={theme.direction}>
           <ResponseHeadersTab/>
         </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
+          <TabPanel value={value} index={2} dir={theme.direction}>
           <ResultDiff/>
         </TabPanel>
       </SwipeableViews>

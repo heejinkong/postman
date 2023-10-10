@@ -25,7 +25,9 @@ export default function ResponseDiffTab() {
   return (
     <div>
     <h2>Code Difference</h2>
+    <div>
     <div dangerouslySetInnerHTML={{ __html: outputHtml }}></div>
+    </div>
   </div>
 
   );
