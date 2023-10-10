@@ -8,14 +8,12 @@ import Box from '@mui/material/Box';
 import Collection from '../pages/Collection';
 import { Link, Route, Routes, useLocation, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { collectionActions } from '../slice/collectionSlice';
+
 
 export default function Sidebar() {
   const location = useLocation();
   const pathSegments = location.pathname.split('/');
   const workspaceId = pathSegments[pathSegments.length - 1];
-
-  const dispatch = useDispatch();
 
   // 로컬 스토리지에서 collections 데이터를 가져옴
   const getCollectionsFromLocalStorage = () => {
@@ -34,7 +32,7 @@ export default function Sidebar() {
     return collections;
   };
 
-  const kong = () => {
+  const collectionLocation = () => {
     location.reload();
   }
   const collections = getCollectionsFromLocalStorage();
@@ -50,7 +48,7 @@ export default function Sidebar() {
     <div className="sidebar_container">
       <div className="sidebar_header">
         <div className="btn-group" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-        <Link to={`/workspace/${workspaceId}/collection/:collectoinId`} onClick={kong}>
+        <Link to={`/workspace/${workspaceId}/collection/:collectoinId`} onClick={collectionLocation}>
           <IconButton aria-label="plus">
             <AddIcon fontSize="small" />
             </IconButton>
@@ -72,15 +70,16 @@ export default function Sidebar() {
       <div className='sidebar_collection_container'>
       <Routes>
   <Route path='/workspace/:workspaceId' element={
-    <div className='sidebar_empty_collection'>
+    <div>
       { collections.length > 0 ? (
                     <Collection collections={collections}/>
                 ) : (
-                    <span>Create a collection for your requests</span>
+                    <div className='sidebar_empty_collection'>Create a collection for your requests</div>
                 )}
     </div>
   } />
   <Route path='/workspace/:workspaceId/collection/:collectionId' element={<Collection collections={collections} />} />
+  <Route path='/workspace/:workspaceId/collection/:collectionId/request' element={<Collection collections={collections} />} />
 </Routes>
 
       </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import '../style/workspace.scss';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
@@ -12,7 +12,7 @@ export default function Workspace(props) {
     description: '',
   });
   const [isEditingDescription, setEditingDescription] = useState(false);
-  const location = useLocation();
+
 
   useEffect(() => {
     if (workspaceId !== ':workspaceId') {
@@ -34,9 +34,9 @@ export default function Workspace(props) {
           }
         }
       }
-  
+    
       const nextId = maxId + 1;
-  
+    
       setWorkspaceData({ id: nextId, name: '', description: '' });
     }
   }, [workspaceId]);
@@ -78,7 +78,7 @@ export default function Workspace(props) {
     localStorage.setItem(`workspace-${data.id}`, JSON.stringify(data));
   };
 
-  const isWorkspaceRoute = location.pathname === `/workspace/${workspaceData.id}`;
+  
 
   return (
     <div className="workspace_container">

@@ -10,21 +10,19 @@ import { Link ,useParams, useLocation } from 'react-router-dom';
 export default function CollectionEditor(props) {
   const { workspaceId, collectionId } = useParams();
   const [collectionData, setCollectionData] = useState({
-    id: 0,
+    id: 0, 
     collectionname: "",
-    collectiontext:"",
+    collectiontext: "",
     date: Date.now(),
-    collections: [],
     workspaceId: 0,
   });
   const [isEditingDescription, setEditingDescription] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
     if (collectionId !== ':collectionId') {
       const collectionData = localStorage.getItem(`collection-${workspaceId}-${collectionId}`);
       const collection = collectionData ? JSON.parse(collectionData) : null;
-  
+
       if (collection) {
         setCollectionData(collection);
       }
@@ -40,12 +38,22 @@ export default function CollectionEditor(props) {
           }
         }
       }
-  
-      const nextId = maxId + 1;
-  
-      setCollectionData({ id: nextId, collectionname: '', collectiontext: '' });
+
+      // ID가 null인 경우에만 새로운 ID를 설정
+      if (collectionData.id === 0) {
+        const nextId = maxId + 1;
+        setCollectionData({ ...collectionData, id: nextId });
+      } else {
+ 
+        const collectionData = localStorage.getItem(`collection-${workspaceId}-${collectionId}`);
+        const collection = collectionData ? JSON.parse(collectionData) : null;
+
+        if (collection) {
+          setCollectionData(collection);
+        }
+      }
     }
-  }, [collectionId]);
+  }, [collectionId, workspaceId, collectionData.id]);
  
   const handleNameChange = (e) => {
     const newCollectionName = e.target.value;
@@ -81,7 +89,9 @@ export default function CollectionEditor(props) {
   };
 
   const saveCollectionDataToLocalStorage = (data) => {
+    if(data.id !== 0) {
     localStorage.setItem(`collection-${workspaceId}-${data.id}`, JSON.stringify(data));
+    }
   };
 
   const handleSave = (e) => {
@@ -106,7 +116,6 @@ export default function CollectionEditor(props) {
       collectionname: collectionData.collectionname,
       collectiontext: collectionData.collectiontext,
       date: Date.now(),
-      collections: [],
       workspaceId: workspaceId,
     };
   
@@ -115,12 +124,7 @@ export default function CollectionEditor(props) {
     const newUrl = `/workspace/${workspaceId}/collection/${collection.id}`;
   window.location.href = newUrl;
   };
-  
-
-  
-  const collections = useSelector((state) => state.collectionReducers.collections);
-
-
+   console.log(collectionData.id)
 return (
   <div>
     <div className="collection_editor_container">
@@ -135,15 +139,15 @@ return (
         </div>
         <div className="collection_save_container">
           <div className="collection_save_btn">
-            {collectionData.id > 0 ? (
-              <Link
-                to={`/workspace/${workspaceId}/collection/${collectionData.id}?isForEdit=true`}
-              ></Link>
-            ) : (
+            {collectionData.id === 0 ? (
               <button onClick={handleSave}>
-                Save
-                <SaveIcon />
-              </button>
+              Save
+              <SaveIcon />
+            </button>
+            ) : (
+              <Link
+              to={`/workspace/${workspaceId}/collection/${collectionData.id}?isForEdit=true`}
+            ></Link>
             )}
           </div>
         </div>

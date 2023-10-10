@@ -27,18 +27,21 @@ export default function Collection(props) {
   useEffect(() => {
     // 로컬 스토리지에서 컬렉션 데이터를 불러옵니다.
     const loadCollectionsFromLocalStorage = () => {
-      const workspaceCollections = [];
+      const collections = [];
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         if (key && key.startsWith(`collection-${workspaceId}`)) {
           const collection = JSON.parse(localStorage.getItem(key));
-          workspaceCollections.push(collection);
+          collections.push(collection);
         }
       }
-      setCollections(workspaceCollections);
+      setCollections(collections);
+      console.table(collections);
     };
     loadCollectionsFromLocalStorage();
   }, [workspaceId]);
+
+
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -70,6 +73,8 @@ export default function Collection(props) {
     setCollections((prevCollections) =>
       prevCollections.filter((collection) => collection.id !== collectionId)
     );
+
+    navigate(`/workspace/${workspaceId}/collection/:collectionId`);
   };
 
   return (
@@ -81,7 +86,6 @@ export default function Collection(props) {
               <ChevronRightIcon />
             </button>
             <button className="collection_list_name">
-              {collection.collectionname}
               <Link
                 to={`/workspace/${workspaceId}/collection/${collection.id}`}
                 style={{ textDecoration: 'none', color: 'black' }}

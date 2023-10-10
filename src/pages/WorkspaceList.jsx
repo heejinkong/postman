@@ -11,7 +11,7 @@ const WorkspaceList = (props) => {
     localStorage.removeItem(`workspace-${workspaceId}`);
 
     // 작업 목록 업데이트
-    props.setList((prevList) => prevList.filter((workspace) => workspace.id !== workspaceId));
+    props.handleDeleteClick(workspaceId);
   };
 
   return (
@@ -50,4 +50,3 @@ const WorkspaceList = (props) => {
 };
 
 export default WorkspaceList;
-
