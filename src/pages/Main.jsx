@@ -7,8 +7,6 @@ import CollectionEditor from './CollectionEditor';
 import { DataProvider } from '../contexts/DataContext';
 import ListPage from './ListPage';
 import Header from '../components/Header';
-import { Provider } from 'react-redux';
-import { store } from '../../src/store';
 import Request from './Request';
 
 export default function Main() {

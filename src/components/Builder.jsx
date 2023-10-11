@@ -13,7 +13,11 @@ export default function Builder() {
   const [url, setUrl] = useState(''); 
   const { setResult } = useData();
   const [name, setName] = useState('New Request');
-  
+  // const [requestData, setRequestData] = useState({
+  //   id: 0, 
+  //   name: "New Request",
+  //   request: "",
+  // });
 
   // 메서드 변경 
   const handleChangeMethod = (event) => {
