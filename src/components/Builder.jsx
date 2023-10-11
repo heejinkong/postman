@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../style/builder.scss';
 import { Button, FormControl, MenuItem, OutlinedInput, Select, Stack } from '@mui/material';
 import Box from '@mui/material/Box';
@@ -14,8 +14,16 @@ export default function Builder() {
   const { setResult, paramsData } = useData();
   const [name, setName] = useState('New Request');
   const { key, value } = paramsData;
-  const queryString = key && value ? `${key}=${value}` : '';
+  const [queryString, setQueryString] =useState(key && value ? `${key}=${value}` : '');
   const fullUrl = url + (queryString ? `?${queryString}` : '');
+
+  const updateQueryString = () => {
+    setQueryString(key && value ? `${key}=${value}` : '');
+  };
+
+  // const queryString = key && value ? `${key}=${value}` : '';
+  // const fullUrl = url + (queryString ? `?${queryString}` : '');
+
   // const [queryParams, setQueryParams] = useState([]);
   // const queryString = queryParams.map(param => `${key}=${value}`).join('&');
   
@@ -24,7 +32,16 @@ export default function Builder() {
   //   name: "New Request",
   //   request: "",
   // });
-console.log(key)
+
+  useEffect(() => {
+    updateQueryString();
+  }, [key, value]);
+
+  useEffect(() => {
+    updateQueryString();
+  }, [url, queryString]);
+
+  console.log(fullUrl)
   // 메서드 변경 
   const handleChangeMethod = (e) => {
     setMethod(e.target.value);
@@ -95,7 +112,7 @@ console.log(key)
                   <FormControl sx={{ marginRight: '200px', width: '127ch' }} size='small'>
                     <OutlinedInput
                       type="text"
-                      value={url}
+                      value={fullUrl}
                       onChange={handleChangeUrl}
                       placeholder='Enter URL or paste text'
                     />
