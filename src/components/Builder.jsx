@@ -11,8 +11,9 @@ import { useData } from '../contexts/DataContext';
 export default function Builder() {
   const [method, setMethod] = useState(''); 
   const [url, setUrl] = useState(''); 
-  const { setResult } = useData();
+  const { setResult, paramsData } = useData();
   const [name, setName] = useState('New Request');
+  
   // const [requestData, setRequestData] = useState({
   //   id: 0, 
   //   name: "New Request",
@@ -20,21 +21,24 @@ export default function Builder() {
   // });
 
   // 메서드 변경 
-  const handleChangeMethod = (event) => {
-    setMethod(event.target.value);
+  const handleChangeMethod = (e) => {
+    setMethod(e.target.value);
   };
 
   // URL 입력
-  const handleChangeUrl = (event) => {
-    setUrl(event.target.value);
+  const handleChangeUrl = (e) => {
+    setUrl(e.target.value);
   };
 
   // Send 버튼 클릭 
   const handleSendClick = async () => {
     try {
+      const { key, value } = paramsData;
+      const fulUrl = url + `?${key}=${value}`;
+
       const response = await axios({
         method: method, // 선택한 메서드
-        url: url, // 입력한 URL
+        url: fulUrl, // 입력한 URL
       });
       console.log(response.data); 
       setResult(JSON.stringify(response.data, null, 2));
@@ -109,8 +113,7 @@ export default function Builder() {
           </div>
         </div>
         <div className='box_request_tab'>
-          <ApiRequestTabs/>
-          
+          <ApiRequestTabs/>    
         </div>
       </div>
     </div>

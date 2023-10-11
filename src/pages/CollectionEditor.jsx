@@ -51,7 +51,7 @@ export default function CollectionEditor(props) {
         }
       }
     }
-  }, [collectionId, workspaceId, collectionData.id]);
+  }, [collectionId, workspaceId, collectionData.id, collectionData]);
  
   const handleNameChange = (e) => {
     const newCollectionName = e.target.value;

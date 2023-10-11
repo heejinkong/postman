@@ -9,6 +9,11 @@ export function useData() {
 export function DataProvider({ children }) {
   const [resultText, setResultText] = useState('');
   const [resultData, setResultData] = useState('');
+  const [paramsData, setParamsData] = useState({
+    key: "",
+    value: "",
+    description: "",
+  });
 
   const setResult = (data) => {
     setResultData(data);
@@ -18,8 +23,12 @@ export function DataProvider({ children }) {
     setResultText(text);
   };
 
+  const updateParamsData = (newParamsData) => {
+    setParamsData(newParamsData);
+  };
+
   return (
-    <DataContext.Provider value={{ resultText, resultData, setResult, setTextInput }}>
+    <DataContext.Provider value={{ resultText, resultData, setResult, setTextInput, paramsData, setParamsData, updateParamsData }}>
       {children}
     </DataContext.Provider>
   );
