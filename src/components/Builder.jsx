@@ -13,13 +13,18 @@ export default function Builder() {
   const [url, setUrl] = useState(''); 
   const { setResult, paramsData } = useData();
   const [name, setName] = useState('New Request');
+  const { key, value } = paramsData;
+  const queryString = key && value ? `${key}=${value}` : '';
+  const fullUrl = url + (queryString ? `?${queryString}` : '');
+  // const [queryParams, setQueryParams] = useState([]);
+  // const queryString = queryParams.map(param => `${key}=${value}`).join('&');
   
   // const [requestData, setRequestData] = useState({
   //   id: 0, 
   //   name: "New Request",
   //   request: "",
   // });
-
+console.log(key)
   // 메서드 변경 
   const handleChangeMethod = (e) => {
     setMethod(e.target.value);
@@ -30,15 +35,13 @@ export default function Builder() {
     setUrl(e.target.value);
   };
 
+
   // Send 버튼 클릭 
   const handleSendClick = async () => {
     try {
-      const { key, value } = paramsData;
-      const fulUrl = url + `?${key}=${value}`;
-
       const response = await axios({
         method: method, // 선택한 메서드
-        url: fulUrl, // 입력한 URL
+        url: fullUrl, // 입력한 URL
       });
       console.log(response.data); 
       setResult(JSON.stringify(response.data, null, 2));
