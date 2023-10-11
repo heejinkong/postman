@@ -1,18 +1,16 @@
-//ResponseBodyTab.jsx
-import  { useEffect } from 'react';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/mode/javascript/javascript';
-import axios from 'axios';
 import { Controlled as ControlledCodeMirror } from 'react-codemirror2';
 import '../../style/codemirror.scss';
 import { useData } from '../../contexts/DataContext';
 import '../../style/responsebodytab.scss';
+import '../Response';
 
 
 
 export default function ResponseBodyTabs() {
 
-  const { resultData,setResult } = useData('');
+  const { resultData } = useData('');
 
   // const fetchApi = async () => {
   //   try {
@@ -40,7 +38,6 @@ export default function ResponseBodyTabs() {
         />
         <button onClick={fetchApi}>Send Request</button>
       </div> */}
-        { resultData !== '' ? (
           <div style={{ marginTop: '0.1px' }}>
           <ControlledCodeMirror
             value={resultData}
@@ -54,10 +51,6 @@ export default function ResponseBodyTabs() {
             className="custom-codemirror"
           />
           </div>
-        ) : (
-          <div className='text-area' >Enter the URL and click Send to get a response</div>
-        )}
-
     </div>
   );
 }

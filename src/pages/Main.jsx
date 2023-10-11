@@ -1,13 +1,10 @@
 import React from 'react';
-import { Route, Routes, useParams } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import '../style/main.scss';
 import Sidebar from '../components/Sidebar';
-import Builder from '../components/Builder';
-import ResponseSuccess from '../components/ResponseSuccess';
 import Workspace from './Workspace';
 import CollectionEditor from './CollectionEditor';
 import { DataProvider } from '../contexts/DataContext';
-import WorkspaceList from './WorkspaceList';
 import ListPage from './ListPage';
 import Header from '../components/Header';
 import { Provider } from 'react-redux';
@@ -17,7 +14,6 @@ import Request from './Request';
 export default function Main() {
   return (
     <section className="container">
-      <Provider store={store}>
         <DataProvider>
           <div className="header">
             <Header />
@@ -39,7 +35,6 @@ export default function Main() {
             </Routes>
           </div>
         </DataProvider>
-      </Provider>
     </section>
   );
 }

@@ -294,7 +294,7 @@
   }
   
   .d2h-file-list-wrapper a:visited {
-      font-weight: 0; /* 또는 font-weight: hidden; */
+      font-weight: 0; 
       color: transparent;
   }
   

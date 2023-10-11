@@ -11,7 +11,7 @@ import { useData } from '../contexts/DataContext';
 export default function Builder() {
   const [method, setMethod] = useState(''); 
   const [url, setUrl] = useState(''); 
-  const { resultData,setResult } = useData();
+  const { setResult } = useData();
   const [name, setName] = useState('New Request');
   
 

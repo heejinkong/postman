@@ -13,6 +13,7 @@ import ResponseBodyTab from './ResponseSuccessTabs/ResponseBodyTab';
 import ResponseHeadersTab from './ResponseSuccessTabs/ResponseHeadersTab';
 import ResultDiff from './ResponseSuccessTabs/ResponseDiffTab';
 import { useData } from '../contexts/DataContext';
+import Response from './Response';
 
 
 
@@ -58,59 +59,64 @@ export default function ResponseSuccess() {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
-  const {resultText} = useData();
+  const {resultText, resultData} = useData();
 
   return (
     <div className='responsesuccess_container'>
-    <Box
-      sx={{
-        bgcolor: 'transparent',
-        width: 1550,
-        position: 'relative',
-        minHeight: 283,
-      }}
-    >
-      <AppBar position="static" color= "transparent"
-      sx={{
-        height: '35px', 
-        background: 'rgba(0, 0, 0, 0)',
-        boxShadow: 'none',
-        top: '50px'
-       
-      }} >
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="standard"
-          aria-label="action tabs example"
-        >
-          <Tab label="Body" {...a11yProps(0)} />
-          <Tab label="Headers" {...a11yProps(1)} />
-          {/* <Tab label="Rsult diff" {...a11yProps(2)} /> */}
-          {resultText !== '' ? (
-          <Tab label="Rsult diff" {...a11yProps(2)} />) :('')
-        }
-        </Tabs>
-      </AppBar>
-      <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={value}
-        onChangeIndex={handleChangeIndex}
+      { resultData !== '' ? (
+        <Box
+        sx={{
+          bgcolor: 'transparent',
+          width: 1550,
+          position: 'relative',
+          minHeight: 283,
+        }}
       >
-        <TabPanel value={value} index={0} dir={theme.direction}>
-            <ResponseBodyTab/>
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-          <ResponseHeadersTab/>
-        </TabPanel>
-          <TabPanel value={value} index={2} dir={theme.direction}>
-          <ResultDiff/>
-        </TabPanel>
-      </SwipeableViews>
-      
-    </Box>
+        <AppBar position="static" color= "transparent"
+        sx={{
+          height: '35px', 
+          background: 'rgba(0, 0, 0, 0)',
+          boxShadow: 'none',
+          top: '50px'
+         
+        }} >
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            variant="standard"
+            aria-label="action tabs example"
+          >
+            <Tab label="Body" {...a11yProps(0)} />
+            <Tab label="Headers" {...a11yProps(1)} />
+            {/* <Tab label="Rsult diff" {...a11yProps(2)} /> */}
+            {resultText !== '' ? (
+            <Tab label="Rsult diff" {...a11yProps(2)} />) :('')
+          }
+          </Tabs>
+        </AppBar>
+        <SwipeableViews
+          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+          index={value}
+          onChangeIndex={handleChangeIndex}
+        >
+          <TabPanel value={value} index={0} dir={theme.direction}>
+              <ResponseBodyTab/>
+          </TabPanel>
+          <TabPanel value={value} index={1} dir={theme.direction}>
+            <ResponseHeadersTab/>
+          </TabPanel>
+            <TabPanel value={value} index={2} dir={theme.direction}>
+            <ResultDiff/>
+          </TabPanel>
+        </SwipeableViews>
+        
+      </Box>
+
+      ) : (
+        <Response />
+      )}
     </div>
   );
 }

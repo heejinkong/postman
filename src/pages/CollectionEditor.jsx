@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../style/collectioneditor.scss';
 import { Button } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { collectionActions } from '../slice/collectionSlice';
-import { Link ,useParams, useLocation } from 'react-router-dom';
+import { Link ,useParams } from 'react-router-dom';
 
 
 export default function CollectionEditor(props) {
