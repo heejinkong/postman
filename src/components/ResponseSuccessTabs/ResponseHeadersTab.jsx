@@ -13,7 +13,6 @@ export default function ResponseHeadersTab() {
     { key: 'Server', value: '' },
     { key: 'Access-Control-Allow-Origin', value: '' },
     { key: 'Access-Control-Allow-Credentials', value: '' },
-
   ];
 
   useEffect(() => {
@@ -38,25 +37,37 @@ export default function ResponseHeadersTab() {
   }, []);
 
   return (
-    <div className='headers_editor_container'>
-      <div className='headers_editor_header_row'>
-        <div className='headers_editor_top_header'>
-          <div className='headers_editor_key_header_row '>
-            <div className='headers_form_header_row'></div>
-            <div className='headers_header_row'>
+    <div className="headers_editor_container">
+      <div className="headers_editor_header_row">
+        <div className="headers_editor_top_header">
+          <div className="headers_editor_key_header_row ">
+            <div className="headers_form_header_row"></div>
+            <div className="headers_header_row">
               <div className="headers_row">Key</div>
               <div className="headers_row">Value</div>
             </div>
           </div>
           {headers.map((header, index) => (
-            <div className='headers_editor_key_header_row ' key={index}>
-              <div className='headers_form_header_row'></div>
-              <div className='headers_header_row'>
+            <div className="headers_editor_key_header_row " key={index}>
+              <div className="headers_form_header_row"></div>
+              <div className="headers_header_row">
                 <div className="headers_input_row">
-                  <input className="headers_row" type="text" placeholder="Key" value={header.key} readOnly />
+                  <input
+                    className="headers_row"
+                    type="text"
+                    placeholder="Key"
+                    value={header.key}
+                    readOnly
+                  />
                 </div>
                 <div className="headers_input_row">
-                  <input className="headers_row" type="text" placeholder="Value" value={header.value} readOnly />
+                  <input
+                    className="headers_row"
+                    type="text"
+                    placeholder="Value"
+                    value={header.value}
+                    readOnly
+                  />
                 </div>
               </div>
             </div>

@@ -12,27 +12,27 @@ import Request from './Request';
 export default function Main() {
   return (
     <section className="container">
-        <DataProvider>
-          <div className="header">
-            <Header />
-          </div>
-          <Sidebar />
-          <div className="main_container">
-            {/* Collection , WorkSpace Router 처리. part 1. */}
-            <Routes>
-              <Route path="/" element={<ListPage />} />
-              <Route path="/workspace/:workspaceId" element={<Workspace />} />
-              <Route
-                path="/workspace/:workspaceId/collection/:collectionId"
-                element={<CollectionEditor />}
-              />
-              <Route
-                path="/workspace/:workspaceId/collection/:collectionId/request"
-                element={<Request />}
-              />
-            </Routes>
-          </div>
-        </DataProvider>
+      <DataProvider>
+        <div className="header">
+          <Header />
+        </div>
+        <Sidebar />
+        <div className="main_container">
+          {/* Collection , WorkSpace Router 처리. part 1. */}
+          <Routes>
+            <Route path="/" element={<ListPage />} />
+            <Route path="/workspace/:workspaceId" element={<Workspace />} />
+            <Route
+              path="/workspace/:workspaceId/collection/:collectionId"
+              element={<CollectionEditor />}
+            />
+            <Route
+              path="/workspace/:workspaceId/collection/:collectionId/request"
+              element={<Request />}
+            />
+          </Routes>
+        </div>
+      </DataProvider>
     </section>
   );
 }

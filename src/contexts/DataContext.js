@@ -14,6 +14,8 @@ export function DataProvider({ children }) {
     value: "",
     description: "",
   });
+  // const [url, setUrl] = useState('');
+  // const [fullUrl , setFullUrl] = useState();
 
   const setResult = (data) => {
     setResultData(data);
