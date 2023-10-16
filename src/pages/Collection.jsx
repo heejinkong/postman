@@ -6,6 +6,12 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Link, useParams, useNavigate } from 'react-router-dom';
+import ListItemButton from '@mui/material/ListItemButton';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import Collapse from '@mui/material/Collapse';
+import { List, ListItemIcon, ListItemText } from '@mui/material';
+import { Star } from '@mui/icons-material';
 
 const options = [
   'Move',
@@ -22,6 +28,7 @@ export default function Collection(props) {
   const open = Boolean(anchorEl);
   const [collections, setCollections] = useState([]);
   const navigate = useNavigate();
+  const [openList, setOpenList] = useState(true);
 
   useEffect(() => {
     // 로컬 스토리지에서 컬렉션 데이터를 불러옵니다.
@@ -74,14 +81,23 @@ export default function Collection(props) {
     navigate(`/workspace/${workspaceId}/collection/:collectionId`);
   };
 
+  const handleListClick = () => {
+    setOpenList(!open);
+  };
+
   return (
     <div>
       <div className="collection_container">
         {collections.map((collection) => (
           <div key={collection.id} className="collection_list">
-            <button className="collection_list_btn">
-              <ChevronRightIcon />
-            </button>
+            <ListItemButton
+              onClick={handleListClick}
+              className="collection_list_btn"
+            >
+              {/* <ChevronRightIcon /> */}
+              {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+
             <button className="collection_list_name">
               <Link
                 to={`/workspace/${workspaceId}/collection/${collection.id}`}
@@ -90,6 +106,16 @@ export default function Collection(props) {
                 {collection.collectionname}
               </Link>
             </button>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <ListItemButton sx={{ pl: 4 }}>
+                  <ListItemIcon>
+                    <Star />
+                  </ListItemIcon>
+                  <ListItemText primary="Starred" />
+                </ListItemButton>
+              </List>
+            </Collapse>
 
             <div
               className="collection_list_options"

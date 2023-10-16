@@ -1,66 +1,58 @@
 .collection_container {
-    position: absolute;
-    width: 100%;
-    height: 4%;
+  position: absolute;
+  width: 100%;
+  height: 4%;
 
-    .collection_list {
-        position: relative;
-        display: flex;
-        width: 90%;
-        height: 40px;
-    
-        margin-top: 1%;
-        margin-left: 13px;
-        align-items: center;
-        padding: 0;
+  .collection_list {
+    position: relative;
+    display: flex;
+    width: 90%;
+    height: 40px;
 
-        
-        .collection_list_btn {
-            position: relative;
-            display: flex;
-            height: 28px;
-            width: 10%; 
-            align-items: center;
-            border: none; 
-            background-color: transparent; 
-            padding: 0; 
-            color: rgba(0, 0, 0, 0.54);
-            cursor: pointer; 
-        }
+    margin-top: 1%;
+    margin-left: 13px;
+    align-items: center;
+    padding: 0;
 
-        .collection_list_name {
-            position: relative;
-            display: flex;
-            height: 28px;
-            width: 75%; 
-            align-items: center;
-            border: none; 
-            background-color: transparent; 
-            cursor: pointer; 
-            font-size: 15px;
-
-            
-        }
-
-        .collection_list_options {
-            position: relative;
-            bottom: 4px;
-            height: 28px;
-            width: 15%;  
-            opacity: 0; /* 초기에는 투명한 상태 */
-
-            &:hover {
-             opacity: 1 !important; 
-            }
-
-        }
-
-        &:hover {
-            background-color: lightgray;
-            }
-    
-
-       
+    .collection_list_btn {
+      position: relative;
+      display: flex;
+      height: 28px;
+      width: 10%;
+      align-items: center;
+      border: none;
+      background-color: transparent;
+      padding: 0;
+      color: rgba(0, 0, 0, 0.54);
+      cursor: pointer;
     }
-}
 
+    .collection_list_name {
+      position: relative;
+      display: flex;
+      height: 28px;
+      width: 75%;
+      align-items: center;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .collection_list_options {
+      position: relative;
+      bottom: 4px;
+      height: 28px;
+      width: 15%;
+      opacity: 0; /* 초기에는 투명한 상태 */
+
+      &:hover {
+        opacity: 1 !important;
+      }
+    }
+
+    &:hover {
+      background-color: lightgray;
+    }
+  }
+}
