@@ -1,4 +1,3 @@
-//collection.jsx
 import React, { useState, useEffect } from 'react';
 import '../style/collection.scss';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -40,8 +39,6 @@ export default function Collection(props) {
     };
     loadCollectionsFromLocalStorage();
   }, [workspaceId]);
-
-
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

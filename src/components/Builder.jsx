@@ -63,6 +63,27 @@ export default function Builder() {
     setName(e.target.value);
   };
 
+  const handleSaveClick = () => {
+    const urlData = new URL(fullUrl);
+
+    const queryData = {
+      name: name,
+      request: {
+        method: method,
+        header: [],
+        url: {
+          raw: fullUrl,
+          protocol: urlData.protocol,
+          host: urlData.host.split('.'),
+          path: urlData.pathname,
+        },
+      },
+      response: [],
+    };
+    const key = `request-${name}`;
+    localStorage.setItem(key, JSON.stringify(queryData));
+  };
+
   return (
     <div className="builder_container">
       <div className="builder_file_path">
@@ -70,7 +91,12 @@ export default function Builder() {
       </div>
       <div className="file_actions">
         <div className="box_btn_save">
-          <Button variant="outlined" startIcon={<SaveIcon />} size="big">
+          <Button
+            variant="outlined"
+            startIcon={<SaveIcon />}
+            size="big"
+            onClick={handleSaveClick}
+          >
             Save
           </Button>
         </div>
