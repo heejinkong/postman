@@ -9,11 +9,14 @@ export function useData() {
 export function DataProvider({ children }) {
   const [resultText, setResultText] = useState('');
   const [resultData, setResultData] = useState('');
-  const [paramsData, setParamsData] = useState({
-    key: "",
-    value: "",
-    description: "",
-  });
+  const [paramsData, setParamsData] = useState([
+    {
+      key: "",
+      value: "",
+      description: "",
+    }
+  ]);
+  
   // const [url, setUrl] = useState('');
   // const [fullUrl , setFullUrl] = useState();
 

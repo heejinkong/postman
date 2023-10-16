@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../style/builder.scss';
 import {
   Button,
@@ -20,18 +20,12 @@ export default function Builder() {
   const [url, setUrl] = useState('');
   const { setResult, paramsData } = useData();
   const [name, setName] = useState('New Request');
-  const { key, value } = paramsData;
-  const queryString = key && value ? `${key}=${value}` : '';
-  const fullUrl = url + (queryString ? `?${queryString}` : '');
-  // const [queryParams, setQueryParams] = useState([]);
-  // const queryString = queryParams.map(param => `${key}=${value}`).join('&');
 
-  // const [requestData, setRequestData] = useState({
-  //   id: 0,
-  //   name: "New Request",
-  //   request: "",
-  // });
-  console.log(key);
+  // 기존 URL 뒤에 key=value를 붙이는 함수
+  const addUrl = (url, key, value) => {
+    return url + (url.includes('?') ? '&' : '?') + `${key}=${value}`;
+  };
+
   // 메서드 변경
   const handleChangeMethod = (e) => {
     setMethod(e.target.value);
@@ -42,17 +36,26 @@ export default function Builder() {
     setUrl(e.target.value);
   };
 
+  let fullUrl = url;
+  paramsData.forEach((dataRow) => {
+    if (dataRow.key && dataRow.value) {
+      fullUrl = addUrl(fullUrl, dataRow.key, dataRow.value);
+    }
+    console.log(dataRow);
+    console.log(`Final URL: ${fullUrl}`);
+  });
+
   // Send 버튼 클릭
   const handleSendClick = async () => {
     try {
       const response = await axios({
         method: method, // 선택한 메서드
-        url: fullUrl, // 입력한 URL
+        url: fullUrl, // URL 뒤에 key=value를 추가한 URL
       });
-      console.log(response.data);
+      console.log(method);
       setResult(JSON.stringify(response.data, null, 2));
-    } catch (error) {
-      setResult(`Error: ${error.message}`);
+    } catch (e) {
+      setResult(`Error: ${e.message}`);
     }
   };
 
@@ -83,10 +86,12 @@ export default function Builder() {
                     onChange={handleChangeMethod}
                     displayEmpty
                   >
-                    <MenuItem value="">
+                    {/* <MenuItem value="">
                       <em>Method</em>
+                    </MenuItem> */}
+                    <MenuItem value={'get'}>
+                      <em>GET</em>
                     </MenuItem>
-                    <MenuItem value={'get'}>GET</MenuItem>
                     <MenuItem value={'post'}>POST</MenuItem>
                     <MenuItem value={'put'}>PUT</MenuItem>
                     <MenuItem value={'patch'}>PATCH</MenuItem>
@@ -100,7 +105,7 @@ export default function Builder() {
                   >
                     <OutlinedInput
                       type="text"
-                      value={url}
+                      value={fullUrl}
                       onChange={handleChangeUrl}
                       placeholder="Enter URL or paste text"
                     />

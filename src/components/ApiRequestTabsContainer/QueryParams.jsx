@@ -10,6 +10,7 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 export default function QueryParams() {
   const { paramsData, updateParamsData } = useData();
   const [dataRows, setDataRows] = useState([paramsData]);
+  const [checked, setChecked] = React.useState(true);
 
   const handleKeyChange = (e, index) => {
     const newKey = e.target.value;
@@ -51,12 +52,16 @@ export default function QueryParams() {
       setDataRows(data);
     }
   };
-
+  // console.log(dataRows[0]);
   const deleteRow = (index) => {
     const updatedDataRows = [...dataRows];
     updatedDataRows.splice(index, 1);
     updateParamsData(updatedDataRows);
     setDataRows(updatedDataRows);
+  };
+
+  const handleChange = (e) => {
+    setChecked(e.target.checked);
   };
 
   return (
@@ -76,7 +81,12 @@ export default function QueryParams() {
               <div className="params_form_header_row"></div>
               <div className="params_header_row">
                 {rowData.key || rowData.value || rowData.description !== '' ? (
-                  <Checkbox {...label} defaultChecked />
+                  <Checkbox
+                    checked={checked}
+                    onChange={handleChange}
+                    inputProps={{ 'aria-label': 'controlled' }}
+                    size="small"
+                  />
                 ) : (
                   ''
                 )}
