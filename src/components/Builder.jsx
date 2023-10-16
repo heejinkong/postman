@@ -18,7 +18,7 @@ import { useData } from '../contexts/DataContext';
 export default function Builder() {
   const [method, setMethod] = useState('');
   const [url, setUrl] = useState('');
-  const { setResult, paramsData } = useData();
+  const { setResult, paramsData, checked } = useData();
   const [name, setName] = useState('New Request');
 
   // 기존 URL 뒤에 key=value를 붙이는 함수
@@ -38,11 +38,11 @@ export default function Builder() {
 
   let fullUrl = url;
   paramsData.forEach((dataRow) => {
-    if (dataRow.key && dataRow.value) {
+    if (dataRow.key && dataRow.value && dataRow.checked === true) {
       fullUrl = addUrl(fullUrl, dataRow.key, dataRow.value);
     }
     console.log(dataRow);
-    console.log(`Final URL: ${fullUrl}`);
+    console.log(`URL: ${fullUrl}`);
   });
 
   // Send 버튼 클릭
@@ -86,12 +86,10 @@ export default function Builder() {
                     onChange={handleChangeMethod}
                     displayEmpty
                   >
-                    {/* <MenuItem value="">
+                    <MenuItem value="">
                       <em>Method</em>
-                    </MenuItem> */}
-                    <MenuItem value={'get'}>
-                      <em>GET</em>
                     </MenuItem>
+                    <MenuItem value={'get'}>GET</MenuItem>
                     <MenuItem value={'post'}>POST</MenuItem>
                     <MenuItem value={'put'}>PUT</MenuItem>
                     <MenuItem value={'patch'}>PATCH</MenuItem>

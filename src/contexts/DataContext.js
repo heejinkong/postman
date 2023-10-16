@@ -16,9 +16,7 @@ export function DataProvider({ children }) {
       description: "",
     }
   ]);
-  
-  // const [url, setUrl] = useState('');
-  // const [fullUrl , setFullUrl] = useState();
+  const [checked, setChecked] = useState('');
 
   const setResult = (data) => {
     setResultData(data);
@@ -33,7 +31,7 @@ export function DataProvider({ children }) {
   };
 
   return (
-    <DataContext.Provider value={{ resultText, resultData, setResult, setTextInput, paramsData, setParamsData, updateParamsData }}>
+    <DataContext.Provider value={{ resultText, resultData, setResult, setTextInput, paramsData, setParamsData, updateParamsData, checked, setChecked }}>
       {children}
     </DataContext.Provider>
   );

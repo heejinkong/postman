@@ -8,9 +8,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export default function QueryParams() {
-  const { paramsData, updateParamsData } = useData();
+  const { paramsData, updateParamsData, checked } = useData();
   const [dataRows, setDataRows] = useState([paramsData]);
-  const [checked, setChecked] = React.useState(true);
 
   const handleKeyChange = (e, index) => {
     const newKey = e.target.value;
@@ -60,8 +59,12 @@ export default function QueryParams() {
     setDataRows(updatedDataRows);
   };
 
-  const handleChange = (e) => {
-    setChecked(e.target.checked);
+  const handleDataRowChange = (e, index) => {
+    const newChecked = e.target.checked;
+    const updatedDataRows = [...dataRows];
+    updatedDataRows[index] = { ...updatedDataRows[index], checked: newChecked };
+    updateParamsData(updatedDataRows);
+    setDataRows(updatedDataRows);
   };
 
   return (
@@ -82,8 +85,8 @@ export default function QueryParams() {
               <div className="params_header_row">
                 {rowData.key || rowData.value || rowData.description !== '' ? (
                   <Checkbox
-                    checked={checked}
-                    onChange={handleChange}
+                    checked={rowData.checked || checked}
+                    onChange={(e) => handleDataRowChange(e, index)}
                     inputProps={{ 'aria-label': 'controlled' }}
                     size="small"
                   />
