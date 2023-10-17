@@ -28,7 +28,7 @@ export default function Collection(props) {
   const open = Boolean(anchorEl);
   const [collections, setCollections] = useState([]);
   const navigate = useNavigate();
-  const [openList, setOpenList] = React.useState(true);
+  const [openList, setOpenList] = React.useState(false);
 
   const handleListClick = () => {
     setOpenList(!openList);
@@ -50,8 +50,13 @@ export default function Collection(props) {
     loadCollectionsFromLocalStorage();
   }, [workspaceId]);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  // const handleClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+  const handleClick = (e) => {
+    if (e.currentTarget) {
+      setAnchorEl(e.currentTarget);
+    }
   };
 
   const handleClose = () => {
@@ -86,40 +91,60 @@ export default function Collection(props) {
   return (
     <div>
       <div className="collection_container">
-        <ListItemButton onClick={handleListClick}>
-          <ListItemIcon></ListItemIcon>
-          <ListItemText primary="Inbox" />
-          {openList ? <ExpandLess /> : <ExpandMore />}
-        </ListItemButton>
-        <Collapse in={openList} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItemButton sx={{ pl: 4 }}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary="Starred" />
-            </ListItemButton>
-          </List>
-        </Collapse>
-
-        {/* {collections.map((collection) => (
-          <div key={collection.id} className="collection_list">
-            <ListItemButton
-              onClick={handleListClick}
-              className="collection_list_btn"
+        {collections.map((collection) => (
+          <div>
+            <Link
+              to={`/workspace/${workspaceId}/collection/${collection.id}`}
+              style={{ textDecoration: 'none', color: 'black' }}
             >
-              {openList ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
+              <ListItemButton onClick={handleListClick}>
+                {openList ? <ExpandLess /> : <ExpandMore />}
 
-            <div className="collection_list_name">
-              <Link
-                to={`/workspace/${workspaceId}/collection/${collection.id}`}
-                style={{ textDecoration: 'none', color: 'black' }}
-              >
-                {collection.collectionname}
-              </Link>
-            </div>
-            <div>
+                <ListItemText primary={collection.collectionname} />
+                <div
+                  className="collection_list_options"
+                  style={{ opacity: open ? 1 : 0 }}
+                >
+                  <IconButton
+                    style={{ position: 'relative' }}
+                    disableRipple
+                    aria-label="more"
+                    id="long-button"
+                    aria-controls={open ? 'long-menu' : undefined}
+                    aria-expanded={open ? 'true' : undefined}
+                    aria-haspopup="true"
+                    onClick={handleClick}
+                  >
+                    <MoreVertIcon />
+                  </IconButton>
+
+                  <Menu
+                    id="long-menu"
+                    MenuListProps={{
+                      'aria-labelledby': 'long-button',
+                    }}
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    PaperProps={{
+                      style: {
+                        maxHeight: ITEM_HEIGHT * 4.5,
+                        width: '20ch',
+                      },
+                    }}
+                  >
+                    {options.map((option) => (
+                      <MenuItem
+                        key={option}
+                        selected={option === 'Delete'}
+                        onClick={() => handleOptionClick(option, collection.id)}
+                      >
+                        {option}
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </div>
+              </ListItemButton>
               <Collapse in={openList} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
                   <ListItemButton sx={{ pl: 4 }}>
@@ -130,9 +155,9 @@ export default function Collection(props) {
                   </ListItemButton>
                 </List>
               </Collapse>
-            </div> */}
-        {/* </div>
-        ))} */}
+            </Link>
+          </div>
+        ))}
       </div>
     </div>
   );
