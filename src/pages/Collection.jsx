@@ -22,7 +22,7 @@ const options = [
 const ITEM_HEIGHT = 50;
 
 export default function Collection(props) {
-  const { workspaceId } = useParams();
+  const { workspaceId, collectionId } = useParams();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [collections, setCollections] = useState([]);
@@ -30,9 +30,7 @@ export default function Collection(props) {
   const navigate = useNavigate();
 
   const handleListClick = (collectionId) => {
-    if (collectionId === clickCollection) {
-      setClickCollection(null);
-    } else {
+    if (collectionId !== clickCollection) {
       setClickCollection(collectionId);
     }
   };
@@ -53,9 +51,6 @@ export default function Collection(props) {
     loadCollectionsFromLocalStorage();
   }, [workspaceId]);
 
-  // const handleClick = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
   const handleClick = (e) => {
     if (e.currentTarget) {
       setAnchorEl(e.currentTarget);
@@ -65,10 +60,10 @@ export default function Collection(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const handleOptionClick = (option, collectionId) => {
+  console.log(collectionId);
+  const handleOptionClick = (option, collection) => {
     if (option === 'Delete') {
-      handleDeleteClick(collectionId);
+      handleDeleteClick(collection.id);
     } else if (option === 'Move') {
     } else if (option === 'Run collection') {
     } else if (option === 'Add request') {

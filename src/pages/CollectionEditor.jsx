@@ -44,19 +44,13 @@ export default function CollectionEditor(props) {
       // ID가 null인 경우에만 새로운 ID를 설정
       if (collectionData.id === 0) {
         const nextId = maxId + 1;
-        setCollectionData({ ...collectionData, id: nextId });
-      } else {
-        const collectionData = localStorage.getItem(
-          `collection-${workspaceId}-${collectionId}`
-        );
-        const collection = collectionData ? JSON.parse(collectionData) : null;
-
-        if (collection) {
-          setCollectionData(collection);
-        }
+        setCollectionData((prevData) => ({
+          ...prevData,
+          id: nextId,
+        }));
       }
     }
-  }, [collectionId, workspaceId, collectionData.id, collectionData]);
+  }, [collectionId, workspaceId]);
 
   const handleNameChange = (e) => {
     const newCollectionName = e.target.value;
@@ -133,7 +127,7 @@ export default function CollectionEditor(props) {
     const newUrl = `/workspace/${workspaceId}/collection/${collection.id}`;
     window.location.href = newUrl;
   };
-  console.log(collectionData.id);
+
   return (
     <div>
       <div className="collection_editor_container">

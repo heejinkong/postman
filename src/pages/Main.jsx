@@ -18,7 +18,6 @@ export default function Main() {
         </div>
         <Sidebar />
         <div className="main_container">
-          {/* Collection , WorkSpace Router 처리. part 1. */}
           <Routes>
             <Route path="/" element={<ListPage />} />
             <Route path="/workspace/:workspaceId" element={<Workspace />} />
