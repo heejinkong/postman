@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useSyncExternalStore } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../style/collection.scss';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -71,12 +70,11 @@ export default function Collection(props) {
     if (option === 'Delete') {
       handleDeleteClick(collectionId);
     } else if (option === 'Move') {
-      // Add logic for moving the collection
     } else if (option === 'Run collection') {
-      // Add logic for running the collection
     } else if (option === 'Add request') {
       navigate(`/workspace/${workspaceId}/collection/${collectionId}/request`);
     }
+    handleClose();
   };
 
   const handleDeleteClick = (collectionId) => {
@@ -114,7 +112,9 @@ export default function Collection(props) {
                   style={{ opacity: open ? 1 : 0 }}
                 >
                   <IconButton
-                    style={{ position: 'relative' }}
+                    style={{
+                      position: 'relative',
+                    }}
                     disableRipple
                     aria-label="more"
                     id="long-button"
@@ -140,6 +140,8 @@ export default function Collection(props) {
                         width: '20ch',
                       },
                     }}
+                    onMouseDownCapture={(e) => e.stopPropagation()}
+                    onClick={(e) => e.stopPropagation()}
                   >
                     {options.map((option) => (
                       <MenuItem
