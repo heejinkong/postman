@@ -63,30 +63,32 @@ export default function Collection(props) {
   console.log(collectionId);
   const handleOptionClick = (option, collection) => {
     if (option === 'Delete') {
-      handleDeleteClick(collection.id);
+      handleDeleteClick(collectionId);
     } else if (option === 'Move') {
+      // Add logic for moving the collection
     } else if (option === 'Run collection') {
+      // Add logic for running the collection
     } else if (option === 'Add request') {
       navigate(
-        `/workspace/${workspaceId}/collection/${collectionId}/:requestName`
+        `/workspace/${workspaceId}/collection/${collection.id}/:requestName`
       );
     }
     handleClose();
   };
 
   const handleDeleteClick = (collectionId) => {
-    if (!window.confirm('Are you sure you want to delete this collection?'))
-      return false;
+    if (!window.confirm('해당 collection를 삭제하시겠습니까 ?')) return false;
 
+    // 로컬 스토리지에서 컬렉션 데이터 삭제
     localStorage.removeItem(`collection-${workspaceId}-${collectionId}`);
 
+    // 컬렉션 목록 업데이트
     setCollections((prevCollections) =>
       prevCollections.filter((collection) => collection.id !== collectionId)
     );
 
-    navigate(`/workspace/${workspaceId}/collection/:collectionId`);
+    navigate(`/workspace/${workspaceId}`);
   };
-
   return (
     <div>
       <div className="collection_container">
