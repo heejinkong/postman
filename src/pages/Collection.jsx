@@ -28,7 +28,7 @@ export default function Collection(props) {
   const open = Boolean(anchorEl);
   const [collections, setCollections] = useState([]);
   const navigate = useNavigate();
-  const [openList, setOpenList] = useState(false);
+  const [openList, setOpenList] = React.useState(true);
 
   const handleListClick = () => {
     setOpenList(!openList);
@@ -87,10 +87,11 @@ export default function Collection(props) {
     <div>
       <div className="collection_container">
         <ListItemButton onClick={handleListClick}>
+          <ListItemIcon></ListItemIcon>
           <ListItemText primary="Inbox" />
-          {open ? <ExpandLess /> : <ExpandMore />}
+          {openList ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
-        <Collapse in={open} timeout="auto" unmountOnExit>
+        <Collapse in={openList} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemIcon>
