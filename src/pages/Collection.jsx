@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useSyncExternalStore } from 'react';
 import '../style/collection.scss';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import IconButton from '@mui/material/IconButton';
@@ -27,11 +27,15 @@ export default function Collection(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [collections, setCollections] = useState([]);
+  const [clickCollection, setClickCollection] = useState(null);
   const navigate = useNavigate();
-  const [openList, setOpenList] = React.useState(false);
 
-  const handleListClick = () => {
-    setOpenList(!openList);
+  const handleListClick = (collectionId) => {
+    if (collectionId === clickCollection) {
+      setClickCollection(null);
+    } else {
+      setClickCollection(collectionId);
+    }
   };
 
   useEffect(() => {
@@ -92,13 +96,17 @@ export default function Collection(props) {
     <div>
       <div className="collection_container">
         {collections.map((collection) => (
-          <div>
+          <div key={collection.id}>
             <Link
               to={`/workspace/${workspaceId}/collection/${collection.id}`}
               style={{ textDecoration: 'none', color: 'black' }}
             >
-              <ListItemButton onClick={handleListClick}>
-                {openList ? <ExpandLess /> : <ExpandMore />}
+              <ListItemButton onClick={() => handleListClick(collection.id)}>
+                {clickCollection === collection.id ? (
+                  <ExpandLess />
+                ) : (
+                  <ExpandMore />
+                )}
 
                 <ListItemText primary={collection.collectionname} />
                 <div
@@ -145,7 +153,11 @@ export default function Collection(props) {
                   </Menu>
                 </div>
               </ListItemButton>
-              <Collapse in={openList} timeout="auto" unmountOnExit>
+              <Collapse
+                in={clickCollection === collection.id}
+                timeout="auto"
+                unmountOnExit
+              >
                 <List component="div" disablePadding>
                   <ListItemButton sx={{ pl: 4 }}>
                     <ListItemIcon>
