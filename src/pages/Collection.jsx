@@ -67,7 +67,9 @@ export default function Collection(props) {
     } else if (option === 'Move') {
     } else if (option === 'Run collection') {
     } else if (option === 'Add request') {
-      navigate(`/workspace/${workspaceId}/collection/${collectionId}/request`);
+      navigate(
+        `/workspace/${workspaceId}/collection/${collectionId}/:requestName`
+      );
     }
     handleClose();
   };

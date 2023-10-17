@@ -26,7 +26,7 @@ export default function Main() {
               element={<CollectionEditor />}
             />
             <Route
-              path="/workspace/:workspaceId/collection/:collectionId/request"
+              path="/workspace/:workspaceId/collection/:collectionId/:requestName"
               element={<Request />}
             />
           </Routes>

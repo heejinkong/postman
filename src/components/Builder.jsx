@@ -14,11 +14,13 @@ import SaveIcon from '@mui/icons-material/Save';
 import ApiRequestTabs from './ApiRequestTabsContainer/ApiRequestTabs';
 import axios from 'axios';
 import { useData } from '../contexts/DataContext';
+import { useParams } from 'react-router-dom';
 
 export default function Builder() {
+  const { workspaceId, collectionId, requestName } = useParams();
   const [method, setMethod] = useState('');
   const [url, setUrl] = useState('');
-  const { setResult, paramsData, checked } = useData();
+  const { setResult, paramsData } = useData();
   const [name, setName] = useState('New Request');
 
   // 기존 URL 뒤에 key=value를 붙이는 함수
@@ -63,25 +65,53 @@ export default function Builder() {
     setName(e.target.value);
   };
 
-  const handleSaveClick = () => {
-    const urlData = new URL(fullUrl);
+  useEffect(() => {
+    if (requestName !== `:requestName`) {
+      const requestData = localStorage.getItem(
+        `collection-${collectionId}-${requestName}`
+      );
+      const request = requestData ? JSON.parse(requestData) : null;
+      if (request) {
+        setName(request.name);
+        setMethod(request.request.method);
+        setUrl(request.request.url.raw);
+      }
+    }
+  }, [requestName, collectionId]);
 
-    const queryData = {
-      name: name,
-      request: {
-        method: method,
-        header: [],
-        url: {
-          raw: fullUrl,
-          protocol: urlData.protocol,
-          host: urlData.host.split('.'),
-          path: urlData.pathname,
+  const handleSaveClick = () => {
+    let requestUrl;
+
+    try {
+      new URL(fullUrl); // Check if fullUrl is a valid URL
+      const key = `collection-${collectionId}-${name}`;
+      const urlData = new URL(fullUrl);
+
+      const queryData = {
+        name: name,
+        request: {
+          method: method,
+          header: [],
+          url: {
+            raw: fullUrl,
+            protocol: urlData.protocol,
+            host: urlData.host.split('.'),
+            path: urlData.pathname,
+          },
         },
-      },
-      response: [],
-    };
-    const key = `request-${name}`;
-    localStorage.setItem(key, JSON.stringify(queryData));
+        response: [],
+      };
+
+      localStorage.setItem(key, JSON.stringify(queryData));
+
+      requestUrl = `/workspace/${workspaceId}/collection/${collectionId}/${name}`;
+    } catch (e) {
+      console.error(e);
+    }
+
+    if (requestUrl) {
+      window.location.href = requestUrl;
+    }
   };
 
   return (
