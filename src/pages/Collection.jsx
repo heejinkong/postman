@@ -9,8 +9,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
-import { List, ListItemIcon, ListItemText } from '@mui/material';
-import StarBorder from '@mui/icons-material/StarBorder';
+import { List, ListItemText } from '@mui/material';
 import { useData } from '../contexts/DataContext';
 
 const options = [
@@ -104,6 +103,7 @@ export default function Collection(props) {
       delete updatedRequestItems[collectionId];
       return updatedRequestItems;
     });
+
     navigate(`/workspace/${workspaceId}/collection/${collectionId}`);
   };
 
