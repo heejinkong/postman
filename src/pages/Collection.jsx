@@ -162,9 +162,20 @@ export default function Collection(props) {
                 <List component="div" disablePadding>
                   {requestItems[collection.id] &&
                     requestItems[collection.id].map((item) => (
-                      <ListItemButton key={item.key}>
-                        <ListItemText primary={item.data.name} />
-                      </ListItemButton>
+                      <Link
+                        to={`/workspace/${workspaceId}/collection/${collection.id}/${item.data.name}`}
+                        style={{
+                          textDecoration: 'none',
+                          color: 'black',
+                        }}
+                      >
+                        <ListItemButton key={item.key}>
+                          <ListItemText
+                            primary={`${item.data.request.method} - ${item.data.name}`}
+                          />
+                          <button>삭제</button>
+                        </ListItemButton>
+                      </Link>
                     ))}
                 </List>
               </Collapse>

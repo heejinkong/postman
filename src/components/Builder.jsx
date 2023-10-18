@@ -106,6 +106,7 @@ export default function Builder() {
       requestUrl = `/workspace/${workspaceId}/collection/${collectionId}/${name}`;
     } catch (e) {
       console.error(e);
+      alert('URL을 입력하세요');
     }
 
     if (requestUrl) {
