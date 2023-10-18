@@ -88,8 +88,9 @@ export default function Collection(props) {
     navigate(`/workspace/${workspaceId}`);
   };
 
-  const handleRequestDeleteClick = (collectionId) => {
-    if (!window.confirm('Delete request ? ')) return false;
+  const handleRequestDeleteClick = (e, collectionId) => {
+    e.preventDefault();
+    if (!window.confirm('Delete request?')) return false;
 
     if (requestItems[collectionId]) {
       requestItems[collectionId].forEach((item) => {
@@ -97,11 +98,14 @@ export default function Collection(props) {
         localStorage.removeItem(key);
       });
     }
+
     setRequestItems((prevRequestItems) => {
       const updatedRequestItems = { ...prevRequestItems };
       delete updatedRequestItems[collectionId];
+      return updatedRequestItems;
     });
 
+    // 요청 삭제 후 원하는 URL로 이동
     navigate(`/workspace/${workspaceId}/collection/${collectionId}`);
   };
 
@@ -192,8 +196,8 @@ export default function Collection(props) {
                           />
                           <button
                             type="button"
-                            onClick={() =>
-                              handleRequestDeleteClick(collection.id)
+                            onClick={(e) =>
+                              handleRequestDeleteClick(e, collection.id)
                             }
                           >
                             삭제
