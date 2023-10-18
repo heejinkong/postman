@@ -19,8 +19,7 @@ export function DataProvider({ children }) {
   const [checked, setChecked] = useState('');
   const [requestItems, setRequestItems] = useState([]);
   const [items, setItems] = useState([]); 
-
-
+ 
   const setResult = (data) => {
     setResultData(data);
   };

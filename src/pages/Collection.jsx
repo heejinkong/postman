@@ -62,7 +62,7 @@ export default function Collection(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  console.log(collectionId);
+
   const handleOptionClick = (option, collection) => {
     if (option === 'Delete') {
       handleDeleteClick(collection.id);
@@ -160,11 +160,12 @@ export default function Collection(props) {
                 unmountOnExit
               >
                 <List component="div" disablePadding>
-                  {requestItems[2].map((item) => (
-                    <ListItemButton key={item.key}>
-                      <ListItemText primary={item.data.name} />
-                    </ListItemButton>
-                  ))}
+                  {requestItems[collection.id] &&
+                    requestItems[collection.id].map((item) => (
+                      <ListItemButton key={item.key}>
+                        <ListItemText primary={item.data.name} />
+                      </ListItemButton>
+                    ))}
                 </List>
               </Collapse>
             </Link>
