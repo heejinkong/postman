@@ -29,7 +29,7 @@ export default function Collection(props) {
   const [collections, setCollections] = useState([]);
   const [clickCollection, setClickCollection] = useState(null);
   const navigate = useNavigate();
-  const { requestItems } = useData();
+  const { requestItems, setRequestItems } = useData();
 
   const handleListClick = (collectionId) => {
     if (collectionId !== clickCollection) {
@@ -77,8 +77,7 @@ export default function Collection(props) {
   };
 
   const handleDeleteClick = (collectionId) => {
-    if (!window.confirm('Are you sure you want to delete this collection?'))
-      return false;
+    if (!window.confirm('Delete collection ?')) return false;
 
     localStorage.removeItem(`collection-${workspaceId}-${collectionId}`);
 
@@ -86,7 +85,24 @@ export default function Collection(props) {
       prevCollections.filter((collection) => collection.id !== collectionId)
     );
 
-    navigate(`/workspace/${workspaceId}/collection/:collectionId`);
+    navigate(`/workspace/${workspaceId}`);
+  };
+
+  const handleRequestDeleteClick = (collectionId) => {
+    if (!window.confirm('Delete request ? ')) return false;
+
+    if (requestItems[collectionId]) {
+      requestItems[collectionId].forEach((item) => {
+        const key = `request-${collectionId}-${item.data.name}`;
+        localStorage.removeItem(key);
+      });
+    }
+    setRequestItems((prevRequestItems) => {
+      const updatedRequestItems = { ...prevRequestItems };
+      delete updatedRequestItems[collectionId];
+    });
+
+    navigate(`/workspace/${workspaceId}/collection/${collectionId}`);
   };
 
   return (
@@ -168,12 +184,20 @@ export default function Collection(props) {
                           textDecoration: 'none',
                           color: 'black',
                         }}
+                        key={item.key}
                       >
-                        <ListItemButton key={item.key}>
+                        <ListItemButton>
                           <ListItemText
                             primary={`${item.data.request.method} - ${item.data.name}`}
                           />
-                          <button>삭제</button>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              handleRequestDeleteClick(collection.id)
+                            }
+                          >
+                            삭제
+                          </button>
                         </ListItemButton>
                       </Link>
                     ))}
