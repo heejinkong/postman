@@ -47,12 +47,11 @@ export default function Builder() {
     console.log(`URL: ${fullUrl}`);
   });
 
-  // Send 버튼 클릭
   const handleSendClick = async () => {
     try {
       const response = await axios({
-        method: method, // 선택한 메서드
-        url: fullUrl, // URL 뒤에 key=value를 추가한 URL
+        method: method,
+        url: fullUrl,
       });
       console.log(method);
       setResult(JSON.stringify(response.data, null, 2));
@@ -68,7 +67,7 @@ export default function Builder() {
   useEffect(() => {
     if (requestName !== `:requestName`) {
       const requestData = localStorage.getItem(
-        `collection-${collectionId}-${requestName}`
+        `request-${collectionId}-${requestName}`
       );
       const request = requestData ? JSON.parse(requestData) : null;
       if (request) {
@@ -83,8 +82,8 @@ export default function Builder() {
     let requestUrl;
 
     try {
-      new URL(fullUrl); // Check if fullUrl is a valid URL
-      const key = `collection-${collectionId}-${name}`;
+      new URL(fullUrl);
+      const key = `request-${collectionId}-${name}`;
       const urlData = new URL(fullUrl);
 
       const queryData = {

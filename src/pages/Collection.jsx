@@ -11,6 +11,7 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
 import { List, ListItemIcon, ListItemText } from '@mui/material';
 import StarBorder from '@mui/icons-material/StarBorder';
+import { useData } from '../contexts/DataContext';
 
 const options = [
   'Move',
@@ -28,6 +29,7 @@ export default function Collection(props) {
   const [collections, setCollections] = useState([]);
   const [clickCollection, setClickCollection] = useState(null);
   const navigate = useNavigate();
+  const { requestItems } = useData();
 
   const handleListClick = (collectionId) => {
     if (collectionId !== clickCollection) {
@@ -63,32 +65,30 @@ export default function Collection(props) {
   console.log(collectionId);
   const handleOptionClick = (option, collection) => {
     if (option === 'Delete') {
-      handleDeleteClick(collectionId);
+      handleDeleteClick(collection.id);
     } else if (option === 'Move') {
-      // Add logic for moving the collection
     } else if (option === 'Run collection') {
-      // Add logic for running the collection
     } else if (option === 'Add request') {
       navigate(
-        `/workspace/${workspaceId}/collection/${collection.id}/:requestName`
+        `/workspace/${workspaceId}/collection/${collectionId}/:requestName`
       );
     }
     handleClose();
   };
 
   const handleDeleteClick = (collectionId) => {
-    if (!window.confirm('해당 collection를 삭제하시겠습니까 ?')) return false;
+    if (!window.confirm('Are you sure you want to delete this collection?'))
+      return false;
 
-    // 로컬 스토리지에서 컬렉션 데이터 삭제
     localStorage.removeItem(`collection-${workspaceId}-${collectionId}`);
 
-    // 컬렉션 목록 업데이트
     setCollections((prevCollections) =>
       prevCollections.filter((collection) => collection.id !== collectionId)
     );
 
-    navigate(`/workspace/${workspaceId}`);
+    navigate(`/workspace/${workspaceId}/collection/:collectionId`);
   };
+
   return (
     <div>
       <div className="collection_container">
@@ -160,12 +160,11 @@ export default function Collection(props) {
                 unmountOnExit
               >
                 <List component="div" disablePadding>
-                  <ListItemButton sx={{ pl: 4 }}>
-                    <ListItemIcon>
-                      <StarBorder />
-                    </ListItemIcon>
-                    <ListItemText primary="Starred" />
-                  </ListItemButton>
+                  {requestItems[2].map((item) => (
+                    <ListItemButton key={item.key}>
+                      <ListItemText primary={item.data.name} />
+                    </ListItemButton>
+                  ))}
                 </List>
               </Collapse>
             </Link>
