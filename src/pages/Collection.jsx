@@ -104,8 +104,6 @@ export default function Collection(props) {
       delete updatedRequestItems[collectionId];
       return updatedRequestItems;
     });
-
-    // 요청 삭제 후 원하는 URL로 이동
     navigate(`/workspace/${workspaceId}/collection/${collectionId}`);
   };
 

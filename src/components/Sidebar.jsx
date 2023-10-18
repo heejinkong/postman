@@ -110,7 +110,7 @@ export default function Sidebar() {
             element={<Collection collections={collections} />}
           />
           <Route
-            path="/workspace/:workspaceId/collection/:collectionId/request"
+            path="/workspace/:workspaceId/collection/:collectionId/:requestName"
             element={<Collection collections={collections} />}
           />
         </Routes>
