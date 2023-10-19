@@ -7,11 +7,10 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import ParamsTab from './ParamsTab';
-import HeadersTab from './HeadersTab';
-import BodyTab from './BodyTab';
-import ResultTab from './ResultTab';
-
+import ParamsTab from './Params/ParamsTab';
+import HeadersTab from './Headers/HeadersTab';
+import BodyTab from './Body/BodyTab';
+import ResultTab from './Result/ResultTab';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -43,8 +42,6 @@ function a11yProps(index) {
   };
 }
 
-
-
 export default function FloatingActionButtonZoom() {
   const theme = useTheme();
   const [value, setValue] = useState(0);
@@ -62,8 +59,6 @@ export default function FloatingActionButtonZoom() {
   //   exit: theme.transitions.duration.leavingScreen,
   // };
 
- 
-
   return (
     <Box
       sx={{
@@ -73,14 +68,16 @@ export default function FloatingActionButtonZoom() {
         minHeight: 283,
       }}
     >
-      <AppBar position="static" color= "transparent"
-      sx={{
-        height: '35px', 
-        background: 'rgba(0, 0, 0, 0)',
-        boxShadow: 'none',
-        top: '50px'
-       
-      }} >
+      <AppBar
+        position="static"
+        color="transparent"
+        sx={{
+          height: '35px',
+          background: 'rgba(0, 0, 0, 0)',
+          boxShadow: 'none',
+          top: '50px',
+        }}
+      >
         <Tabs
           value={value}
           onChange={handleChange}
@@ -101,19 +98,18 @@ export default function FloatingActionButtonZoom() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <ParamsTab/>
+          <ParamsTab />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <HeadersTab/>
+          <HeadersTab />
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          <BodyTab/>
+          <BodyTab />
         </TabPanel>
         <TabPanel value={value} index={3} dir={theme.direction}>
-          <ResultTab/>
+          <ResultTab />
         </TabPanel>
       </SwipeableViews>
-      
     </Box>
   );
 }

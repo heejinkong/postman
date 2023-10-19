@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import '../style/builder.scss';
+import '../../style/builder.scss';
 import {
   Button,
   FormControl,
-  ListItemText,
   MenuItem,
   OutlinedInput,
   Select,
@@ -12,9 +11,9 @@ import {
 import Box from '@mui/material/Box';
 import SendIcon from '@mui/icons-material/Send';
 import SaveIcon from '@mui/icons-material/Save';
-import ApiRequestTabs from './ApiRequestTabsContainer/ApiRequestTabs';
+import ApiRequestTabs from './RequestTabs/ApiRequestTabs';
 import axios from 'axios';
-import { useData } from '../contexts/DataContext';
+import { useData } from '../../contexts/DataContext';
 import { useParams, Link } from 'react-router-dom';
 
 export default function Builder() {

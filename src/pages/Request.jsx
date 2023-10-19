@@ -1,6 +1,6 @@
 import React from 'react';
-import Builder from '../components/Builder';
-import ResponseSuccess from '../components/ResponseSuccess';
+import Builder from '../components/ApiRequestTabsContainer/Builder';
+import ResponseSuccess from '../components/ResponseContainer/ResponseSuccess';
 import '../style/request.scss';
 
 export default function Request() {

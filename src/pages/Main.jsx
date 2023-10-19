@@ -3,11 +3,11 @@ import { Route, Routes } from 'react-router-dom';
 import '../style/main.scss';
 import Sidebar from '../components/Sidebar';
 import Workspace from './Workspace';
-import CollectionEditor from './CollectionEditor';
 import { DataProvider } from '../contexts/DataContext';
 import ListPage from './ListPage';
 import Header from '../components/Header';
 import Request from './Request';
+import Collection from '../pages/Collection';
 
 export default function Main() {
   return (
@@ -23,7 +23,7 @@ export default function Main() {
             <Route path="/workspace/:workspaceId" element={<Workspace />} />
             <Route
               path="/workspace/:workspaceId/collection/:collectionId"
-              element={<CollectionEditor />}
+              element={<Collection />}
             />
             <Route
               path="/workspace/:workspaceId/collection/:collectionId/:requestName"

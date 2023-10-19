@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import '../../style/queryparams.scss';
-import { useData } from '../../contexts/DataContext';
+import '../../../../style/queryparams.scss';
+import { useData } from '../../../../contexts/DataContext';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';

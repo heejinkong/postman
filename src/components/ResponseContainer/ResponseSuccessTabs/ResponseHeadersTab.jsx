@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../../style/responseheaderstab.scss';
+import '../../../style/responseheaderstab.scss';
 
 export default function ResponseHeadersTab() {
   const [headers, setHeaders] = useState([]);

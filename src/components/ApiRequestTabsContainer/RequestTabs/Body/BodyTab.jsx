@@ -1,7 +1,7 @@
 import React from 'react';
-import '../../style/bodytab.scss';
+import '../../../../style/bodytab.scss';
 import { Radio } from '@mui/material';
-import QueryParams from './QueryParams';
+import QueryParams from '../Params/QueryParams';
 import RawType from './RawType';
 import ContentType from './ContentType';
 
@@ -20,24 +20,22 @@ export default function BodyTab() {
     inputProps: { 'aria-label': item },
   });
 
-
-
   return (
-    <div className='body_container'>
-      <div className='body_request_type'>
-        <div className='body_request_form'>
+    <div className="body_container">
+      <div className="body_request_type">
+        <div className="body_request_form">
           <Radio {...controlProps('a')} size="10px" />
           <span>form-data</span>
         </div>
         <div className="body_request_raw">
           <Radio {...controlProps('b')} size="10px" />
           <span>raw</span>
-          {selectedValue === 'b' && <ContentType />} 
+          {selectedValue === 'b' && <ContentType />}
         </div>
-     </div>
-     <div className='body_editor_container'>
-     {selectedValue === 'a' ? <QueryParams /> : <RawType/>}
-     </div>
+      </div>
+      <div className="body_editor_container">
+        {selectedValue === 'a' ? <QueryParams /> : <RawType />}
+      </div>
     </div>
   );
 }
