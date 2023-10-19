@@ -4,7 +4,7 @@ import '../style/main.scss';
 import Sidebar from '../components/Sidebar';
 import Workspace from './Workspace';
 import { DataProvider } from '../contexts/DataContext';
-import ListPage from './ListPage';
+import WorkspaceList from './WorkspaceList';
 import Header from '../components/Header';
 import Request from './Request';
 import Collection from '../pages/Collection';
@@ -19,7 +19,7 @@ export default function Main() {
         <Sidebar />
         <div className="main_container">
           <Routes>
-            <Route path="/" element={<ListPage />} />
+            <Route path="/" element={<WorkspaceList />} />
             <Route path="/workspace/:workspaceId" element={<Workspace />} />
             <Route
               path="/workspace/:workspaceId/collection/:collectionId"

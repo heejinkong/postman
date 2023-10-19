@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
-import CollectionListaPage from '../pages/CollectionListPage';
+import CollectionList from '../pages/CollectionList';
 import { Link, Route, Routes, useLocation } from 'react-router-dom';
 
 export default function Sidebar() {
@@ -96,7 +96,7 @@ export default function Sidebar() {
             element={
               <div>
                 {collections.length > 0 ? (
-                  <CollectionListaPage collections={collections} />
+                  <CollectionList collections={collections} />
                 ) : (
                   <div className="sidebar_empty_collection">
                     Create a collection for your requests
@@ -107,11 +107,11 @@ export default function Sidebar() {
           />
           <Route
             path="/workspace/:workspaceId/collection/:collectionId"
-            element={<CollectionListaPage collections={collections} />}
+            element={<CollectionList collections={collections} />}
           />
           <Route
             path="/workspace/:workspaceId/collection/:collectionId/:requestName"
-            element={<CollectionListaPage collections={collections} />}
+            element={<CollectionList collections={collections} />}
           />
         </Routes>
       </div>
