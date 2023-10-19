@@ -22,7 +22,7 @@ const options = [
 const ITEM_HEIGHT = 50;
 
 export default function Collection(props) {
-  const { workspaceId, collectionId } = useParams();
+  const { workspaceId } = useParams();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [collections, setCollections] = useState([]);
@@ -76,13 +76,19 @@ export default function Collection(props) {
   };
 
   const handleDeleteClick = (collectionId) => {
-    if (!window.confirm('Delete collection ?')) return false;
+    if (!window.confirm('Delete collection?')) return false;
 
     localStorage.removeItem(`collection-${workspaceId}-${collectionId}`);
-    navigate(`/workspace/${workspaceId}`);
+
+    for (let i = localStorage.length - 1; i >= 0; i--) {
+      const key = localStorage.key(i);
+      if (key.startsWith(`request-${collectionId}-`)) {
+        localStorage.removeItem(key);
+      }
+    }
 
     setCollections((prevCollections) =>
-      prevCollections.filter((collections) => collections.id !== collectionId)
+      prevCollections.filter((collection) => collection.id !== collectionId)
     );
 
     navigate(`/workspace/${workspaceId}`);

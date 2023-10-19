@@ -50,7 +50,7 @@ export default function CollectionEditor(props) {
         }));
       }
     }
-  }, [collectionId, workspaceId]);
+  }, [collectionData.id, collectionId, workspaceId]);
 
   const handleNameChange = (e) => {
     const newCollectionName = e.target.value;

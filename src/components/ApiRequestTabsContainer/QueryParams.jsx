@@ -5,8 +5,6 @@ import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
 export default function QueryParams() {
   const { paramsData, updateParamsData, checked } = useData();
   const [dataRows, setDataRows] = useState([paramsData]);
