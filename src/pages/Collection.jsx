@@ -62,9 +62,9 @@ export default function Collection(props) {
     setAnchorEl(null);
   };
 
-  const handleOptionClick = (option, collection) => {
+  const handleOptionClick = (option, collectionId) => {
     if (option === 'Delete') {
-      handleDeleteClick(collection.id);
+      handleDeleteClick(collectionId);
     } else if (option === 'Move') {
     } else if (option === 'Run collection') {
     } else if (option === 'Add request') {
@@ -79,9 +79,10 @@ export default function Collection(props) {
     if (!window.confirm('Delete collection ?')) return false;
 
     localStorage.removeItem(`collection-${workspaceId}-${collectionId}`);
+    navigate(`/workspace/${workspaceId}`);
 
     setCollections((prevCollections) =>
-      prevCollections.filter((collection) => collection.id !== collectionId)
+      prevCollections.filter((collections) => collections.id !== collectionId)
     );
 
     navigate(`/workspace/${workspaceId}`);
