@@ -19,6 +19,13 @@ export function DataProvider({ children }) {
   const [checked, setChecked] = useState('');
   const [requestItems, setRequestItems] = useState([]);
   const [items, setItems] = useState([]); 
+  const [collectionData, setCollectionData] = useState({
+    id: 0,
+    collectionname: '',
+    collectiontext: '',
+    date: Date.now(),
+    workspaceId: 0,
+  });
  
   const setResult = (data) => {
     setResultData(data);
@@ -51,7 +58,7 @@ export function DataProvider({ children }) {
       }
       setRequestItems(requestItems);
 
-      console.table(requestItems[2]);
+      // console.table(requestItems[2]);
       
       setItems(requestItems);
     };
@@ -59,7 +66,7 @@ export function DataProvider({ children }) {
   }, []);
 
   return (
-    <DataContext.Provider value={{ resultText, resultData, setResult, setTextInput, paramsData, setParamsData, updateParamsData, checked, setChecked, requestItems, setRequestItems, items, setItems }}>
+    <DataContext.Provider value={{ resultText, resultData, setResult, setTextInput, paramsData, setParamsData, updateParamsData, checked, setChecked, requestItems, setRequestItems, items, setItems, collectionData, setCollectionData }}>
       {children}
     </DataContext.Provider>
   );

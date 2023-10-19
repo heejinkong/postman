@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 
 const WorkspaceList = (props) => {
   const handleDeleteClick = (workspaceId) => {
@@ -36,15 +37,17 @@ const WorkspaceList = (props) => {
         </colgroup>
         <thead>
           <tr>
-            <th style={{ paddingRight: '32px' }}>id</th>
-            <th>Title</th>
+            <th style={{ paddingRight: '32px' }}></th>
+            {/* <th>Title</th> */}
             <th></th>
           </tr>
         </thead>
         <tbody>
           {props.list.map((workspace) => (
             <tr key={workspace.id}>
-              <td>{workspace.id}</td>
+              <td>
+                <PeopleAltOutlinedIcon />
+              </td>
               <td>
                 <Link
                   to={`/workspace/${workspace.id}`}

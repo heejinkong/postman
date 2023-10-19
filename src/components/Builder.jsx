@@ -3,6 +3,7 @@ import '../style/builder.scss';
 import {
   Button,
   FormControl,
+  ListItemText,
   MenuItem,
   OutlinedInput,
   Select,
@@ -14,13 +15,13 @@ import SaveIcon from '@mui/icons-material/Save';
 import ApiRequestTabs from './ApiRequestTabsContainer/ApiRequestTabs';
 import axios from 'axios';
 import { useData } from '../contexts/DataContext';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 export default function Builder() {
   const { workspaceId, collectionId, requestName } = useParams();
   const [method, setMethod] = useState('');
   const [url, setUrl] = useState('');
-  const { setResult, paramsData } = useData();
+  const { setResult, paramsData, collectionData } = useData();
   const [name, setName] = useState('New Request');
 
   // 기존 URL 뒤에 key=value를 붙이는 함수
@@ -117,8 +118,17 @@ export default function Builder() {
   return (
     <div className="builder_container">
       <div className="builder_file_path">
-        <input type="text" value={name} onChange={handleNameChange} />
+        <div>
+          <Link
+            to={`/workspace/${workspaceId}/collection/${collectionId}`}
+            style={{ textDecoration: 'none', color: 'gray' }}
+          >
+            <span>{collectionData.collectionname}</span> /
+          </Link>
+          <input type="text" value={name} onChange={handleNameChange} />
+        </div>
       </div>
+
       <div className="file_actions">
         <div className="box_btn_save">
           <Button

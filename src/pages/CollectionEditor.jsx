@@ -3,16 +3,18 @@ import '../style/collectioneditor.scss';
 import { Button } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
 import { Link, useParams } from 'react-router-dom';
+import { useData } from '../contexts/DataContext';
 
 export default function CollectionEditor(props) {
   const { workspaceId, collectionId } = useParams();
-  const [collectionData, setCollectionData] = useState({
-    id: 0,
-    collectionname: '',
-    collectiontext: '',
-    date: Date.now(),
-    workspaceId: 0,
-  });
+  const { collectionData, setCollectionData } = useData();
+  // const [collectionData, setCollectionData] = useState({
+  //   id: 0,
+  //   collectionname: '',
+  //   collectiontext: '',
+  //   date: Date.now(),
+  //   workspaceId: 0,
+  // });
   const [isEditingDescription, setEditingDescription] = useState(false);
 
   useEffect(() => {
