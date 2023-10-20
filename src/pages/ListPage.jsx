@@ -2,35 +2,30 @@ import React, { useEffect, useState } from 'react';
 import '../style/listpage.scss';
 import WorkspaceList from '../components/WorkspaceList';
 
-const ListPage = () => {
+export default function ListPage() {
   const [list, setList] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     const getListFromLocalStorage = () => {
       const workspaceData = Object.keys(localStorage)
-        .filter((key) => key.startsWith('workspace-'))
-        .map((key) => JSON.parse(localStorage.getItem(key)));
+        .filter((key) => key.startsWith('workspace-')) // 키 필터링
+        .map((key) => JSON.parse(localStorage.getItem(key))); // JSON으로 파싱
 
       if (workspaceData.length > 0) {
+        //데이터 존재하시 목록 업데이트
         setList(workspaceData);
-        setIsSuccess(true);
       }
-
-      setIsLoading(false);
     };
+    getListFromLocalStorage(); // 페이지 로드 시, 실행
+  }, []); // 컴포넌트가 마운트될 때 한 번만 실행
 
-    getListFromLocalStorage();
-  }, []);
-
+  // workspace 삭제 처리
   const handleDeleteClick = (workspaceId) => {
     if (!window.confirm('해당 Workspace를 삭제하시겠습니까 ?')) return false;
 
-    // 로컬 스토리지에서 Workspace 데이터 삭제
     localStorage.removeItem(`workspace-${workspaceId}`);
 
-    // 작업 목록 업데이트
+    // 목록 업데이트
     setList((prevList) =>
       prevList.filter((workspace) => workspace.id !== workspaceId)
     );
@@ -44,14 +39,14 @@ const ListPage = () => {
         </div>
         <div className="home_description">
           <div className="home_title">
-            {isSuccess && list.length > 0 ? (
+            {list.length > 0 ? (
               <p>Click a Workspace</p>
             ) : (
               <p>Workspace does not exist</p>
             )}
           </div>
           <div className="home_description_notes">
-            {isSuccess && list.length > 0 ? (
+            {list.length > 0 ? (
               <WorkspaceList
                 list={list}
                 handleDeleteClick={handleDeleteClick}
@@ -64,6 +59,4 @@ const ListPage = () => {
       </div>
     </div>
   );
-};
-
-export default ListPage;
+}

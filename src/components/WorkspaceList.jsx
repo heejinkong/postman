@@ -4,12 +4,13 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 
-const WorkspaceList = (props) => {
+export default function WorkspaceList(props) {
   const handleDeleteClick = (workspaceId) => {
     if (!window.confirm('Delete WorkspaceId ?')) return false;
 
     localStorage.removeItem(`workspace-${workspaceId}`);
 
+    //연관된 collection과 request 데이터 삭제
     for (let i = localStorage.length - 1; i >= 0; i--) {
       const key = localStorage.key(i);
       if (key.startsWith(`collection-${workspaceId}-`)) {
@@ -70,6 +71,4 @@ const WorkspaceList = (props) => {
       </table>
     </div>
   );
-};
-
-export default WorkspaceList;
+}
