@@ -9,7 +9,7 @@ export function useData() {
 export function DataProvider({ children }) {
   const [workspaceData, setWorkspaceData] = useState({
     id: 0,
-    name: '',
+    name: 'New workspace',
     description: '',
   });
   const [resultText, setResultText] = useState('');
@@ -26,7 +26,7 @@ export function DataProvider({ children }) {
   const [items, setItems] = useState([]); 
   const [collectionData, setCollectionData] = useState({
     id: 0,
-    collectionname: '',
+    collectionname: 'New collection',
     collectiontext: '',
     date: Date.now(),
     workspaceId: 0,

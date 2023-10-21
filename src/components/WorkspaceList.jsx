@@ -6,8 +6,6 @@ import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 
 export default function WorkspaceList(props) {
   const handleDeleteClick = (workspaceId) => {
-    if (!window.confirm('Delete WorkspaceId ?')) return false;
-
     localStorage.removeItem(`workspace-${workspaceId}`);
 
     //연관된 collection과 request 데이터 삭제

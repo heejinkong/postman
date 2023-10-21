@@ -35,7 +35,7 @@ export default function Sidebar() {
   const collections = getCollectionsFromLocalStorage();
 
   const buttons = [
-    <Link to={`/workspaces/:workspaceId`}>
+    <Link key="link" to={`/workspaces/:workspaceId`}>
       <Button key="new" className="btn-1">
         New
       </Button>
