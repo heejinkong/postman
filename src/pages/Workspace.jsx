@@ -3,16 +3,14 @@ import { useParams } from 'react-router-dom';
 import '../style/workspace.scss';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
-import { useData } from '../contexts/DataContext';
 
 export default function Workspace(props) {
   const { workspaceId } = useParams();
-  const { workspaceData, setWorkspaceData } = useData('');
-  // const [workspaceData, setWorkspaceData] = useState({
-  //   id: 0,
-  //   name: '',
-  //   description: '',
-  // });
+  const [workspaceData, setWorkspaceData] = useState({
+    id: 0,
+    name: '',
+    description: '',
+  });
   const [isEditingDescription, setEditingDescription] = useState(false);
 
   // 컴포넌트가 렌더링될 때 실행

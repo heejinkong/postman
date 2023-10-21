@@ -119,7 +119,7 @@ export default function CollectionEditor(props) {
       JSON.stringify(collection)
     );
 
-    const newUrl = `/workspaces/${workspaceId}/collections/${collection.id}`;
+    const newUrl = `/workspace/${workspaceId}/collection/${collection.id}`;
     window.location.href = newUrl;
   };
 
@@ -148,7 +148,7 @@ export default function CollectionEditor(props) {
                 </Button>
               ) : (
                 <Link
-                  to={`/workspaces/${workspaceId}/collection/${collectionData.id}?isForEdit=true`}
+                  to={`/workspace/${workspaceId}/collection/${collectionData.id}?isForEdit=true`}
                 ></Link>
               )}
             </div>

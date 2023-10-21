@@ -103,7 +103,7 @@ export default function Builder() {
 
       localStorage.setItem(key, JSON.stringify(queryData));
 
-      requestUrl = `/workspaces/${workspaceId}/collections/${collectionId}/${name}`;
+      requestUrl = `/workspace/${workspaceId}/collection/${collectionId}/${name}`;
     } catch (e) {
       console.error(e);
       alert('URL을 입력하세요');
@@ -119,7 +119,7 @@ export default function Builder() {
       <div className="builder_file_path">
         <div>
           <Link
-            to={`/workspaces/${workspaceId}/collections/${collectionId}`}
+            to={`/workspace/${workspaceId}/collection/${collectionId}`}
             style={{ textDecoration: 'none', color: 'gray' }}
           >
             <span>{collectionData.collectionname}</span> /

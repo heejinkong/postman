@@ -51,7 +51,7 @@ export default function WorkspaceList(props) {
               </td>
               <td>
                 <Link
-                  to={`/workspaces/${workspace.id}`}
+                  to={`/workspace/${workspace.id}`}
                   style={{ textDecoration: 'none', color: 'black' }}
                 >
                   {workspace.name}

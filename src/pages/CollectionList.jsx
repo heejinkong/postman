@@ -69,7 +69,7 @@ export default function Collection(props) {
     } else if (option === 'Run collection') {
     } else if (option === 'Add request') {
       navigate(
-        `/workspaces/${workspaceId}/collections/${collectionId}/:requestName`
+        `/workspace/${workspaceId}/collection/${collectionId}/:requestName`
       );
     }
     handleClose();
@@ -91,7 +91,7 @@ export default function Collection(props) {
       prevCollections.filter((collection) => collection.id !== collectionId)
     );
 
-    navigate(`/workspaces/${workspaceId}`);
+    navigate(`/workspace/${workspaceId}`);
   };
 
   const handleRequestDeleteClick = (e, collectionId) => {
@@ -111,7 +111,7 @@ export default function Collection(props) {
       return updatedRequestItems;
     });
 
-    navigate(`/workspaces/${workspaceId}/collections/${collectionId}`);
+    navigate(`/workspace/${workspaceId}/collection/${collectionId}`);
   };
 
   return (
@@ -120,7 +120,7 @@ export default function Collection(props) {
         {collections.map((collection) => (
           <div key={collection.id}>
             <Link
-              to={`/workspaces/${workspaceId}/collections/${collection.id}`}
+              to={`/workspace/${workspaceId}/collection/${collection.id}`}
               style={{ textDecoration: 'none', color: 'black' }}
             >
               <ListItemButton onClick={() => handleListClick(collection.id)}>
@@ -188,7 +188,7 @@ export default function Collection(props) {
                   {requestItems[collection.id] &&
                     requestItems[collection.id].map((item) => (
                       <Link
-                        to={`/workspaces/${workspaceId}/collections/${collection.id}/${item.data.name}`}
+                        to={`/workspace/${workspaceId}/collection/${collection.id}/${item.data.name}`}
                         style={{
                           textDecoration: 'none',
                           color: 'black',

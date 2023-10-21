@@ -7,11 +7,6 @@ export function useData() {
 }
 
 export function DataProvider({ children }) {
-  const [workspaceData, setWorkspaceData] = useState({
-    id: 0,
-    name: '',
-    description: '',
-  });
   const [resultText, setResultText] = useState('');
   const [resultData, setResultData] = useState('');
   const [paramsData, setParamsData] = useState([
@@ -56,6 +51,7 @@ export function DataProvider({ children }) {
             requestItems[collectionId] = [];
           }
           requestItems[collectionId].push({
+            key,
             data: requestData,
           });
         }
@@ -70,7 +66,7 @@ export function DataProvider({ children }) {
   }, []);
 
   return (
-    <DataContext.Provider value={{ resultText, resultData, setResult, setTextInput, paramsData, setParamsData, updateParamsData, checked, setChecked, requestItems, setRequestItems, items, setItems, collectionData, setCollectionData, workspaceData, setWorkspaceData }}>
+    <DataContext.Provider value={{ resultText, resultData, setResult, setTextInput, paramsData, setParamsData, updateParamsData, checked, setChecked, requestItems, setRequestItems, items, setItems, collectionData, setCollectionData }}>
       {children}
     </DataContext.Provider>
   );
