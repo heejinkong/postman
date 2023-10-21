@@ -35,7 +35,7 @@ export default function Sidebar() {
   const collections = getCollectionsFromLocalStorage();
 
   const buttons = [
-    <Link to={`/workspace/:workspaceId`}>
+    <Link to={`/workspaces/:workspaceId`}>
       <Button key="new" className="btn-1">
         New
       </Button>
@@ -59,7 +59,7 @@ export default function Sidebar() {
         >
           {!showPlusButton ? (
             <Link
-              to={`/workspace/${workspaceId}/collection/:collectoinId`}
+              to={`/workspaces/${workspaceId}/collections/:collectoinId`}
               onClick={collectionLocation}
             >
               <IconButton aria-label="plus">
@@ -92,7 +92,7 @@ export default function Sidebar() {
       <div className="sidebar_collection_container">
         <Routes>
           <Route
-            path="/workspace/:workspaceId"
+            path="/workspaces/:workspaceId"
             element={
               <div>
                 {collections.length > 0 ? (
@@ -106,11 +106,11 @@ export default function Sidebar() {
             }
           />
           <Route
-            path="/workspace/:workspaceId/collection/:collectionId"
+            path="/workspaces/:workspaceId/collections/:collectionId"
             element={<CollectionList collections={collections} />}
           />
           <Route
-            path="/workspace/:workspaceId/collection/:collectionId/:requestName"
+            path="/workspaces/:workspaceId/collections/:collectionId/:requestName"
             element={<CollectionList collections={collections} />}
           />
         </Routes>
