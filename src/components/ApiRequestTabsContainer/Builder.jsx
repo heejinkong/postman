@@ -48,15 +48,19 @@ export default function Builder() {
   });
 
   const handleSendClick = async () => {
-    try {
-      const response = await axios({
-        method: method,
-        url: fullUrl,
-      });
-      console.log(method);
-      setResult(JSON.stringify(response.data, null, 2));
-    } catch (e) {
-      setResult(`Error: ${e.message}`);
+    if (method !== '') {
+      try {
+        const response = await axios({
+          method: method,
+          url: fullUrl,
+        });
+        console.log(method);
+        setResult(JSON.stringify(response.data, null, 2));
+      } catch (e) {
+        setResult(`Error: ${e.message}`);
+      }
+    } else {
+      alert('method를 선택하세요');
     }
   };
 
