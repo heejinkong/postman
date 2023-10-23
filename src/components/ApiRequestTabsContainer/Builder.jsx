@@ -27,6 +27,11 @@ export default function Builder() {
   const addUrl = (url, key, value) => {
     return url + (url.includes('?') ? '&' : '?') + `${key}=${value}`;
   };
+  // const [requestData, setRequestData] = useState({
+  //   id: 0,
+  //   name: "New Request",
+  //   request: "",
+  // });
 
   // 메서드 변경
   const handleChangeMethod = (e) => {
@@ -37,20 +42,8 @@ export default function Builder() {
   const handleChangeUrl = (e) => {
     setUrl(e.target.value);
   };
-
   let fullUrl = url;
-  paramsData.forEach((paramsData) => {
-    if (paramsData.key && paramsData.value && paramsData.checked === true) {
-      fullUrl = addUrl(fullUrl, paramsData.key, paramsData.value);
-      localStorage.setItem(
-        `dataRow-${collectionId}-${name}`,
-        JSON.stringify(paramsData)
-      );
-    }
-    console.table(paramsData);
-    console.log(`URL: ${fullUrl}`);
-  });
-
+  // Send 버튼 클릭
   const handleSendClick = async () => {
     if (method !== '') {
       try {
@@ -71,20 +64,6 @@ export default function Builder() {
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
-
-  useEffect(() => {
-    if (requestName !== `:requestName`) {
-      const requestData = localStorage.getItem(
-        `request-${collectionId}-${requestName}`
-      );
-      const request = requestData ? JSON.parse(requestData) : null;
-      if (request) {
-        setName(request.name);
-        setMethod(request.request.method);
-        setUrl(request.request.url.raw);
-      }
-    }
-  }, [requestName, collectionId]);
 
   const handleSaveClick = () => {
     let requestUrl;
@@ -120,6 +99,32 @@ export default function Builder() {
     if (requestUrl) {
       window.location.href = requestUrl;
     }
+    const { key, value, description } = paramsData;
+
+    // 기존 로컬 스토리지에서 해당 컬렉션 및 요청 데이터 가져오기
+    let requestItems = localStorage.getItem(
+      `requestdata-${collectionId}-${name}`
+    );
+
+    if (requestItems) {
+      // 이미 해당 컬렉션의 요청 데이터가 존재하는 경우, 파싱하여 배열로 변환
+      requestItems = JSON.parse(requestItems);
+    } else {
+      // 컬렉션에 대한 요청 데이터가 아직 없는 경우 빈 배열 생성
+      requestItems = [];
+    }
+
+    // 새로운 요청 데이터 생성
+    const newRequestData = { key, value, description };
+
+    // 새로운 요청 데이터를 배열에 추가
+    requestItems.push(newRequestData);
+
+    // 로컬 스토리지에 업데이트된 요청 데이터 저장
+    localStorage.setItem(
+      `requestdata-${collectionId}-${name}`,
+      JSON.stringify(requestItems)
+    );
   };
 
   return (

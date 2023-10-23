@@ -9,79 +9,51 @@ import { useParams } from 'react-router-dom';
 export default function QueryParams() {
   const { collectionId, requestName } = useParams();
   const { paramsData, updateParamsData, checked } = useData();
-  const [dataRows, setDataRows] = useState([]);
 
-  useEffect(() => {
-    if (requestName !== ':requestName') {
-      const paramsDataKey = `dataRow-${collectionId}-${requestName}`;
-      const dataRowData = localStorage.getItem(paramsDataKey);
-      const dataRow = dataRowData ? JSON.parse(dataRowData) : null;
-
-      if (dataRow) {
-        setDataRows([...paramsData, dataRow]);
-      } else {
-        setDataRows([...paramsData]);
-      }
-    } else {
-      setDataRows([...paramsData]);
-    }
-  }, [collectionId, paramsData, requestName]);
-
-  const handleKeyChange = (e, index) => {
+  const handleKeyChange = (e) => {
     const newKey = e.target.value;
-    const updatedDataRows = [...dataRows];
-    updatedDataRows[index] = { ...updatedDataRows[index], key: newKey };
-    updateParamsData(updatedDataRows);
-    setDataRows(updatedDataRows);
-    newRow(index, updatedDataRows);
+    const newParamsData = { ...paramsData, key: newKey };
+    updateParamsData(newParamsData);
   };
 
-  const handleValueChange = (e, index) => {
+  const handleValueChange = (e) => {
     const newValue = e.target.value;
-    const updatedDataRows = [...dataRows];
-    updatedDataRows[index] = { ...updatedDataRows[index], value: newValue };
-    updateParamsData(updatedDataRows);
-    setDataRows(updatedDataRows);
-    newRow(index, updatedDataRows);
+    const newParamsData = { ...paramsData, value: newValue };
+    updateParamsData(newParamsData);
   };
 
-  const handleDescriptionChange = (e, index) => {
+  const handleDescriptionChange = (e) => {
     const newDescription = e.target.value;
-    const updatedDataRows = [...dataRows];
-    updatedDataRows[index] = {
-      ...updatedDataRows[index],
-      description: newDescription,
-    };
-    updateParamsData(updatedDataRows);
-    setDataRows(updatedDataRows);
-    newRow(index, updatedDataRows);
+    const newParamsData = { ...paramsData, description: newDescription };
+    updateParamsData(newParamsData);
   };
 
-  const newRow = (index, data) => {
-    if (
-      index === data.length - 1 &&
-      (data[index].key || data[index].value || data[index].description)
-    ) {
-      data.push({ key: '', value: '', description: '' });
-      updateParamsData(data);
-      setDataRows(data);
-    }
-  };
+  // const handleKeyChange = (e) => {
+  //   const newKey =e.target.value;
+  //   setParamsData((prevDate) => ({
+  //     ...prevDate,
+  //     key: newKey,
+  //   }));
+  // };
 
-  const deleteRow = (index) => {
-    const updatedDataRows = [...dataRows];
-    updatedDataRows.splice(index, 1);
-    updateParamsData(updatedDataRows);
-    setDataRows(updatedDataRows);
-  };
+  // const handleValueChange = (e) => {
+  //   const newValue = e.target.value;
+  //   setParamsData((prevDate) => ({
+  //     ...prevDate,
+  //     value: newValue,
+  //   }));
+  // };
 
-  const handleDataRowChange = (e, index) => {
-    const newChecked = e.target.checked;
-    const updatedDataRows = [...dataRows];
-    updatedDataRows[index] = { ...updatedDataRows[index], checked: newChecked };
-    updateParamsData(updatedDataRows);
-    setDataRows(updatedDataRows);
-  };
+  // const handleDescriptionChange = (e) => {
+  //   const newDescription = e.target.value;
+  //   setParamsData((prevDate) => ({
+  //     ...prevDate,
+  //     description: newDescription,
+  //   }))
+
+  // };
+
+  // console.log(paramsData);
 
   return (
     <div className="params_editor_container">
@@ -95,60 +67,46 @@ export default function QueryParams() {
               <div className="param_row">Description</div>
             </div>
           </div>
-          {dataRows.map((rowData, index) => (
-            <div className="params_editor_key_header_row" key={index}>
-              <div className="params_form_header_row"></div>
-              <div className="params_header_row">
-                {rowData.key || rowData.value || rowData.description !== '' ? (
-                  <Checkbox
-                    checked={rowData.checked || checked}
-                    onChange={(e) => handleDataRowChange(e, index)}
-                    inputProps={{ 'aria-label': 'controlled' }}
-                    size="small"
-                  />
-                ) : (
-                  ''
-                )}
-                <div className="param_input_row">
-                  <input
-                    className="param_row"
-                    type="text"
-                    value={rowData.key}
-                    onChange={(e) => handleKeyChange(e, index)}
-                    placeholder="Key"
-                  />
-                </div>
-                <div className="param_input_row">
-                  <input
-                    className="param_row"
-                    type="text"
-                    value={rowData.value}
-                    onChange={(e) => handleValueChange(e, index)}
-                    placeholder="Value"
-                  />
-                </div>
-                <div className="param_input_row">
-                  <input
-                    className="param_row"
-                    type="text"
-                    value={rowData.description}
-                    onChange={(e) => handleDescriptionChange(e, index)}
-                    placeholder="Description"
-                  />
-                </div>
+          <div
+            className="params_editor_key_header_row "
+            style={{ borderTop: 'none' }}
+          >
+            <div className="params_form_header_row"></div>
+            <div className="params_header_row">
+              <div className="param_input_row">
+                <input
+                  className="param_row"
+                  type="text"
+                  value={paramsData.key}
+                  onChange={handleKeyChange}
+                  placeholder="Key"
+                />
               </div>
-              {!rowData.key && !rowData.value && !rowData.description ? (
-                ''
-              ) : (
-                <IconButton
-                  aria-label="delete"
-                  onClick={() => deleteRow(index)}
-                >
-                  <DeleteIcon />
-                </IconButton>
-              )}
+              <div className="param_input_row">
+                <input
+                  className="param_row"
+                  type="text"
+                  value={paramsData.value}
+                  onChange={handleValueChange}
+                  placeholder="Value"
+                />
+              </div>
+              <div className="param_input_row">
+                <input
+                  className="param_row"
+                  type="text"
+                  placeholder="Description"
+                />
+                <input
+                  className="param_row"
+                  type="text"
+                  value={paramsData.description}
+                  onChange={handleDescriptionChange}
+                  placeholder="Description"
+                />
+              </div>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </div>
