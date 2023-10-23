@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import '../style/workspace.scss';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
-import { useData } from '../contexts/DataContext';
 
 export default function Workspace(props) {
   const { workspaceId } = useParams();
-  const navigate = useNavigate();
-  const { workspaceData, setWorkspaceData } = useData('');
-  // const [workspaceData, setWorkspaceData] = useState({
-  //   id: 0,
-  //   name: '',
-  //   description: '',
-  // });
+  const [workspaceData, setWorkspaceData] = useState({
+    id: 0,
+    name: '',
+    description: '',
+  });
   const [isEditingDescription, setEditingDescription] = useState(false);
 
   // 컴포넌트가 렌더링될 때 실행
@@ -29,7 +26,7 @@ export default function Workspace(props) {
     } else {
       // workspace를 새로 만들 경우
       let maxId = 0;
-      for (let i = 0; i <= localStorage.length; i++) {
+      for (let i = 1; i <= localStorage.length; i++) {
         const key = localStorage.key(i);
         //workspace 데이터인 경우
         if (key && key.startsWith('workspace-')) {
@@ -60,8 +57,6 @@ export default function Workspace(props) {
       ...workspaceData,
       name: newWorkspaceName,
     });
-
-    navigate(`/workspaces/${workspaceData.id}`);
   };
 
   //description 변경될 때
@@ -76,8 +71,6 @@ export default function Workspace(props) {
       ...workspaceData,
       description: newDescriptionText,
     });
-
-    navigate(`/workspaces/${workspaceData.id}`);
   };
 
   // //입력필드에서 포커스 잃었을 때
@@ -95,11 +88,7 @@ export default function Workspace(props) {
 
   //workspace 로컬스토리지에 저장
   const saveWorkspaceDataToLocalStorage = (data) => {
-    if (data.name && data.description) {
-      localStorage.setItem(`workspace-${data.id}`, JSON.stringify(data));
-    } else {
-      alert('workspace name을 입력하세요');
-    }
+    localStorage.setItem(`workspace-${data.id}`, JSON.stringify(data));
   };
 
   return (

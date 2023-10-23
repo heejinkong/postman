@@ -14,13 +14,11 @@ export function DataProvider({ children }) {
   });
   const [resultText, setResultText] = useState('');
   const [resultData, setResultData] = useState('');
-  const [paramsData, setParamsData] = useState([
-    {
-      key: "",
-      value: "",
-      description: "",
-    }
-  ]);
+ const [paramsData, setParamsData] = useState([
+  { key: '', value: '', description: '' }
+]);
+
+  
   const [checked, setChecked] = useState('');
   const [requestItems, setRequestItems] = useState([]);
   const [items, setItems] = useState([]); 

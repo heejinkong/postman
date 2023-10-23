@@ -39,11 +39,15 @@ export default function Builder() {
   };
 
   let fullUrl = url;
-  paramsData.forEach((dataRow) => {
-    if (dataRow.key && dataRow.value && dataRow.checked === true) {
-      fullUrl = addUrl(fullUrl, dataRow.key, dataRow.value);
+  paramsData.forEach((paramsData) => {
+    if (paramsData.key && paramsData.value && paramsData.checked === true) {
+      fullUrl = addUrl(fullUrl, paramsData.key, paramsData.value);
+      localStorage.setItem(
+        `dataRow-${collectionId}-${name}`,
+        JSON.stringify(paramsData)
+      );
     }
-    console.log(dataRow);
+    console.table(paramsData);
     console.log(`URL: ${fullUrl}`);
   });
 

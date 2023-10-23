@@ -10,7 +10,9 @@ export default function CollectionEditor(props) {
   const { collectionData, setCollectionData } = useData();
   const [isEditingDescription, setEditingDescription] = useState(false);
 
+  //컴포넌트가 렌더링될 때 실행
   useEffect(() => {
+    //해당 collection이 로컬스토리지에 존재할 경우
     if (collectionId !== ':collectionId') {
       const collectionData = localStorage.getItem(
         `collection-${workspaceId}-${collectionId}`
@@ -21,65 +23,79 @@ export default function CollectionEditor(props) {
         setCollectionData(collection);
       }
     } else {
-      // 기존에 사용된 ID 중 가장 큰 ID를 찾아서 그 다음 ID를 설정
+      //collection을 새로 만들 경우
       let maxId = 0;
       for (let i = 1; i <= localStorage.length; i++) {
         const key = localStorage.key(i);
+        //collection 데이터인 경우
         if (key && key.startsWith(`collection-${workspaceId}-`)) {
+          //collection의 Id를 파싱
           const id = parseInt(
             key.replace(`collection-${workspaceId}-`, ''),
             10
           );
+          //Id가 유효하고, maxId보다 클경우
           if (!isNaN(id) && id > maxId) {
             maxId = id;
           }
         }
       }
 
+      const nextId = maxId + 1;
+
+      setCollectionData({ id: nextId, name: '', description: '' });
+
       // ID가 null인 경우에만 새로운 ID를 설정
-      if (collectionData.id === 0) {
-        const nextId = maxId + 1;
-        setCollectionData((prevData) => ({
-          ...prevData,
-          id: nextId,
-        }));
-      }
+      // if (collectionData.id === 0) {
+      //   const nextId = maxId + 1;
+      //   setCollectionData((prevData) => ({
+      //     ...prevData,
+      //     id: nextId,
+      //   }));
+      // }
     }
   }, [collectionData.id, collectionId, setCollectionData, workspaceId]);
 
+  //collection 이름 변경될 때
   const handleNameChange = (e) => {
     const newCollectionName = e.target.value;
     setCollectionData((prevData) => ({
       ...prevData,
       collectionname: newCollectionName,
     }));
+    //변경된 데이터 로컬스토리지에 저장
     saveCollectionDataToLocalStorage({
       ...collectionData,
       collectionname: newCollectionName,
     });
   };
 
+  //description 변경될 때
   const handleDescriptionChange = (e) => {
     const newDescriptionText = e.target.value;
     setCollectionData((prevData) => ({
       ...prevData,
       collectiontext: newDescriptionText,
     }));
+    //변경된 데이터 로컬스토리지에 저장
     saveCollectionDataToLocalStorage({
       ...collectionData,
       collectiontext: newDescriptionText,
     });
   };
 
-  const handleDescriptionBlur = () => {
-    setEditingDescription(false);
-    saveCollectionDataToLocalStorage(collectionData);
-  };
+  // const handleDescriptionBlur = () => {
+  //   setEditingDescription(false);
+  //   saveCollectionDataToLocalStorage(collectionData);
+  // };
 
+  //description 편집하기 위한 버튼 클릭
   const handleNotesClick = () => {
+    //편집 모드 활성화
     setEditingDescription(true);
   };
 
+  //collection 로컬스토리지에 저장
   const saveCollectionDataToLocalStorage = (data) => {
     if (data.id !== 0) {
       localStorage.setItem(
@@ -89,6 +105,7 @@ export default function CollectionEditor(props) {
     }
   };
 
+  //저장 버튼 클릭 시
   const handleSave = (e) => {
     e.preventDefault();
 
@@ -106,6 +123,7 @@ export default function CollectionEditor(props) {
 
     const newId = maxId + 1;
 
+    //새로운 collection 데이터 생성 및 저장
     const collection = {
       id: newId,
       collectionname: collectionData.collectionname,
@@ -171,7 +189,7 @@ export default function CollectionEditor(props) {
               <textarea
                 value={collectionData.collectiontext}
                 onChange={handleDescriptionChange}
-                onBlur={handleDescriptionBlur}
+                // onBlur={handleDescriptionBlur}
                 autoFocus
               />
             ) : (

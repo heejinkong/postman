@@ -1,13 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../../../style/queryparams.scss';
 import { useData } from '../../../../contexts/DataContext';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useParams } from 'react-router-dom';
 
 export default function QueryParams() {
+  const { collectionId, requestName } = useParams();
   const { paramsData, updateParamsData, checked } = useData();
-  const [dataRows, setDataRows] = useState([paramsData]);
+  const [dataRows, setDataRows] = useState([]);
+
+  useEffect(() => {
+    if (requestName !== ':requestName') {
+      const paramsDataKey = `dataRow-${collectionId}-${requestName}`;
+      const dataRowData = localStorage.getItem(paramsDataKey);
+      const dataRow = dataRowData ? JSON.parse(dataRowData) : null;
+
+      if (dataRow) {
+        setDataRows([...paramsData, dataRow]);
+      } else {
+        setDataRows([...paramsData]);
+      }
+    } else {
+      setDataRows([...paramsData]);
+    }
+  }, [collectionId, paramsData, requestName]);
 
   const handleKeyChange = (e, index) => {
     const newKey = e.target.value;
@@ -49,7 +67,7 @@ export default function QueryParams() {
       setDataRows(data);
     }
   };
-  // console.log(dataRows[0]);
+
   const deleteRow = (index) => {
     const updatedDataRows = [...dataRows];
     updatedDataRows.splice(index, 1);

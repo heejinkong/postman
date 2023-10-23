@@ -5,7 +5,7 @@ import '../../../style/responseheaderstab.scss';
 export default function ResponseHeadersTab() {
   const [headers, setHeaders] = useState([]);
 
-  const defaultHeaders = [
+  const defaultHeaders = useState([
     { key: 'Date', value: '' },
     { key: 'Content-Type', value: '' },
     { key: 'Content-Length', value: '' },
@@ -13,7 +13,7 @@ export default function ResponseHeadersTab() {
     { key: 'Server', value: '' },
     { key: 'Access-Control-Allow-Origin', value: '' },
     { key: 'Access-Control-Allow-Credentials', value: '' },
-  ];
+  ]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,7 +34,7 @@ export default function ResponseHeadersTab() {
     };
 
     fetchData();
-  }, []);
+  }, [defaultHeaders]);
 
   return (
     <div className="headers_editor_container">
