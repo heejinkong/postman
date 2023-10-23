@@ -99,6 +99,8 @@ export default function Builder() {
     if (requestUrl) {
       window.location.href = requestUrl;
     }
+
+    // 아래의 코드는 requestdata에 대한 추가 저장을 수행합니다.
     const { key, value, description } = paramsData;
 
     // 기존 로컬 스토리지에서 해당 컬렉션 및 요청 데이터 가져오기
