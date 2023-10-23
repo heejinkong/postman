@@ -11,14 +11,9 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import Collapse from '@mui/material/Collapse';
 import { List, ListItemText } from '@mui/material';
 import { useData } from '../contexts/DataContext';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
-const options = [
-  'Move',
-  'Run collection',
-  'Add request',
-  'Add folder',
-  'Delete',
-];
+const options = ['Run collection', 'Add request', 'Add folder', 'Delete'];
 const ITEM_HEIGHT = 50;
 
 export default function Collection(props) {
@@ -65,7 +60,6 @@ export default function Collection(props) {
   const handleOptionClick = (option, collectionId) => {
     if (option === 'Delete') {
       handleDeleteClick(collectionId);
-    } else if (option === 'Move') {
     } else if (option === 'Run collection') {
     } else if (option === 'Add request') {
       navigate(
@@ -114,107 +108,147 @@ export default function Collection(props) {
     navigate(`/workspaces/${workspaceId}/collections/${collectionId}`);
   };
 
+  const onDragEnd = (result) => {
+    if (!result.destination) {
+      return;
+    }
+
+    const items = [...collections];
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
+
+    setCollections(items);
+  };
+
   return (
     <div>
       <div className="collection_container">
-        {collections.map((collection) => (
-          <div key={collection.id}>
-            <Link
-              to={`/workspaces/${workspaceId}/collections/${collection.id}`}
-              style={{ textDecoration: 'none', color: 'black' }}
-            >
-              <ListItemButton onClick={() => handleListClick(collection.id)}>
-                {clickCollection === collection.id ? (
-                  <ExpandLess />
-                ) : (
-                  <ExpandMore />
-                )}
-
-                <ListItemText primary={collection.collectionname} />
-                <div
-                  className="collection_list_options"
-                  style={{ opacity: open ? 1 : 0 }}
-                >
-                  <IconButton
-                    style={{
-                      position: 'relative',
-                    }}
-                    disableRipple
-                    aria-label="more"
-                    id="long-button"
-                    aria-controls={open ? 'long-menu' : undefined}
-                    aria-expanded={open ? 'true' : undefined}
-                    aria-haspopup="true"
-                    onClick={handleClick}
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="collections">
+            {(provided, snapshot) => (
+              <div ref={provided.innerRef} {...provided.droppableProps}>
+                {collections.map((collection, index) => (
+                  <Draggable
+                    key={String(collection.id)}
+                    draggableId={String(collection.id)}
+                    index={index}
                   >
-                    <MoreVertIcon />
-                  </IconButton>
-
-                  <Menu
-                    id="long-menu"
-                    MenuListProps={{
-                      'aria-labelledby': 'long-button',
-                    }}
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleClose}
-                    PaperProps={{
-                      style: {
-                        maxHeight: ITEM_HEIGHT * 4.5,
-                        width: '20ch',
-                      },
-                    }}
-                    onMouseDownCapture={(e) => e.stopPropagation()}
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {options.map((option) => (
-                      <MenuItem
-                        key={option}
-                        selected={option === 'Delete'}
-                        onClick={() => handleOptionClick(option, collection.id)}
+                    {(provided) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
                       >
-                        {option}
-                      </MenuItem>
-                    ))}
-                  </Menu>
-                </div>
-              </ListItemButton>
-              <Collapse
-                in={clickCollection === collection.id}
-                timeout="auto"
-                unmountOnExit
-              >
-                <List component="div" disablePadding>
-                  {requestItems[collection.id] &&
-                    requestItems[collection.id].map((item) => (
-                      <Link
-                        to={`/workspaces/${workspaceId}/collections/${collection.id}/${item.data.name}`}
-                        style={{
-                          textDecoration: 'none',
-                          color: 'black',
-                        }}
-                        key={item.key}
-                      >
-                        <ListItemButton>
-                          <ListItemText
-                            primary={`${item.data.request.method} - ${item.data.name}`}
-                          />
-                          <button
-                            type="button"
-                            onClick={(e) =>
-                              handleRequestDeleteClick(e, collection.id)
-                            }
+                        <Link
+                          to={`/workspaces/${workspaceId}/collections/${collection.id}`}
+                          style={{ textDecoration: 'none', color: 'black' }}
+                        >
+                          <ListItemButton
+                            onClick={() => handleListClick(collection.id)}
                           >
-                            삭제
-                          </button>
-                        </ListItemButton>
-                      </Link>
-                    ))}
-                </List>
-              </Collapse>
-            </Link>
-          </div>
-        ))}
+                            {clickCollection === collection.id ? (
+                              <ExpandLess />
+                            ) : (
+                              <ExpandMore />
+                            )}
+
+                            <ListItemText primary={collection.collectionname} />
+                            <div
+                              className="collection_list_options"
+                              style={{ opacity: open ? 1 : 0 }}
+                            >
+                              <IconButton
+                                style={{
+                                  position: 'relative',
+                                }}
+                                disableRipple
+                                aria-label="more"
+                                id="long-button"
+                                aria-controls={open ? 'long-menu' : undefined}
+                                aria-expanded={open ? 'true' : undefined}
+                                aria-haspopup="true"
+                                onClick={handleClick}
+                              >
+                                <MoreVertIcon />
+                              </IconButton>
+
+                              <Menu
+                                id="long-menu"
+                                MenuListProps={{
+                                  'aria-labelledby': 'long-button',
+                                }}
+                                anchorEl={anchorEl}
+                                open={open}
+                                onClose={handleClose}
+                                PaperProps={{
+                                  style: {
+                                    maxHeight: ITEM_HEIGHT * 4.5,
+                                    width: '20ch',
+                                  },
+                                }}
+                                onMouseDownCapture={(e) => e.stopPropagation()}
+                                onClick={(e) => e.stopPropagation()}
+                              >
+                                {options.map((option) => (
+                                  <MenuItem
+                                    key={option}
+                                    selected={option === 'Delete'}
+                                    onClick={() =>
+                                      handleOptionClick(option, collection.id)
+                                    }
+                                  >
+                                    {option}
+                                  </MenuItem>
+                                ))}
+                              </Menu>
+                            </div>
+                          </ListItemButton>
+                          <Collapse
+                            in={clickCollection === collection.id}
+                            timeout="auto"
+                            unmountOnExit
+                          >
+                            <List component="div" disablePadding>
+                              {requestItems[collection.id] &&
+                                requestItems[collection.id].map((item) => (
+                                  <Link
+                                    to={`/workspaces/${workspaceId}/collections/${collection.id}/${item.data.name}`}
+                                    style={{
+                                      textDecoration: 'none',
+                                      color: 'black',
+                                    }}
+                                    key={item.key}
+                                  >
+                                    <ListItemButton>
+                                      <ListItemText
+                                        primary={`${item.data.request.method} - ${item.data.name}`}
+                                      />
+                                      <button
+                                        type="button"
+                                        onClick={(e) =>
+                                          handleRequestDeleteClick(
+                                            e,
+                                            collection.id
+                                          )
+                                        }
+                                      >
+                                        삭제
+                                      </button>
+                                    </ListItemButton>
+                                  </Link>
+                                ))}
+                            </List>
+                          </Collapse>
+                        </Link>
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </div>
     </div>
   );
