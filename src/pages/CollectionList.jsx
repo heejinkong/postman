@@ -25,12 +25,14 @@ export default function Collection(props) {
   const navigate = useNavigate();
   const { requestItems, setRequestItems } = useData();
 
+  // 클릭한 컬렉션 열고 닫는 함수
   const handleListClick = (collectionId) => {
     if (collectionId !== clickCollection) {
       setClickCollection(collectionId);
     }
   };
 
+  // 로컬스토리지에서 컬렉션 정보를 가져와 state 상태 업데이트
   useEffect(() => {
     const loadCollectionsFromLocalStorage = () => {
       const collections = [];
@@ -47,16 +49,19 @@ export default function Collection(props) {
     loadCollectionsFromLocalStorage();
   }, [workspaceId]);
 
+  //메뉴 열기
   const handleClick = (e) => {
     if (e.currentTarget) {
       setAnchorEl(e.currentTarget);
     }
   };
 
+  //메뉴 닫기
   const handleClose = () => {
     setAnchorEl(null);
   };
 
+  //옵션 선택 시 처리 함수
   const handleOptionClick = (option, collectionId) => {
     if (option === 'Delete') {
       handleDeleteClick(collectionId);
@@ -69,9 +74,11 @@ export default function Collection(props) {
     handleClose();
   };
 
+  //컬렉션 삭제
   const handleDeleteClick = (collectionId) => {
     if (!window.confirm('Delete collection?')) return false;
 
+    //로컬 스토리지에서 컬렉션 제거
     localStorage.removeItem(`collection-${workspaceId}-${collectionId}`);
 
     for (let i = localStorage.length - 1; i >= 0; i--) {
@@ -81,26 +88,31 @@ export default function Collection(props) {
       }
     }
 
+    //컬렉션 목록에서 삭제
     setCollections((prevCollections) =>
       prevCollections.filter((collection) => collection.id !== collectionId)
     );
 
+    //업데이트
     navigate(`/workspaces/${workspaceId}`);
   };
 
+  //요청 삭제
   const handleRequestDeleteClick = (e, collectionId) => {
     e.preventDefault();
     if (!window.confirm('Delete request?')) return false;
 
+    //연관된 request와 dataRow 삭제
     if (requestItems[collectionId]) {
       requestItems[collectionId].forEach((item) => {
         const key = `request-${collectionId}-${item.data.name}`;
         localStorage.removeItem(key);
-        const paramsKey = `paramsData-${item.data.name}`;
+        const paramsKey = `paramsData-${collectionId}-${item.data.name}`;
         localStorage.removeItem(paramsKey);
       });
     }
 
+    //상태에서 요청 삭제
     setRequestItems((prevRequestItems) => {
       const updatedRequestItems = { ...prevRequestItems };
       delete updatedRequestItems[collectionId];
@@ -110,11 +122,13 @@ export default function Collection(props) {
     navigate(`/workspaces/${workspaceId}/collections/${collectionId}`);
   };
 
+  //드래그 앤 드롭 이벤트 처리
   const onDragEnd = (result) => {
     if (!result.destination) {
       return;
     }
 
+    //컬렉션 순서 변경
     const items = [...collections];
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
