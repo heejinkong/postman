@@ -131,7 +131,7 @@ export default function Collection(props) {
               <div ref={provided.innerRef} {...provided.droppableProps}>
                 {collections.map((collection, index) => (
                   <Draggable
-                    key={String(collection.id)}
+                    key={collection.id}
                     draggableId={String(collection.id)}
                     index={index}
                   >

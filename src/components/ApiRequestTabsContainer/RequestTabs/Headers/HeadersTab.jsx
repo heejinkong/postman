@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../../../style/headertab.scss';
-import Headers from './Headers';
+import HeadersParams from './HeadersParams';
 
 export default function HeadersTab() {
   return (
@@ -8,7 +8,7 @@ export default function HeadersTab() {
       <div className="header_editor_title">
         <span>Headers</span>
       </div>
-      <Headers />
+      <HeadersParams />
     </div>
   );
 }

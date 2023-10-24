@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useParams } from 'react-router-dom';
 
-export default function QueryBody() {
+export default function BodyParams() {
   const { collectionId, requestName } = useParams();
   const { paramsData, updateParamsData, checked, dataRows, setDataRows } =
     useData();
