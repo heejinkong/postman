@@ -20,8 +20,14 @@ export default function Builder() {
   const { workspaceId, collectionId, requestName } = useParams();
   const [method, setMethod] = useState('');
   const [url, setUrl] = useState('');
-  const { setResult, collectionData, dataRows, setRequestItems, setDataRows } =
-    useData();
+  const {
+    setResult,
+    collectionData,
+    dataRows,
+    setRequestItems,
+    setDataRows,
+    resultData,
+  } = useData();
   const [name, setName] = useState('New Request');
 
   useEffect(() => {
@@ -111,7 +117,7 @@ export default function Builder() {
             path: urlData.pathname,
           },
         },
-        response: [],
+        response: [JSON.stringify(resultData, null, 2)],
       };
 
       localStorage.setItem(key, JSON.stringify(queryData));
