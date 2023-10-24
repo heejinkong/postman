@@ -31,7 +31,6 @@ export default function Builder() {
   const [name, setName] = useState('New Request');
 
   useEffect(() => {
-    //해당 request가 로컬스토리지에 존재할 경우
     if (requestName !== ':requestName') {
       const requestData = localStorage.getItem(
         `request-${collectionId}-${requestName}`
@@ -46,36 +45,38 @@ export default function Builder() {
         const url = fullUrl.split('?');
         const baseUrl = url[0];
         setUrl(baseUrl);
-        const paramsDataKey = `paramsData-${requestName}`;
+        const paramsDataKey = `paramsData-${collectionId}-${requestName}`;
         const storageParamsData = localStorage.getItem(paramsDataKey);
-        setDataRows(JSON.parse(storageParamsData));
+        const initialDataRows = storageParamsData
+          ? JSON.parse(storageParamsData)
+          : [];
+        setDataRows(initialDataRows);
       }
     }
   }, [requestName, collectionId, setRequestItems, setDataRows]);
 
-  // 기존 URL 뒤에 key=value를 붙이는 함수
   const addUrl = (url, key, value) => {
     return url + (url.includes('?') ? '&' : '?') + `${key}=${value}`;
   };
 
-  // 메서드 변경
   const handleChangeMethod = (e) => {
     setMethod(e.target.value);
   };
 
-  // URL 입력
   const handleChangeUrl = (e) => {
     setUrl(e.target.value);
   };
+
   let fullUrl = url;
 
-  dataRows.forEach((paramsData) => {
-    if (paramsData.key && paramsData.value && paramsData.checked === true) {
-      fullUrl = addUrl(fullUrl, paramsData.key, paramsData.value);
-    }
-  });
+  if (dataRows) {
+    dataRows.forEach((paramsData) => {
+      if (paramsData.key && paramsData.value && paramsData.checked === true) {
+        fullUrl = addUrl(fullUrl, paramsData.key, paramsData.value);
+      }
+    });
+  }
 
-  // Send 버튼 클릭
   const handleSendClick = async () => {
     if (method !== '') {
       try {
@@ -83,13 +84,12 @@ export default function Builder() {
           method: method,
           url: fullUrl,
         });
-        console.log(method);
         setResult(JSON.stringify(response.data, null, 2));
       } catch (e) {
         setResult(`Error: ${e.message}`);
       }
     } else {
-      alert('method를 선택하세요');
+      alert('Method를 선택하세요');
     }
   };
 
@@ -132,8 +132,8 @@ export default function Builder() {
       window.location.href = requestUrl;
     }
 
-    //params 저장
-    localStorage.setItem(`paramsData-${name}`, JSON.stringify(dataRows));
+    const paramsDataKey = `paramsData-${collectionId}-${name}`;
+    localStorage.setItem(paramsDataKey, JSON.stringify(dataRows));
   };
 
   return (

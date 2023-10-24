@@ -1,21 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 
 export default function WorkspaceList(props) {
-  const handleDeleteClick = (workspaceId) => {
-    localStorage.removeItem(`workspace-${workspaceId}`);
+  const [workspaces, setWorkspaces] = useState(props.list);
 
-    //연관된 collection과 request 데이터 삭제
+  const handleDeleteClick = (workspaceId) => {
+    // 연관된 collection과 request 데이터 삭제
     for (let i = localStorage.length - 1; i >= 0; i--) {
       const key = localStorage.key(i);
-      if (key.startsWith(`collection-${workspaceId}-`)) {
+      if (key && key.startsWith(`collection-${workspaceId}-`)) {
         const collectionId = key.split('-')[2];
         for (let j = localStorage.length - 1; j >= 0; j--) {
           const requestKey = localStorage.key(j);
-          if (requestKey.startsWith(`request-${collectionId}-`)) {
+          if (
+            requestKey &&
+            (requestKey.startsWith(`request-${collectionId}-`) ||
+              requestKey.startsWith(`paramsData-${collectionId}-`))
+          ) {
             localStorage.removeItem(requestKey);
           }
         }
@@ -23,6 +27,13 @@ export default function WorkspaceList(props) {
       }
     }
 
+    // 워크스페이스 목록에서 삭제된 워크스페이스를 제거
+    const updatedWorkspaces = workspaces.filter(
+      (workspace) => workspace.id !== workspaceId
+    );
+    setWorkspaces(updatedWorkspaces);
+
+    // 부모 컴포넌트로 삭제 이벤트를 전달
     props.handleDeleteClick(workspaceId);
   };
 
@@ -37,12 +48,11 @@ export default function WorkspaceList(props) {
         <thead>
           <tr>
             <th style={{ paddingRight: '32px' }}></th>
-            {/* <th>Title</th> */}
             <th></th>
           </tr>
         </thead>
         <tbody>
-          {props.list.map((workspace) => (
+          {workspaces.map((workspace) => (
             <tr key={workspace.id}>
               <td>
                 <PeopleAltOutlinedIcon />

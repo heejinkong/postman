@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../../../style/queryparams.scss';
 import { useData } from '../../../../contexts/DataContext';
 import Checkbox from '@mui/material/Checkbox';
@@ -7,12 +7,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useParams } from 'react-router-dom';
 
 export default function QueryParams() {
-  const { requestName } = useParams();
+  const { requestName, collectionId } = useParams();
   const { updateParamsData, checked, dataRows, setDataRows } = useData();
 
   const addRow = () => {
-    setDataRows([
-      ...dataRows,
+    setDataRows((prevDataRows) => [
+      ...prevDataRows,
       { key: '', value: '', description: '', checked: false },
     ]);
   };
@@ -35,9 +35,8 @@ export default function QueryParams() {
     setDataRows(updatedDataRows);
 
     // 삭제한 행 업데이트
-    const paramsDataKey = `paramsData-${requestName}`;
+    const paramsDataKey = `paramsData-${collectionId}-${requestName}`;
     localStorage.setItem(paramsDataKey, JSON.stringify(updatedDataRows));
-    console.table(updatedDataRows);
   };
 
   const handleDataRowChange = (e, index) => {
@@ -48,17 +47,20 @@ export default function QueryParams() {
     setDataRows(updatedDataRows);
   };
 
-  // useEffect(() => {
-  //   setDataRows(dataRows);
-  // }, [requestName, dataRows, setDataRows]);
-
-  // console.table(paramsData);
+  useEffect(() => {
+    // 로컬 스토리지에서 해당 request의 파라미터 데이터를 불러옵니다.
+    const paramsDataKey = `paramsData-${collectionId}-${requestName}`;
+    const storageParamsData = localStorage.getItem(paramsDataKey);
+    if (storageParamsData) {
+      setDataRows(JSON.parse(storageParamsData));
+    }
+  }, [requestName, collectionId, setDataRows]);
 
   return (
     <div className="params_editor_container">
       <div className="params_editor_header_row">
         <div className="params_editor_top_header">
-          <div className="params_editor_key_header_row ">
+          <div className="params_editor_key_header_row">
             <div className="params_form_header_row"></div>
             <div className="params_header_row">
               <div className="param_row">Key</div>
@@ -70,16 +72,12 @@ export default function QueryParams() {
             <div className="params_editor_key_header_row" key={index}>
               <div className="params_form_header_row"></div>
               <div className="params_header_row">
-                {rowData.key || rowData.value || rowData.description !== '' ? (
-                  <Checkbox
-                    checked={rowData.checked || checked}
-                    onChange={(e) => handleDataRowChange(e, index)}
-                    inputProps={{ 'aria-label': 'controlled' }}
-                    size="small"
-                  />
-                ) : (
-                  ''
-                )}
+                <Checkbox
+                  checked={rowData.checked || checked}
+                  onChange={(e) => handleDataRowChange(e, index)}
+                  inputProps={{ 'aria-label': 'controlled' }}
+                  size="small"
+                />
                 <div className="param_input_row">
                   <input
                     className="param_row"
@@ -107,17 +105,13 @@ export default function QueryParams() {
                     placeholder="Description"
                   />
                 </div>
-              </div>
-              {!rowData.key && !rowData.value && !rowData.description ? (
-                ''
-              ) : (
                 <IconButton
                   aria-label="delete"
                   onClick={() => deleteRow(index)}
                 >
                   <DeleteIcon />
                 </IconButton>
-              )}
+              </div>
             </div>
           ))}
         </div>
