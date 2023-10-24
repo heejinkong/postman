@@ -73,11 +73,12 @@ export default function QueryParams() {
               <div className="params_form_header_row"></div>
               <div className="params_header_row">
                 <Checkbox
-                  checked={rowData.checked || checked}
+                  checked={Boolean(rowData.checked) || checked}
                   onChange={(e) => handleDataRowChange(e, index)}
                   inputProps={{ 'aria-label': 'controlled' }}
                   size="small"
                 />
+
                 <div className="param_input_row">
                   <input
                     className="param_row"
