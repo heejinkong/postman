@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import '../../../../style/queryparams.scss';
 import { useData } from '../../../../contexts/DataContext';
 import Checkbox from '@mui/material/Checkbox';
@@ -7,9 +7,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useParams } from 'react-router-dom';
 
 export default function QueryParams() {
-  const { collectionId, requestName } = useParams();
-  const { paramsData, updateParamsData, checked, dataRows, setDataRows } =
-    useData();
+  const { requestName } = useParams();
+  const { updateParamsData, checked, dataRows, setDataRows } = useData();
 
   const addRow = () => {
     setDataRows([
@@ -34,6 +33,11 @@ export default function QueryParams() {
     updatedDataRows.splice(index, 1);
     updateParamsData(updatedDataRows);
     setDataRows(updatedDataRows);
+
+    // 삭제한 행 업데이트
+    const paramsDataKey = `paramsData-${requestName}`;
+    localStorage.setItem(paramsDataKey, JSON.stringify(updatedDataRows));
+    console.table(updatedDataRows);
   };
 
   const handleDataRowChange = (e, index) => {
