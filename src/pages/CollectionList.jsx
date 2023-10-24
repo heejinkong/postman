@@ -96,6 +96,8 @@ export default function Collection(props) {
       requestItems[collectionId].forEach((item) => {
         const key = `request-${collectionId}-${item.data.name}`;
         localStorage.removeItem(key);
+        const paramsKey = `paramsData-${item.data.name}`;
+        localStorage.removeItem(paramsKey);
       });
     }
 

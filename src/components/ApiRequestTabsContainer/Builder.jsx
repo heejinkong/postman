@@ -40,12 +40,8 @@ export default function Builder() {
         const url = fullUrl.split('?');
         const baseUrl = url[0];
         setUrl(baseUrl);
-      }
-
-      const paramsDataKey = `paramsData-${requestName}`;
-      const storageParamsData = localStorage.getItem(paramsDataKey);
-
-      if (storageParamsData) {
+        const paramsDataKey = `paramsData-${requestName}`;
+        const storageParamsData = localStorage.getItem(paramsDataKey);
         setDataRows(JSON.parse(storageParamsData));
       }
     }
