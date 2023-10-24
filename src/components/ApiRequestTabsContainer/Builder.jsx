@@ -20,23 +20,15 @@ export default function Builder() {
   const { workspaceId, collectionId, requestName } = useParams();
   const [method, setMethod] = useState('');
   const [url, setUrl] = useState('');
-  const {
-    setResult,
-    paramsData,
-    collectionData,
-    dataRows,
-    requestItems,
-    setRequestItems,
-    setParamsData,
-    setDataRows,
-  } = useData();
+  const { setResult, collectionData, dataRows, setRequestItems, setDataRows } =
+    useData();
   const [name, setName] = useState('New Request');
 
   useEffect(() => {
     //해당 request가 로컬스토리지에 존재할 경우
     if (requestName !== ':requestName') {
       const requestData = localStorage.getItem(
-        `request-${collectionId}-${requestName}` // Use requestName here
+        `request-${collectionId}-${requestName}`
       );
       const request = requestData ? JSON.parse(requestData) : null;
 
@@ -44,7 +36,10 @@ export default function Builder() {
         setRequestItems(request);
 
         setMethod(request.request.method);
-        setUrl(request.request.url.raw);
+        const fullUrl = request.request.url.raw;
+        const url = fullUrl.split('?');
+        const baseUrl = url[0];
+        setUrl(baseUrl);
       }
 
       const paramsDataKey = `paramsData-${requestName}`;
