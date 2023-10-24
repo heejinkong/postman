@@ -19,7 +19,7 @@ export function DataProvider({ children }) {
     value: "",
     description: "",
   });
-
+  const [dataRows, setDataRows] = useState([paramsData]);
   
   const [checked, setChecked] = useState('');
   const [requestItems, setRequestItems] = useState([]);
@@ -70,7 +70,7 @@ export function DataProvider({ children }) {
   }, []);
 
   return (
-    <DataContext.Provider value={{ resultText, resultData, setResult, setTextInput, paramsData, setParamsData, updateParamsData, checked, setChecked, requestItems, setRequestItems, items, setItems, collectionData, setCollectionData, workspaceData, setWorkspaceData }}>
+    <DataContext.Provider value={{ resultText, resultData, setResult, setTextInput, paramsData, setParamsData, updateParamsData, checked, setChecked, requestItems, setRequestItems, items, setItems, collectionData, setCollectionData, workspaceData, setWorkspaceData,dataRows, setDataRows }}>
       {children}
     </DataContext.Provider>
   );
