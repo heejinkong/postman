@@ -8,6 +8,7 @@ import Header from '../components/Header';
 import Request from './Request';
 import Collection from '../pages/Collection';
 import ListPage from './ListPage';
+import Runner from './Runner';
 
 export default function Main() {
   return (
@@ -28,6 +29,10 @@ export default function Main() {
             <Route
               path="/workspaces/:workspaceId/collections/:collectionId/:requestName"
               element={<Request />}
+            />
+            <Route
+              path="/workspaces/:workspaceId/collections/:collectionId/runner"
+              element={<Runner />}
             />
           </Routes>
         </div>

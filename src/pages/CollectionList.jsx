@@ -66,6 +66,7 @@ export default function Collection(props) {
     if (option === 'Delete') {
       handleDeleteClick(collectionId);
     } else if (option === 'Run collection') {
+      navigate(`/workspaces/${workspaceId}/collections/${collectionId}/runner`);
     } else if (option === 'Add request') {
       navigate(
         `/workspaces/${workspaceId}/collections/${collectionId}/:requestName`

@@ -123,7 +123,7 @@ export default function CollectionEditor(props) {
 
     const newId = maxId + 1;
 
-    //새로운 collection 데이터 생성 및 저장
+    // 새로운 collection 데이터 생성 및 저장
     const collection = {
       id: newId,
       collectionname: collectionData.collectionname,
@@ -133,11 +133,11 @@ export default function CollectionEditor(props) {
     };
 
     localStorage.setItem(
-      `collection-${workspaceId}-${collection.id}`,
+      `collection-${workspaceId}-${newId}`, // 변경: `collection-${workspaceId}-${collection.id}` 대신 `collection-${workspaceId}-${newId}`
       JSON.stringify(collection)
     );
 
-    const newUrl = `/workspaces/${workspaceId}/collections/${collection.id}`;
+    const newUrl = `/workspaces/${workspaceId}/collections/${newId}`; // 변경: collection.id 대신 newId 사용
     window.location.href = newUrl;
   };
 

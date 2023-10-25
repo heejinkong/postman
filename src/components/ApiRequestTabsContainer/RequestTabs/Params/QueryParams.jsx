@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import '../../../../style/queryparams.scss';
 import { useData } from '../../../../contexts/DataContext';
 import Checkbox from '@mui/material/Checkbox';
