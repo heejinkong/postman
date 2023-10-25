@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useData } from '../contexts/DataContext';
-import { useParams } from 'react-router-dom';
+import { useData } from '../../contexts/DataContext';
+import { Link, useParams } from 'react-router-dom';
 import { List, ListItem, ListItemText } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 
@@ -27,15 +27,14 @@ const Runner = () => {
     }
 
     // requestItems에서 현재 collectionId에 해당하는 항목만 가져오기
-    const currentRequestList = requestItems[collectionId] || [];
-    setRequestList(currentRequestList);
+    const requestList = requestItems[collectionId] || [];
+    setRequestList(requestList);
   }, [collectionId, setCollectionData, workspaceId, requestItems]);
 
-  console.log(requestItems[collectionId]);
+  const handleRunClick = () => {};
 
   return (
     <div>
-      <span>Run order</span>
       <div>
         <List component="nav">
           {requestList.map((item, index) => (
@@ -46,7 +45,12 @@ const Runner = () => {
           ))}
         </List>
       </div>
-      <button>Run {collectionData.collectionname}</button>
+      <button onClick={handleRunClick}>
+        Run {collectionData.collectionname}
+        <Link
+          to={`/workspaces/${workspaceId}/collections/${collectionId}/run01000`}
+        ></Link>
+      </button>
     </div>
   );
 };
