@@ -27,6 +27,8 @@ export default function Builder() {
     setRequestItems,
     setDataRows,
     resultData,
+    HeadrsDataRows,
+    headersDataRows,
   } = useData();
   const [name, setName] = useState('New Request');
 
@@ -83,8 +85,10 @@ export default function Builder() {
         const response = await axios({
           method: method,
           url: fullUrl,
+          headers: headersDataRows,
         });
         setResult(JSON.stringify(response.data, null, 2));
+        console.log('Response Headers:', response.headers);
       } catch (e) {
         setResult(`Error: ${e.message}`);
       }
@@ -97,8 +101,14 @@ export default function Builder() {
     setName(e.target.value);
   };
 
-  const handleSaveClick = () => {
+  const handleSaveClick = async () => {
     let requestUrl;
+
+    const response = await axios({
+      method: method,
+      url: fullUrl,
+      headers: headersDataRows,
+    });
 
     try {
       new URL(fullUrl);
@@ -109,7 +119,7 @@ export default function Builder() {
         name: name,
         request: {
           method: method,
-          header: [],
+          header: [response.headers],
           url: {
             raw: fullUrl,
             protocol: urlData.protocol,
@@ -134,6 +144,8 @@ export default function Builder() {
 
     const paramsDataKey = `paramsData-${collectionId}-${name}`;
     localStorage.setItem(paramsDataKey, JSON.stringify(dataRows));
+    const HeadersParamsDataKey = `HeadersparamsData-${collectionId}-${name}`;
+    localStorage.setItem(HeadersParamsDataKey, JSON.stringify(HeadrsDataRows));
   };
 
   return (

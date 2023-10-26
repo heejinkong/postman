@@ -20,8 +20,24 @@ export function DataProvider({ children }) {
     description: "",
   });
   const [dataRows, setDataRows] = useState([paramsData]);
+
+  const updateParamsData = (newParamsData) => {
+    setParamsData(newParamsData);
+  };
   
+  const [HeadersparamsData, setHeadersParamsData] = useState({
+    key: "",
+    value: "",
+    description: "",
+  });
+  const [HeadrsDataRows, setHeadersDataRows] = useState([HeadersparamsData]);
+
+  const updateHeadersParamsData = (newHeadersParamsData) => {
+    setHeadersParamsData(newHeadersParamsData);
+  };
+
   const [checked, setChecked] = useState('');
+  const [checkedHeaders, setCheckedHeaders] = useState('');
   const [requestItems, setRequestItems] = useState([]);
   const [items, setItems] = useState([]); 
   const [collectionData, setCollectionData] = useState({
@@ -40,9 +56,7 @@ export function DataProvider({ children }) {
     setResultText(text);
   };
 
-  const updateParamsData = (newParamsData) => {
-    setParamsData(newParamsData);
-  };
+  
   useEffect(() => {
     const loadItemsFromLocalStorage = () => {
       const requestItems = {};
@@ -70,7 +84,7 @@ export function DataProvider({ children }) {
   }, []);
 
   return (
-    <DataContext.Provider value={{ resultText, resultData, setResult, setTextInput, paramsData, setParamsData, updateParamsData, checked, setChecked, requestItems, setRequestItems, items, setItems, collectionData, setCollectionData, workspaceData, setWorkspaceData,dataRows, setDataRows }}>
+    <DataContext.Provider value={{ resultText, resultData, setResult, setTextInput, paramsData, setParamsData, updateParamsData, checked, setChecked, requestItems, setRequestItems, items, setItems, collectionData, setCollectionData, workspaceData, setWorkspaceData,dataRows, setDataRows, HeadersparamsData, setHeadersParamsData, HeadrsDataRows, setHeadersDataRows, updateHeadersParamsData, checkedHeaders, setCheckedHeaders }}>
       {children}
     </DataContext.Provider>
   );
