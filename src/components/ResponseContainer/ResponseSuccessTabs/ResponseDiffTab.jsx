@@ -9,8 +9,8 @@ export default function ResponseDiffTab() {
   const Diff = require('diff');
 
   const diff = Diff.createTwoFilesPatch(
-    '예상값',
-    '응답값',
+    'resultText',
+    'resultData',
     `${resultText}`,
     `${resultData}`
   );
