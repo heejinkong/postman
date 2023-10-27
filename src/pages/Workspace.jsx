@@ -3,93 +3,72 @@ import { useParams } from 'react-router-dom';
 import '../style/workspace.scss';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
+import { useDispatch, useSelector } from 'react-redux';
+import { workspaceActions } from '../slice/workspaceSlice';
 
 export default function Workspace(props) {
   const { workspaceId } = useParams();
-  const [workspaceData, setWorkspaceData] = useState({
-    id: 0,
-    name: '',
-    description: '',
-  });
   const [isEditingDescription, setEditingDescription] = useState(false);
+  const dispatch = useDispatch();
+  const [workspaceName, setWorkspaceName] = useState('');
+  const [descriptionText, setDescriptionText] = useState('');
+  const [nextId, setNextId] = useState(null); // State to store nextId
 
-  // 컴포넌트가 렌더링될 때 실행
+  const { id, name, description } = useSelector((state) => ({
+    id: state.workspaceReducers.id,
+    name: state.workspaceReducers.name,
+    description: state.workspaceReducers.description,
+  }));
+
   useEffect(() => {
-    //해당 workspace가 로컬스토리지에 존재할 경우
     if (workspaceId !== ':workspaceId') {
-      const workspaceData = localStorage.getItem(`workspace-${workspaceId}`);
-      const workspace = workspaceData ? JSON.parse(workspaceData) : null;
-
-      if (workspace) {
-        setWorkspaceData(workspace);
-      }
+      dispatch(workspaceActions.getWorkspaceAsync(workspaceId));
     } else {
-      // workspace를 새로 만들 경우
       let maxId = 0;
-      for (let i = 1; i <= localStorage.length; i++) {
+      for (let i = 0; i < localStorage.length; i++) {
+        // Start from 0
         const key = localStorage.key(i);
-        //workspace 데이터인 경우
         if (key && key.startsWith('workspace-')) {
-          //workspace의 Id를 파싱
           const id = parseInt(key.replace('workspace-', ''), 10);
-          //Id가 유효하고, maxId보다 클경우
           if (!isNaN(id) && id > maxId) {
             maxId = id;
           }
         }
       }
-
-      const nextId = maxId + 1;
-
-      setWorkspaceData({ id: nextId, name: '', description: '' });
+      const nextIdValue = maxId + 1;
+      setNextId(nextIdValue); // Set the nextId
     }
-  }, [workspaceId]);
+  }, [workspaceId, dispatch]);
 
-  // workspace 이름 변경될 때
   const handleNameChange = (e) => {
-    const newWorkspaceName = e.target.value;
-    setWorkspaceData((prevData) => ({
-      ...prevData,
-      name: newWorkspaceName,
-    }));
-    //변경된 데이터 로컬스토리지에 저장
-    saveWorkspaceDataToLocalStorage({
-      ...workspaceData,
-      name: newWorkspaceName,
-    });
+    setWorkspaceName(e.target.value);
   };
 
-  //description 변경될 때
   const handleDescriptionChange = (e) => {
-    const newDescriptionText = e.target.value;
-    setWorkspaceData((prevData) => ({
-      ...prevData,
-      description: newDescriptionText,
-    }));
-    //변경된 데이터 로컬스토리지에 저장
-    saveWorkspaceDataToLocalStorage({
-      ...workspaceData,
-      description: newDescriptionText,
-    });
+    setDescriptionText(e.target.value);
   };
 
-  // //입력필드에서 포커스 잃었을 때
-  // const handleDescriptionBlur = () => {
-  //   setEditingDescription(false);
-  //   //편집된 데이터 로컬스토리지에 저장
-  //   saveWorkspaceDataToLocalStorage(workspaceData);
-  // };
-
-  //description 편집하기 위한 버튼 클릭
   const handleNotesClick = () => {
-    //편집 모드 활성화
     setEditingDescription(true);
   };
 
-  //workspace 로컬스토리지에 저장
-  const saveWorkspaceDataToLocalStorage = (data) => {
-    localStorage.setItem(`workspace-${data.id}`, JSON.stringify(data));
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const workspace = {
+      id: nextId,
+      name: workspaceName,
+      description: descriptionText,
+    };
+    dispatch(workspaceActions.registerWorkspace(workspace));
+
+    // // Save data to local storage
+    // saveWorkspaceDataToLocalStorage(workspace);
   };
+
+  // // Function to save workspace data to local storage
+  // const saveWorkspaceDataToLocalStorage = (data) => {
+  //   localStorage.setItem(`workspace-${data.id}`, JSON.stringify(data));
+  // };
 
   return (
     <div className="workspace_container">
@@ -98,10 +77,11 @@ export default function Workspace(props) {
         <input
           type="text"
           name="workspacetitle"
-          value={workspaceData.name}
+          value={workspaceName}
           onChange={handleNameChange}
           placeholder="My Workspace"
         />
+        <button onClick={handleSubmit}>Save</button>
       </div>
       <div className="workspace_description">
         <div className="workspace_description_btn">
@@ -115,14 +95,13 @@ export default function Workspace(props) {
             {isEditingDescription ? (
               <textarea
                 name="description"
-                value={workspaceData.description}
+                value={descriptionText}
                 onChange={handleDescriptionChange}
-                // onBlur={handleDescriptionBlur}
                 autoFocus
               />
             ) : (
               <span>
-                {workspaceData.description ||
+                {descriptionText ||
                   'Add information that you want quick access to. It can include links to important resources or notes of what you want to remember.'}
               </span>
             )}
