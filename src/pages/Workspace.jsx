@@ -18,6 +18,14 @@ export default function Workspace(props) {
     name: state.workspaceReducers.name,
     description: state.workspaceReducers.description,
   }));
+  useEffect(() => {
+    if (name !== undefined && name !== null) {
+      setWorkspaceName(name);
+    }
+    if (description !== undefined && description !== null) {
+      setDescriptionText(description);
+    }
+  }, [name, description]);
 
   useEffect(() => {
     if (workspaceId !== ':workspaceId') {
@@ -75,16 +83,11 @@ export default function Workspace(props) {
         <input
           type="text"
           name="workspacetitle"
-          value={workspaceId !== ':workspaceId' ? name : workspaceName}
+          value={workspaceName}
           onChange={handleNameChange}
           placeholder="My Workspace"
         />
-        <button
-          onClick={handleSubmit}
-          disabled={workspaceId !== ':workspaceId'}
-        >
-          Save
-        </button>
+        <button onClick={handleSubmit}>Save</button>
       </div>
       <div className="workspace_description">
         <div className="workspace_description_btn">
