@@ -14,7 +14,8 @@ export default function Workspace(props) {
   const [descriptionText, setDescriptionText] = useState('');
   const [nextId, setNextId] = useState(null); // State to store nextId
 
-  const { name, description } = useSelector((state) => ({
+  const { id, name, description } = useSelector((state) => ({
+    id: state.workspaceReducers.id,
     name: state.workspaceReducers.name,
     description: state.workspaceReducers.description,
   }));
@@ -60,21 +61,26 @@ export default function Workspace(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const workspace = {
-      id: nextId,
-      name: workspaceName,
-      description: descriptionText,
-    };
-    dispatch(workspaceActions.registerWorkspace(workspace));
 
-    // // Save data to local storage
-    // saveWorkspaceDataToLocalStorage(workspace);
+    if (workspaceId !== `:workspaceId`) {
+      const workspace = {
+        id: workspaceId,
+        name: workspaceName,
+        description: descriptionText,
+      };
+      console.log(workspace.id);
+      // Update logic when workspaceId is not `:workspaceId`
+      dispatch(workspaceActions.updateWorkspace(workspace)); // Dispatch update action
+    } else {
+      const workspace = {
+        id: nextId,
+        name: workspaceName,
+        description: descriptionText,
+      };
+      // When creating a new workspace, save the data to localStorage
+      dispatch(workspaceActions.registerWorkspace(workspace)); // Dispatch register action
+    }
   };
-
-  // // Function to save workspace data to local storage
-  // const saveWorkspaceDataToLocalStorage = (data) => {
-  //   localStorage.setItem(`workspace-${data.id}`, JSON.stringify(data));
-  // };
 
   return (
     <div className="workspace_container">

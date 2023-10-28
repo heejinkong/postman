@@ -44,5 +44,29 @@ const getWorkspaceDataFromLocalStorage = (id) => {
     } else {
       console.error("데이터를 찾을 수 없음");
     }
+    
+  }
+  
+  export function* updateWorkspaceAsync(action) {
+    const workspace = action.payload;
+  
+    try {
+      const storedWorkspace = JSON.parse(localStorage.getItem(`workspace-${workspace.id}`));
+  
+      if (storedWorkspace) {
+        // Update the properties of storedWorkspace
+        storedWorkspace.name = workspace.name;
+        storedWorkspace.description = workspace.description;
+  
+        // Save the updated workspace data back to local storage
+        localStorage.setItem(`workspace-${workspace.id}`, JSON.stringify(storedWorkspace));
+  
+        yield alert("업데이트 완료");
+      } else {
+        console.error("해당 ID의 작업 공간이 로컬 스토리지에 존재하지 않습니다.");
+      }
+    } catch (e) {
+      console.error("에러 발생:", e);
+    }
   }
   
