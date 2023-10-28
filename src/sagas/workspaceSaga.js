@@ -21,10 +21,14 @@ const saveWorkspaceDataToLocalStorage = (data) => {
       console.error("에러 발생:", error);
     }
   }
+
+  
   
   //로컬스토리지에서 데이터 얻어옴
 const getWorkspaceDataFromLocalStorage = (id) => {
     const data = localStorage.getItem(`workspace-${id}`);
+
+    console.log(data);
     return data ? JSON.parse(data) : null;
   };
   
@@ -34,8 +38,7 @@ const getWorkspaceDataFromLocalStorage = (id) => {
     const data = getWorkspaceDataFromLocalStorage(id);
   
     if (data) {
-      console.log(data);
-      yield put(workspaceActions.getArticleAsync(data));
+      yield put(workspaceActions.receiveWorkspaceData(data));
     } else {
       console.error("데이터를 찾을 수 없음");
     }

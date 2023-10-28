@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import '../style/workspace.scss';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { workspaceActions } from '../slice/workspaceSlice';
 
 export default function Workspace(props) {
@@ -14,19 +14,17 @@ export default function Workspace(props) {
   const [descriptionText, setDescriptionText] = useState('');
   const [nextId, setNextId] = useState(null); // State to store nextId
 
-  const { id, name, description } = useSelector((state) => ({
-    id: state.workspaceReducers.id,
+  const { name, description } = useSelector((state) => ({
     name: state.workspaceReducers.name,
     description: state.workspaceReducers.description,
   }));
 
   useEffect(() => {
     if (workspaceId !== ':workspaceId') {
-      dispatch(workspaceActions.getWorkspaceAsync(workspaceId));
+      dispatch(workspaceActions.getWorkspace(workspaceId));
     } else {
       let maxId = 0;
       for (let i = 0; i < localStorage.length; i++) {
-        // Start from 0
         const key = localStorage.key(i);
         if (key && key.startsWith('workspace-')) {
           const id = parseInt(key.replace('workspace-', ''), 10);
@@ -77,11 +75,16 @@ export default function Workspace(props) {
         <input
           type="text"
           name="workspacetitle"
-          value={workspaceName}
+          value={workspaceId !== ':workspaceId' ? name : workspaceName}
           onChange={handleNameChange}
           placeholder="My Workspace"
         />
-        <button onClick={handleSubmit}>Save</button>
+        <button
+          onClick={handleSubmit}
+          disabled={workspaceId !== ':workspaceId'}
+        >
+          Save
+        </button>
       </div>
       <div className="workspace_description">
         <div className="workspace_description_btn">

@@ -26,7 +26,6 @@ export const workspaceSlice = createSlice({
             console.log(id);
         },
         getWorkspaceAsync: (state, { payload: workspace }) => {
-            console.log(workspace);
             return {
                 ...state,
                 id: workspace.id,
@@ -34,6 +33,14 @@ export const workspaceSlice = createSlice({
                 description: workspace.description,
             };
         },
+
+        receiveWorkspaceData: (state, action) => {
+            const { name, description } = action.payload;
+            state.name = name;
+            state.description = description;
+          },
+
+        
 
     },
 });
