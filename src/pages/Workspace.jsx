@@ -12,7 +12,7 @@ export default function Workspace(props) {
   const dispatch = useDispatch();
   const [workspaceName, setWorkspaceName] = useState('');
   const [descriptionText, setDescriptionText] = useState('');
-  const [nextId, setNextId] = useState(null); // State to store nextId
+  const [nextId, setNextId] = useState(null);
 
   const { id, name, description } = useSelector((state) => ({
     id: state.workspaceReducers.id,
@@ -43,7 +43,7 @@ export default function Workspace(props) {
         }
       }
       const nextIdValue = maxId + 1;
-      setNextId(nextIdValue); // Set the nextId
+      setNextId(nextIdValue);
     }
   }, [workspaceId, dispatch]);
 
