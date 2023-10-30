@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const workspaceListSlice = createSlice({
     name: "workspaceList",
     initialState: {
-      list: [],
+      workspaceList: [],
       isLoading: true,
       isSuccess: false,
       error: null,
