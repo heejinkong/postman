@@ -1,40 +1,44 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
+import { workspaceActions } from '../slice/workspaceSlice';
 
 export default function WorkspaceList(props) {
   const [workspaces, setWorkspaces] = useState(props.list);
+  const dispatch = useDispatch();
 
   const handleDeleteClick = (workspaceId) => {
-    // 연관된 collection과 request 데이터 삭제
-    for (let i = localStorage.length - 1; i >= 0; i--) {
-      const key = localStorage.key(i);
-      if (key && key.startsWith(`collection-${workspaceId}-`)) {
-        const collectionId = key.split('-')[2];
-        for (let j = localStorage.length - 1; j >= 0; j--) {
-          const requestKey = localStorage.key(j);
-          if (
-            requestKey &&
-            (requestKey.startsWith(`request-${collectionId}-`) ||
-              requestKey.startsWith(`paramsData-${collectionId}-`))
-          ) {
-            localStorage.removeItem(requestKey);
-          }
-        }
-        localStorage.removeItem(key);
-      }
-    }
+    if (!window.confirm('해당 Workspace를 삭제하시겠습니까 ?')) return false;
+    dispatch(workspaceActions.deleteWorkspace(workspaceId));
+    // // 연관된 collection과 request 데이터 삭제
+    // for (let i = localStorage.length - 1; i >= 0; i--) {
+    //   const key = localStorage.key(i);
+    //   if (key && key.startsWith(`collection-${workspaceId}-`)) {
+    //     const collectionId = key.split('-')[2];
+    //     for (let j = localStorage.length - 1; j >= 0; j--) {
+    //       const requestKey = localStorage.key(j);
+    //       if (
+    //         requestKey &&
+    //         (requestKey.startsWith(`request-${collectionId}-`) ||
+    //           requestKey.startsWith(`paramsData-${collectionId}-`))
+    //       ) {
+    //         localStorage.removeItem(requestKey);
+    //       }
+    //     }
+    //     localStorage.removeItem(key);
+    //   }
 
     // 워크스페이스 목록에서 삭제된 워크스페이스를 제거
-    const updatedWorkspaces = workspaces.filter(
-      (workspace) => workspace.id !== workspaceId
-    );
-    setWorkspaces(updatedWorkspaces);
+    // const updatedWorkspaces = workspaces.filter(
+    //   (workspace) => workspace.id !== workspaceId
+    // );
+    // setWorkspaces(updatedWorkspaces);
 
     // 부모 컴포넌트로 삭제 이벤트를 전달
-    props.handleDeleteClick(workspaceId);
+    // props.handleDeleteClick(workspaceId);
   };
 
   return (

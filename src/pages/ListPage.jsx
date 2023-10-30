@@ -16,11 +16,11 @@ export default function ListPage() {
   }));
 
   // workspace 삭제 처리
-  const handleDeleteClick = (workspaceId) => {
-    if (!window.confirm('해당 Workspace를 삭제하시겠습니까 ?')) return false;
+  // const handleDeleteClick = (workspaceId) => {
+  //   if (!window.confirm('해당 Workspace를 삭제하시겠습니까 ?')) return false;
 
-    localStorage.removeItem(`workspace-${workspaceId}`);
-  };
+  //   dispatch(workspaceListActions.getWorkspaceList());
+  // };
 
   return (
     <div>
@@ -38,10 +38,7 @@ export default function ListPage() {
           </div>
           <div className="home_description_notes">
             {workspaceList.length > 0 ? (
-              <WorkspaceList
-                list={workspaceList}
-                handleDeleteClick={handleDeleteClick}
-              />
+              <WorkspaceList list={workspaceList} />
             ) : (
               <p>Create a Workspace using the 'New' button on the left</p>
             )}

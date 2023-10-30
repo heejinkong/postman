@@ -69,4 +69,19 @@ const getWorkspaceDataFromLocalStorage = (id) => {
       console.error("에러 발생:", e);
     }
   }
+
+
+  const deleteWorkspaceDataFromLocalStorage = (id) => {
+    const data = localStorage.removeItem(`workspace-${id}`);
+
+  };
+  export function* deleteWorkspaceAsync(action) {
+    const id = action.payload;
+  
+    yield deleteWorkspaceDataFromLocalStorage(id);
+    alert("삭제");
+    const history = yield getContext("history")
+      yield history.push(`/`)
+      yield history.go(0);
+  }
   

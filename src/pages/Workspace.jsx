@@ -63,14 +63,13 @@ export default function Workspace(props) {
     e.preventDefault();
 
     if (workspaceId !== `:workspaceId`) {
-      const workspace = {
+      const updatedWorkspace = {
         id: workspaceId,
         name: workspaceName,
         description: descriptionText,
       };
-      console.log(workspace.id);
       // Update logic when workspaceId is not `:workspaceId`
-      dispatch(workspaceActions.updateWorkspace(workspace)); // Dispatch update action
+      dispatch(workspaceActions.updateWorkspace(updatedWorkspace)); // Dispatch update action
     } else {
       const workspace = {
         id: nextId,
