@@ -3,22 +3,22 @@ import { useParams } from 'react-router-dom';
 import '../style/workspace.scss';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { workspaceActions } from '../slice/workspaceSlice';
 
 export default function Workspace(props) {
   const { workspaceId } = useParams();
-  const [isEditingDescription, setEditingDescription] = useState(false);
   const dispatch = useDispatch();
+  const [isEditingDescription, setEditingDescription] = useState(false);
   const [workspaceName, setWorkspaceName] = useState('');
   const [descriptionText, setDescriptionText] = useState('');
   const [nextId, setNextId] = useState(null);
 
-  const { id, name, description } = useSelector((state) => ({
-    id: state.workspaceReducers.id,
+  const { name, description } = useSelector((state) => ({
     name: state.workspaceReducers.name,
     description: state.workspaceReducers.description,
   }));
+
   useEffect(() => {
     if (name !== undefined && name !== null) {
       setWorkspaceName(name);
@@ -62,22 +62,22 @@ export default function Workspace(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    //로컬스토리지에 workspace가 존재할 경우
     if (workspaceId !== `:workspaceId`) {
       const updatedWorkspace = {
         id: workspaceId,
         name: workspaceName,
         description: descriptionText,
       };
-      // Update logic when workspaceId is not `:workspaceId`
-      dispatch(workspaceActions.updateWorkspace(updatedWorkspace)); // Dispatch update action
+      dispatch(workspaceActions.updateWorkspace(updatedWorkspace));
     } else {
       const workspace = {
         id: nextId,
         name: workspaceName,
         description: descriptionText,
       };
-      // When creating a new workspace, save the data to localStorage
-      dispatch(workspaceActions.registerWorkspace(workspace)); // Dispatch register action
+      // 새로운 workspace를 만들 경우
+      dispatch(workspaceActions.registerWorkspace(workspace));
     }
   };
 

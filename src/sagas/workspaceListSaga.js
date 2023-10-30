@@ -17,10 +17,10 @@ export function* getWorkspaceListAsync() {
     if (workspaceData.length > 0) {
       yield put(workspaceListActions.getWorkspaceListAsync(workspaceData));
     } else {
-      console.error('No workspace list data found in local storage.');
+      console.error('workspace list 존재하지 않음');
     }
   } catch (error) {
-    console.error('Error fetching workspace list data from local storage:', error);
+    console.error('Error', error);
   }
 }
 
