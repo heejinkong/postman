@@ -7,11 +7,13 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
 import CollectionList from '../pages/CollectionList';
 import { Link, Route, Routes, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function Sidebar() {
   const location = useLocation();
-  const pathSegments = location.pathname.split('/');
-  const workspaceId = pathSegments[pathSegments.length - 1];
+  const workspaceId = useSelector((state) => state.workspaceReducers.id);
+  // const pathSegments = location.pathname.split('/');
+  // const workspaceId = pathSegments[pathSegments.length - 1];
 
   const getCollectionsFromLocalStorage = () => {
     const collections = [];
@@ -29,9 +31,6 @@ export default function Sidebar() {
     return collections;
   };
 
-  const collectionLocation = () => {
-    location.reload();
-  };
   const collections = getCollectionsFromLocalStorage();
 
   const buttons = [
@@ -58,10 +57,7 @@ export default function Sidebar() {
           style={{ display: 'flex', alignItems: 'center', height: '100%' }}
         >
           {!showPlusButton ? (
-            <Link
-              to={`/workspaces/${workspaceId}/collections/:collectoinId`}
-              onClick={collectionLocation}
-            >
+            <Link to={`/workspaces/${workspaceId}/collections/:collectoinId`}>
               <IconButton aria-label="plus">
                 <AddIcon fontSize="small" />
               </IconButton>

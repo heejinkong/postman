@@ -15,13 +15,6 @@ export default function ListPage() {
     workspaceList: state.workspaceListReducers.workspaceList,
   }));
 
-  // workspace 삭제 처리
-  // const handleDeleteClick = (workspaceId) => {
-  //   if (!window.confirm('해당 Workspace를 삭제하시겠습니까 ?')) return false;
-
-  //   dispatch(workspaceListActions.getWorkspaceList());
-  // };
-
   return (
     <div>
       <div className="home_editor_container">

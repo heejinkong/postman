@@ -24,7 +24,4 @@ export function* getWorkspaceListAsync() {
   }
 }
 
-// 액션 감시
-export function* watchGetWorkspaceList() {
-  yield takeEvery('SPECIFIC_TRIGGER_ACTION', getWorkspaceListAsync); // SPECIFIC_TRIGGER_ACTION은 Redux Action Type에 대한 명시적인 액션입니다.
-}
+
