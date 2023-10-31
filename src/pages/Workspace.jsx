@@ -69,6 +69,7 @@ export default function Workspace(props) {
         name: workspaceName,
         description: descriptionText,
       };
+      //액션 디스패치
       dispatch(workspaceActions.updateWorkspace(updatedWorkspace));
     } else {
       const workspace = {

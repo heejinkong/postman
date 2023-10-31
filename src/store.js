@@ -7,12 +7,13 @@ import history from "./utils/history";
 
 const sagaMiddleware = createSagaMiddleware({
   context: { history: history },
+  //history 객체를 context로 sagaMiddleware에 전달
 });
 const initialState = {};
 
 const store = configureStore({
   reducer: rootReducer,
-  middleware: [sagaMiddleware, logger], // Redux Thunk 제거
+  middleware: [sagaMiddleware, logger], 
   devTools: true,
   preloadedState: initialState,
 });
