@@ -13,15 +13,17 @@ const saveWorkspaceDataToLocalStorage = (data) => {
     try {
       
       saveWorkspaceDataToLocalStorage(data);
-  
-      yield alert("저장");
-      console.log(data.id); 
       const history = yield getContext("history")
       yield history.push(`/workspaces/${data.id}`)
 
+      yield alert("저장");
+      yield history.go(0);
 
-    } catch (error) {
-      console.error("에러 발생:", error);
+     
+
+
+    } catch (e) {
+      console.error("에러 발생:", e);
     }
   }
 

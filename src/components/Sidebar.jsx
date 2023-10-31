@@ -55,7 +55,7 @@ export default function Sidebar() {
           style={{ display: 'flex', alignItems: 'center', height: '100%' }}
         >
           {workspaceId && !showPlusButton ? (
-            <Link to={`/workspaces/${workspaceId}/collections/:collectoinId`}>
+            <Link to={`/workspaces/${workspaceId}/collections/:collectionId`}>
               <IconButton aria-label="plus">
                 <AddIcon fontSize="small" />
               </IconButton>
