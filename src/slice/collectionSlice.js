@@ -16,7 +16,7 @@ export const collectionSlice = createSlice({
         registerCollection: (state, { payload: collection }) => {
             console.log(collection);
         },
-        getCollection: (state, { payload: { workspaceId, id } }) => {
+        getCollection: (state, { payload: {  id } }) => {
             console.log(id);
           },
         

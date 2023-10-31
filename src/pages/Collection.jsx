@@ -15,9 +15,11 @@ export default function Collection(props) {
   const [isEditingDescription, setEditingDescription] = useState(false);
   const dispatch = useDispatch();
 
-  const { collectionname, collectiontext } = useSelector((state) => ({
+  const { id, collectionname, collectiontext } = useSelector((state) => ({
+    id: state.collectionReducers.id,
     collectionname: state.collectionReducers.collectionname,
     collectiontext: state.collectionReducers.collectiontext,
+    workspaceId: state.collectionReducers.workspaceId,
   }));
 
   useEffect(() => {
@@ -33,7 +35,13 @@ export default function Collection(props) {
   //컴포넌트가 렌더링될 때 실행
   useEffect(() => {
     if (collectionId !== ':collectionId') {
-      dispatch(collectionActions.getCollection(collectionId));
+      const collection = {
+        id: collectionId,
+        name: collectionName,
+        description: collectionText,
+        workspaceId: workspaceId,
+      };
+      dispatch(collectionActions.getCollectionAsync(collection));
     } else {
       let maxId = 0;
       for (let i = 0; i < localStorage.length; i++) {
@@ -95,8 +103,8 @@ export default function Collection(props) {
   };
 
   useEffect(() => {
-    dispatch(collectionActions.getCollection(workspaceId));
-  }, [dispatch, workspaceId]);
+    dispatch(collectionActions.getCollection(collectionId));
+  }, [collectionId, dispatch]);
 
   return (
     <div>

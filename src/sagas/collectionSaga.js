@@ -23,18 +23,16 @@ export function* registerCollectionAsync(action) {
 //  로컬스토리지에서 데이터 얻어옴
  const getCollectionDataFromLocalStorage = (workspaceId, id) => {
     const data = localStorage.getItem(`collection-${workspaceId}-${id}`);
-
     console.log(data);
     return data ? JSON.parse(data) : null;
   };
   
   export function* getCollectionAsync(action) {
     const { workspaceId, id } = action.payload;
-
     const data = getCollectionDataFromLocalStorage(workspaceId, id);
   
     if (data) {
-      yield put(collectionActions.getCollectionAsync(data));
+      yield put(collectionActions.receiveCollectionData(data));
     } else {
       console.error("데이터를 찾을 수 없음");
     }
@@ -42,10 +40,10 @@ export function* registerCollectionAsync(action) {
   }
 
   export function* updateCollectionAsync(action) {
-    const collection = action.payload;
+    const { collection, workspaceId } = action.payload;
   
     try {
-      const storedCollection = JSON.parse(localStorage.getItem(`collection-${collection.workspaceId}-${collection.id}`));
+      const storedCollection = JSON.parse(localStorage.getItem(`collection-${workspaceId}-${collection.id}`));
   
       if (storedCollection) {
 
