@@ -12,8 +12,6 @@ import { useSelector } from 'react-redux';
 export default function Sidebar() {
   const location = useLocation();
   const workspaceId = useSelector((state) => state.workspaceReducers.id);
-  // const pathSegments = location.pathname.split('/');
-  // const workspaceId = pathSegments[pathSegments.length - 1];
 
   const getCollectionsFromLocalStorage = () => {
     const collections = [];
@@ -56,7 +54,7 @@ export default function Sidebar() {
           className="btn-group"
           style={{ display: 'flex', alignItems: 'center', height: '100%' }}
         >
-          {!showPlusButton ? (
+          {workspaceId && !showPlusButton ? (
             <Link to={`/workspaces/${workspaceId}/collections/:collectoinId`}>
               <IconButton aria-label="plus">
                 <AddIcon fontSize="small" />
