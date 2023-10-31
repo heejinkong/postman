@@ -14,6 +14,7 @@ const { registerWorkspace, getWorkspace, updateWorkspace, deleteWorkspace } = wo
 const  { getWorkspaceList } = workspaceListActions
 const { registerCollection, getCollection, updatecollection } = collectionActions;
 
+// 여러 액션을 감시 및 처리
 export default function* rootWatcher() {
   yield takeLatest(registerWorkspace.type, registerWorkspaceAsync);
   yield takeEvery(getWorkspace.type, getWorkspaceAsync);

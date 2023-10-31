@@ -6,7 +6,7 @@ import { workspaceActions } from "../slice/workspaceSlice";
 const saveWorkspaceDataToLocalStorage = (data) => {
     localStorage.setItem(`workspace-${data.id}`, JSON.stringify(data));
   };
-  
+  // registerWorkspace 액션 발생했을때 실행
   export function* registerWorkspaceAsync(action) {
     const data = action.payload;
 
