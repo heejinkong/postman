@@ -59,7 +59,7 @@ export default function Collection(props) {
       const nextIdValue = maxId + 1;
       setNextId(nextIdValue);
     }
-  }, [workspaceId, dispatch, collectionId]);
+  }, [workspaceId, dispatch, collectionId, collectionName, collectionText]);
 
   //collection 이름 변경될 때
   const handleNameChange = (e) => {

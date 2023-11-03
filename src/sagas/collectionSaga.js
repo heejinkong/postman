@@ -21,15 +21,15 @@ export function* registerCollectionAsync(action) {
 }
 
 //  로컬스토리지에서 데이터 얻어옴
- const getCollectionDataFromLocalStorage = (workspaceId, id) => {
-    const data = localStorage.getItem(`collection-${workspaceId}-${id}`);
+ const getCollectionDataFromLocalStorage = (workspaceId, collectionId) => {
+    const data = localStorage.getItem(`collection-${workspaceId}-${collectionId}`);
     console.log(data);
     return data ? JSON.parse(data) : null;
   };
   
   export function* getCollectionAsync(action) {
-    const { workspaceId, id } = action.payload;
-    const data = getCollectionDataFromLocalStorage(workspaceId, id);
+    const collection = action.payload;
+    const data = getCollectionDataFromLocalStorage(collection.workspaceId, collection.id);
   
     if (data) {
       yield put(collectionActions.receiveCollectionData(data));

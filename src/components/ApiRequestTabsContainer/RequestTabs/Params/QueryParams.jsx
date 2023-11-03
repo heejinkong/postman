@@ -48,7 +48,7 @@ export default function QueryParams() {
   };
 
   useEffect(() => {
-    // 로컬 스토리지에서 해당 request의 파라미터 데이터를 불러옵니다.
+    // 로컬 스토리지에서 해당 request의 파라미터 데이터를 불러옴
     const paramsDataKey = `paramsData-${collectionId}-${requestName}`;
     const storageParamsData = localStorage.getItem(paramsDataKey);
     if (storageParamsData) {

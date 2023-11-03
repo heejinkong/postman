@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useData } from '../contexts/DataContext';
 import { useParams } from 'react-router-dom';
-import CreateRequest from '../components/RunContainer/CreateRequest'; // CreateRequest 컴포넌트를 import
-import Runner from '../components/RunContainer/Runner'; // Runner 컴포넌트를 import
+import CreateRequest from '../components/RunContainer/CreateRequest';
+import Runner from '../components/RunContainer/Runner';
 
 const RunnerCollection = () => {
   const { workspaceId, collectionId } = useParams();

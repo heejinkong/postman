@@ -12,7 +12,7 @@ export const workspaceSlice = createSlice({
     reducers: { // 액션 및  리듀서 정의
         // workspace 등록 리듀서
         registerWorkspace: (state, { payload: workspace }) => {
-            console.log(workspace);
+           
         },
         // workspace 가져오는 리듀서
         getWorkspace: (state, { payload: id }) => {
