@@ -2,7 +2,8 @@
 
 이 프로젝트는 Postman API Platform을 기반으로 한 UI 설계 및 기본 기능 구현을 목표로 합니다. Workspace, Collection, Request 관리와 관련된 다양한 기능을 제공합니다.
 
-![Project UI Design](path_to_image/UI_design.png)
+![Project UI Design]<img width="473" alt="스크린샷 2024-08-10 오후 6 44 51" src="https://github.com/user-attachments/assets/0143ceb2-f484-4ef4-b8c3-fa0b3ecf3c48">
+
 
 ## 목차
 1. [프로젝트 개요](#프로젝트-개요)
