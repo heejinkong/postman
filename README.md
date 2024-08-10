@@ -1,4 +1,5 @@
 # Rest API Platform UI 설계 프로젝트
+프로젝트 목표: 통합문서뷰어통합 테스트 개선
 
 이 프로젝트는 Postman API Platform을 기반으로 한 UI 설계 및 기본 기능 구현을 목표로 합니다. Workspace, Collection, Request 관리와 관련된 다양한 기능을 제공합니다.
 
@@ -19,7 +20,8 @@
 5. [참조 자료](#참조-자료)
 
 ## 프로젝트 개요
-이 프로젝트는 Rest API Platform의 UI 설계와 기본 기능을 구현하는 것을 목표로 하며, Postman API Platform과 유사한 사용자 경험을 제공합니다. 주요 목표는 사용자가 쉽게 Workspace를 관리하고, Collection과 Request를 추가, 수정, 삭제할 수 있는 기능을 구현하는 것입니다.
+이 프로젝트는 Rest API Platform의 UI 설계와 기본 기능을 구현하는 것을 목표로 하며, Postman API Platform과 유사한 사용자 경험을 제공합니다. 
+주요 목표는 요구사항을 기반으로 사용자가 쉽게 Workspace를 관리하고, Collection과 Request를 추가, 수정, 삭제할 수 있는 기능을 구현하는 것입니다.
 
 ## UI 설계 및 기능 구현
 
@@ -30,7 +32,8 @@
   - 'Import' 버튼: Workspace JSON 파일을 불러오는 기능을 제공합니다.
   - 'Export' 버튼: 작성된 내용을 JSON 파일로 저장하는 기능을 제공합니다.
 
-![Workspace UI Design](path_to_image/workspace_ui.png)
+<img width="529" alt="스크린샷 2024-08-10 오후 6 48 24" src="https://github.com/user-attachments/assets/20cc1923-8ba7-4f53-ac57-d752dcbae0f3">
+
 
 ### Collection 및 Folder UI
 - **Task 2: Collection 및 Folder UI 구현**
