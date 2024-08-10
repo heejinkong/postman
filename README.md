@@ -32,8 +32,6 @@
   - 'Import' 버튼: Workspace JSON 파일을 불러오는 기능을 제공합니다.
   - 'Export' 버튼: 작성된 내용을 JSON 파일로 저장하는 기능을 제공합니다.
 
-<img width="529" alt="스크린샷 2024-08-10 오후 6 48 24" src="https://github.com/user-attachments/assets/20cc1923-8ba7-4f53-ac57-d752dcbae0f3">
-
 
 ### Collection 및 Folder UI
 - **Task 2: Collection 및 Folder UI 구현**
@@ -67,6 +65,8 @@
 
 - **Task 3: 'Export' 버튼 기능 개발**
   - 작성된 내용을 JSON 파일로 내보내는 기능을 개발합니다. Export 버튼을 누르면 JSON 파일로 저장하는 로직을 구현합니다.
+  
+<img width="529" alt="스크린샷 2024-08-10 오후 6 48 24" src="https://github.com/user-attachments/assets/20cc1923-8ba7-4f53-ac57-d752dcbae0f3">
 
 ### Collection 및 Folder 관리 기능
 - **Task 1: 'Collection 추가' 버튼 개발**
@@ -78,16 +78,29 @@
 - **Task 3: Collection, Folder 이름 및 설명 수정 기능 추가**
   - Collection 또는 Folder의 이름과 설명을 수정할 수 있는 기능을 개발합니다. Save 버튼을 누르면 수정된 사항이 반영되는 로직을 구현합니다.
 
+<img width="468" alt="스크린샷 2024-08-10 오후 6 51 50" src="https://github.com/user-attachments/assets/96e593ae-0b46-49a5-b1f6-f6a662f81e5f">
+![image](https://github.com/user-attachments/assets/28746c18-e381-497c-b9b8-479796a0cbfa)
+
+
 ### Request 관리 기능
 - **Task 1: 'Request 추가' 버튼 개발**
   - Collection을 선택한 후 새로운 Request를 생성하는 기능을 개발합니다. Request의 이름과 HTTP 메서드 선택 기능을 구현합니다.
+    <img width="800" alt="스크린샷 2024-08-10 오후 6 58 24" src="https://github.com/user-attachments/assets/86f74274-a613-452b-9cce-2811d749da5a">
 
 - **Task 2: Params, Headers, Body 구성**
-  - Params, Headers, Body 탭으로 구성된 Request 요소들을 개발합니다. Params 탭은 매개변수를 추가하고 삭제할 수 있는 기능을 구현합니다.
+  - Params, Headers, Body 탭으로 구성된 Request 요소들을 개발합니다. Params 탭은 매개변수를 추가하고 삭제할 수 있는 기능을 구현합니
+    <img width="675" alt="스크린샷 2024-08-10 오후 7 01 54" src="https://github.com/user-attachments/assets/60518db3-0037-4392-bee1-f541a3db2aa7">
+
   - Body 탭은 form-data 및 raw 형태의 데이터를 지원하며, content-type에 따라 동적으로 변경되는 기능을 구현합니다.
+<img width="701" alt="스크린샷 2024-08-10 오후 7 02 13" src="https://github.com/user-attachments/assets/bd603886-1882-4d72-ad9c-a4eae925d1e0">
 
 - **Task 3: Request 결과값 예측 기능**
   - 예상되는 ResponseBody 값을 저장해두는 textarea를 개발합니다. Request 탭과 함께 구성되며 결과값을 저장하고 비교하는 기능을 구현합니다.
+
+
+
+
+    
 
 ## 기능 확장 및 테스트
 
