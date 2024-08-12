@@ -121,7 +121,7 @@
 ### JSON 파일 입출력 및 순서 변경 기능
 - Workspace와 Collection 정보를 JSON 파일로 import/export 기능을 추가합니다. 왼쪽 Tree에서 순서 변경이 가능하도록 기능을 추가합니다.
   <img width="233" alt="스크린샷 2024-08-12 오전 10 21 40" src="https://github.com/user-attachments/assets/a5720bd5-9665-4766-b487-c0b26e0d5ac1">
-=
+
 
 
 ### ResponseBody 예상 값 저장 및 비교 기능 구현
