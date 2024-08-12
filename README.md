@@ -121,15 +121,36 @@
 ### JSON 파일 입출력 및 순서 변경 기능
 - Workspace와 Collection 정보를 JSON 파일로 import/export 기능을 추가합니다. 왼쪽 Tree에서 순서 변경이 가능하도록 기능을 추가합니다.
   <img width="233" alt="스크린샷 2024-08-12 오전 10 21 40" src="https://github.com/user-attachments/assets/a5720bd5-9665-4766-b487-c0b26e0d5ac1">
+=
 
 
 ### ResponseBody 예상 값 저장 및 비교 기능 구현
 - 예상되는 ResponseBody를 미리 저장하고 결과와 비교하여 Result diff탭에서 동일한지 확인하는 기능을 구현합니다. UI에서 비교 결과를 강조하여 표시하는 기능을 추가합니다.
   - Result diff탭은 위에서 저장한 Result 값이 있을 경우에만 노출됩니다.
     <img width="648" alt="스크린샷 2024-08-12 오전 10 23 37" src="https://github.com/user-attachments/assets/0b18c75d-ab71-45f8-ae17-463517f66a1d">
-    <img width="645" alt="스크린샷 2024-08-12 오전 10 23 47" src="https://github.com/user-   attachments/assets/388c1578-d7fc-43cd-8653-d977cd0840c0">
+    <img width="657" alt="스크린샷 2024-08-12 오전 10 35 45" src="https://github.com/user-attachments/assets/22ccd492-dbb9-43e3-bd71-589b60580491">
 
-### Run History 사용자가 실행한 기록     
+   
+
+### Run History 사용자가 실행한 기록 확인 기능 구현
+- 사용자는 run을 실행 했던 기록을 시간별/단위별로 확인 가능합니다.
+<img width="485" alt="스크린샷 2024-08-12 오전 10 36 43" src="https://github.com/user-attachments/assets/c1247ab6-8787-4b70-ab97-21dfd8ea72a1">
+- Run Workspace 클릭시, Workspace의 하위 폴더 실행 결과 확인 가능하며 Run collection 했던 결과와 Run requests 했던 결과 확인 가능합니다.
+<img width="328" alt="스크린샷 2024-08-12 오전 10 40 36" src="https://github.com/user-attachments/assets/8f632470-aae6-4909-9ba5-f4dc83cade4b">
+- Run History 클릭시 (Run Workspace와 동일한 페이지), Run total 버튼을 누르면 현재까지 실행했던 Run 결과를 확인 가능합니다.
+  <img width="340" alt="스크린샷 2024-08-12 오전 10 41 54" src="https://github.com/user-attachments/assets/ea26fd82-0f1b-4503-9d14-387be4dacd4c">
+- Run Collection & Send Requests 실행시
+  - Run 결과 페이지로 확인 가능
+  - Run 기능을 실행한 시간이 화면에 출력
+  - Path 형태로 보여짐(Workspace 1 / Collection 1/ Request 1)
+    <img width="530" alt="스크린샷 2024-08-12 오전 10 43 49" src="https://github.com/user-attachments/assets/e6d453ca-ecc5-4281-89a3-8776f8b94055">
+- 결과 확인 버튼 클릭시
+  - 모달창으로 결과 값 노출 (예상 값 있을 경우 & 예상 값 없을 경우)
+    <img width="325" alt="스크린샷 2024-08-12 오전 10 44 43" src="https://github.com/user-attachments/assets/bb446944-f619-4ed3-b79d-7c30617f4e13">
+
+    
+
+
 
 
 ### 테스트 및 마무리
