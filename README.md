@@ -135,15 +135,19 @@
 ### Run History 사용자가 실행한 기록 확인 기능 구현
 - 사용자는 run을 실행 했던 기록을 시간별/단위별로 확인 가능합니다.
 <img width="485" alt="스크린샷 2024-08-12 오전 10 36 43" src="https://github.com/user-attachments/assets/c1247ab6-8787-4b70-ab97-21dfd8ea72a1">
+
 - Run Workspace 클릭시, Workspace의 하위 폴더 실행 결과 확인 가능하며 Run collection 했던 결과와 Run requests 했던 결과 확인 가능합니다.
 <img width="328" alt="스크린샷 2024-08-12 오전 10 40 36" src="https://github.com/user-attachments/assets/8f632470-aae6-4909-9ba5-f4dc83cade4b">
+
 - Run History 클릭시 (Run Workspace와 동일한 페이지), Run total 버튼을 누르면 현재까지 실행했던 Run 결과를 확인 가능합니다.
   <img width="340" alt="스크린샷 2024-08-12 오전 10 41 54" src="https://github.com/user-attachments/assets/ea26fd82-0f1b-4503-9d14-387be4dacd4c">
+  
 - Run Collection & Send Requests 실행시
   - Run 결과 페이지로 확인 가능
   - Run 기능을 실행한 시간이 화면에 출력
   - Path 형태로 보여짐(Workspace 1 / Collection 1/ Request 1)
     <img width="530" alt="스크린샷 2024-08-12 오전 10 43 49" src="https://github.com/user-attachments/assets/e6d453ca-ecc5-4281-89a3-8776f8b94055">
+    
 - 결과 확인 버튼 클릭시
   - 모달창으로 결과 값 노출 (예상 값 있을 경우 & 예상 값 없을 경우)
     <img width="325" alt="스크린샷 2024-08-12 오전 10 44 43" src="https://github.com/user-attachments/assets/bb446944-f619-4ed3-b79d-7c30617f4e13">
