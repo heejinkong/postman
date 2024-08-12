@@ -1,9 +1,13 @@
 # Rest API Platform UI 설계 프로젝트
 프로젝트 목표: 통합문서뷰어통합 테스트 개선
 
-이 프로젝트는 Postman API Platform을 기반으로 한 UI 설계 및 기본 기능 구현을 목표로 합니다. Workspace, Collection, Request 관리와 관련된 다양한 기능을 제공합니다.
 
-<img width="473" alt="스크린샷 2024-08-10 오후 6 44 51" src="https://github.com/user-attachments/assets/0143ceb2-f484-4ef4-b8c3-fa0b3ecf3c48">
+## 프로젝트 개요
+이 프로젝트는 Rest API Platform의 UI 설계와 기본 기능을 구현하는 것을 목표로 하며, Postman API Platform과 유사한 사용자 경험을 제공합니다. 
+주요 목표는 요구사항을 기반으로 사용자가 쉽게 Workspace를 관리하고, Collection과 Request를 추가, 수정, 삭제할 수 있는 기능을 구현하는 것입니다.
+
+<img width="1710" alt="스크린샷 2024-08-12 오전 9 50 04" src="https://github.com/user-attachments/assets/46da80fc-5355-46b8-9927-bb646c291c76">
+
 
 
 ## 목차
@@ -19,11 +23,9 @@
 4. [기능 확장 및 테스트](#기능-확장-및-테스트)
 5. [참조 자료](#참조-자료)
 
-## 프로젝트 개요
-이 프로젝트는 Rest API Platform의 UI 설계와 기본 기능을 구현하는 것을 목표로 하며, Postman API Platform과 유사한 사용자 경험을 제공합니다. 
-주요 목표는 요구사항을 기반으로 사용자가 쉽게 Workspace를 관리하고, Collection과 Request를 추가, 수정, 삭제할 수 있는 기능을 구현하는 것입니다.
 
-## UI 설계 및 기능 구현
+
+## 1. 컴포넌트 기본 UI 설계 및 기능 구현
 
 ### Workspace UI
 - **Task 1: Workspace UI 구현**
@@ -41,7 +43,6 @@
   - Collection 및 Folder의 이름과 설명 입력 및 저장 기능을 추가합니다.
   - 위치 정보 표시 기능을 추가합니다.
 
-![Collection UI Design](path_to_image/collection_ui.png)
 
 ### Request UI
 - **Task 3: Request UI 구현**
@@ -52,11 +53,13 @@
   - Params 탭에서 매개변수 추가 및 삭제 기능을 제공합니다.
   - Body 탭에서 form-data와 raw type 변경 기능을 제공합니다.
 
-![Request UI Design](path_to_image/request_ui.png)
 
-## 기본 기능 구현
+## 2. 기본 기능 구현
 
 ### Workspace 관리 기능
+- 사용자는 Workspaces를 생성할 수 있습니다.
+  <img width="546" alt="스크린샷 2024-08-12 오전 10 09 30" src="https://github.com/user-attachments/assets/a170f656-806e-419c-9c7c-86e2d562bc1d">
+
 - **Task 1: 'New' 버튼 기능 개발**
   - 사용자가 새로운 Workspace를 추가할 수 있는 기능을 개발합니다.
   
@@ -65,10 +68,20 @@
 
 - **Task 3: 'Export' 버튼 기능 개발**
   - 작성된 내용을 JSON 파일로 내보내는 기능을 개발합니다. Export 버튼을 누르면 JSON 파일로 저장하는 로직을 구현합니다.
-  
-<img width="529" alt="스크린샷 2024-08-10 오후 6 48 24" src="https://github.com/user-attachments/assets/20cc1923-8ba7-4f53-ac57-d752dcbae0f3">
 
+<img width="550" alt="스크린샷 2024-08-12 오전 10 07 06" src="https://github.com/user-attachments/assets/41c671b9-a8d5-4846-a987-fd34833566c9">
+
+
+  
 ### Collection 및 Folder 관리 기능
+- 사용자는 Collection과 Folder를 추가하여 작업을 계층적으로 분류할 수 있습니다.
+- New Collection은 목록에 추가되어 작업들을 더 효율적으로 관리할 수 있습니니다.
+  <img width="495" alt="스크린샷 2024-08-12 오전 10 10 45" src="https://github.com/user-attachments/assets/9475ee6e-cdb2-43b7-83f3-2914e616e647">
+
+- 왼쪽 메뉴에서 Collection, Folder을 선택했을 경우
+![image](https://github.com/user-attachments/assets/0e086059-e24c-4a46-a2ae-d121f115a3e2)
+
+
 - **Task 1: 'Collection 추가' 버튼 개발**
   - 사용자가 새로운 Collection을 추가할 수 있는 기능을 개발합니다. 버튼 클릭으로 새로운 Collection을 생성하는 로직을 구현합니다.
 
@@ -78,29 +91,30 @@
 - **Task 3: Collection, Folder 이름 및 설명 수정 기능 추가**
   - Collection 또는 Folder의 이름과 설명을 수정할 수 있는 기능을 개발합니다. Save 버튼을 누르면 수정된 사항이 반영되는 로직을 구현합니다.
 
-<img width="468" alt="스크린샷 2024-08-10 오후 6 51 50" src="https://github.com/user-attachments/assets/96e593ae-0b46-49a5-b1f6-f6a662f81e5f">
-![image](https://github.com/user-attachments/assets/28746c18-e381-497c-b9b8-479796a0cbfa)
+<img width="487" alt="스크린샷 2024-08-12 오전 10 07 45" src="https://github.com/user-attachments/assets/fb163a39-5200-418c-9e32-5a664dc7532e">
 
 
 ### Request 관리 기능
+- Collection을 선택한 후 "Request 추가" 버튼을 눌러 새로운 Request를 생성합니다.
+- 사용자는 Request의 이름을 입력하고 다양한 HTTP 메서드(GET, POST, PUT, PATCH, DELETE)를 사용하여 Request를 추가할 수 있습니다.
+  <img width="617" alt="스크린샷 2024-08-12 오전 10 14 43" src="https://github.com/user-attachments/assets/0c5b5886-1c6c-482d-9d0e-8d9bd3a4c228">
+- Params탭 클릭시 , 매개변수 리스트는 항상 1개 이상 여유롭게 노출되어 사용자가 변수를 추가할 수 있게 합니다.
+  <img width="493" alt="스크린샷 2024-08-12 오전 10 16 15" src="https://github.com/user-attachments/assets/6d46fee4-0996-4c4d-a093-0556a66e7ea0">
+- Body탭 클릭시
+  <img width="524" alt="스크린샷 2024-08-12 오전 10 16 47" src="https://github.com/user-attachments/assets/093b5db5-caa9-4844-b8dd-f95885accbc5">
+- Result탭 클릭시, 요청 결과로 예상되는 값을 저장해두는 textarea로 구성됩니다.
+  <img width="321" alt="스크린샷 2024-08-12 오전 10 17 32" src="https://github.com/user-attachments/assets/6bf6ae15-471d-4564-a4bc-db9a788b893b">
+
 - **Task 1: 'Request 추가' 버튼 개발**
   - Collection을 선택한 후 새로운 Request를 생성하는 기능을 개발합니다. Request의 이름과 HTTP 메서드 선택 기능을 구현합니다.
-    <img width="800" alt="스크린샷 2024-08-10 오후 6 58 24" src="https://github.com/user-attachments/assets/86f74274-a613-452b-9cce-2811d749da5a">
 
 - **Task 2: Params, Headers, Body 구성**
   - Params, Headers, Body 탭으로 구성된 Request 요소들을 개발합니다. Params 탭은 매개변수를 추가하고 삭제할 수 있는 기능을 구현합니
-    <img width="675" alt="스크린샷 2024-08-10 오후 7 01 54" src="https://github.com/user-attachments/assets/60518db3-0037-4392-bee1-f541a3db2aa7">
 
   - Body 탭은 form-data 및 raw 형태의 데이터를 지원하며, content-type에 따라 동적으로 변경되는 기능을 구현합니다.
-<img width="701" alt="스크린샷 2024-08-10 오후 7 02 13" src="https://github.com/user-attachments/assets/bd603886-1882-4d72-ad9c-a4eae925d1e0">
 
 - **Task 3: Request 결과값 예측 기능**
   - 예상되는 ResponseBody 값을 저장해두는 textarea를 개발합니다. Request 탭과 함께 구성되며 결과값을 저장하고 비교하는 기능을 구현합니다.
-
-
-
-
-    
 
 ## 기능 확장 및 테스트
 
