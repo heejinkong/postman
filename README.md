@@ -91,9 +91,6 @@
 - **Task 3: Collection, Folder 이름 및 설명 수정 기능 추가**
   - Collection 또는 Folder의 이름과 설명을 수정할 수 있는 기능을 개발합니다. Save 버튼을 누르면 수정된 사항이 반영되는 로직을 구현합니다.
 
-<img width="487" alt="스크린샷 2024-08-12 오전 10 07 45" src="https://github.com/user-attachments/assets/fb163a39-5200-418c-9e32-5a664dc7532e">
-
-
 ### Request 관리 기능
 - Collection을 선택한 후 "Request 추가" 버튼을 눌러 새로운 Request를 생성합니다.
 - 사용자는 Request의 이름을 입력하고 다양한 HTTP 메서드(GET, POST, PUT, PATCH, DELETE)를 사용하여 Request를 추가할 수 있습니다.
@@ -123,9 +120,17 @@
 
 ### JSON 파일 입출력 및 순서 변경 기능
 - Workspace와 Collection 정보를 JSON 파일로 import/export 기능을 추가합니다. 왼쪽 Tree에서 순서 변경이 가능하도록 기능을 추가합니다.
+  <img width="233" alt="스크린샷 2024-08-12 오전 10 21 40" src="https://github.com/user-attachments/assets/a5720bd5-9665-4766-b487-c0b26e0d5ac1">
+
 
 ### ResponseBody 예상 값 저장 및 비교 기능 구현
-- 예상되는 ResponseBody를 미리 저장하고 결과와 비교하여 동일한지 확인하는 기능을 구현합니다. UI에서 비교 결과를 강조하여 표시하는 기능을 추가합니다.
+- 예상되는 ResponseBody를 미리 저장하고 결과와 비교하여 Result diff탭에서 동일한지 확인하는 기능을 구현합니다. UI에서 비교 결과를 강조하여 표시하는 기능을 추가합니다.
+  - Result diff탭은 위에서 저장한 Result 값이 있을 경우에만 노출됩니다.
+    <img width="648" alt="스크린샷 2024-08-12 오전 10 23 37" src="https://github.com/user-attachments/assets/0b18c75d-ab71-45f8-ae17-463517f66a1d">
+    <img width="645" alt="스크린샷 2024-08-12 오전 10 23 47" src="https://github.com/user-   attachments/assets/388c1578-d7fc-43cd-8653-d977cd0840c0">
+
+### Run History 사용자가 실행한 기록     
+
 
 ### 테스트 및 마무리
 - 테스트 환경에서 각 기능을 테스트하고 버그 및 예외 상황을 해결하는 작업을 수행합니다.
